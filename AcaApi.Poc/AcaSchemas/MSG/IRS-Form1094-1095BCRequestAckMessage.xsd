@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:us:gov:treasury:irs:msg:form1094-1095bcrequestackmessage" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:irs="urn:us:gov:treasury:irs:common" xmlns:airty24="urn:us:gov:treasury:irs:ext:aca:air:ty24" targetNamespace="urn:us:gov:treasury:irs:msg:form1094-1095bcrequestackmessage" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Component>
+				<DictionaryEntryNm>IRS Message - Form 1094-1095B/C - Upstream Transmittal Request Acknowledgement</DictionaryEntryNm>
+				<MajorVersionNum>2</MajorVersionNum>
+				<MinorVersionNum>0</MinorVersionNum>
+				<VersionEffectiveBeginDt>2014-10-31</VersionEffectiveBeginDt>
+				<VersionDescriptionTxt>Initial version</VersionDescriptionTxt>
+				<DescriptionTxt>IRS Message - Form 1094-1095B/C - Upstream Transmittal Request Acknowledgement</DescriptionTxt>
+			</Component>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!-- ===== Imports ===== -->
+	<xsd:import namespace="urn:us:gov:treasury:irs:common" schemaLocation="../COMMON/IRS-CAC.xsd"/>
+	<xsd:import namespace="urn:us:gov:treasury:irs:ext:aca:air:ty24" schemaLocation="../EXT/IRS-EXT-ACA-AIR-1094BC.xsd"/>
+	<!-- ================================ -->
+	<!-- ===== Root Element Declarations ===== -->
+	<!-- ================================ -->
+	<xsd:element name="FormBCTransmittalAckRequest" type="FormBCTransmittalAckReqType">
+		<xsd:annotation>
+			<xsd:documentation>
+				<Component>
+					<DictionaryEntryNm>FormBC Transmission Acknowledgment Request</DictionaryEntryNm>
+					<MajorVersionNum>1</MajorVersionNum>
+					<MinorVersionNum>1</MinorVersionNum>
+					<VersionEffectiveBeginDt>2014-10-31</VersionEffectiveBeginDt>
+					<VersionDescriptionTxt>Initial Version</VersionDescriptionTxt>
+					<DescriptionTxt>The 1095BC transmission exchange acknowledgment details.</DescriptionTxt>
+				</Component>
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- ======================== -->
+	<!-- ===== Type Defintions ===== -->
+	<!-- ======================== -->
+	<xsd:complexType name="FormBCTransmittalAckReqType">
+		<xsd:annotation>
+			<xsd:documentation>
+				<Component>
+					<DictionaryEntryNm>FormBC Transmittal Acknowledgement Request Type</DictionaryEntryNm>
+					<MajorVersionNum>1</MajorVersionNum>
+					<MinorVersionNum>1</MinorVersionNum>
+					<VersionEffectiveBeginDt>2014-10-31</VersionEffectiveBeginDt>
+					<VersionDescriptionTxt>Initial Version</VersionDescriptionTxt>
+					<DescriptionTxt>Transmittal exchange acknowledgement type for 1095BC Forms Upstream</DescriptionTxt>
+				</Component>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="airty24:ACATransmitterRequestAckGrp"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
