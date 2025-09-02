@@ -19,11 +19,10 @@ It is critical to purchase the exact type of certificate required for the A2A se
 
 #### If using Identrust (Recommended):
 
-1.  Navigate to the **Identrust Government Agencies** website.
+1.  Navigate to the **Identrust Government Agencies** website: https://www.identrust.com/digital-certificates/federal-state-and-local-agencies
 2.  Click the option to **"Buy Now"**.
-3.  You will see a list of government programs. Select one of the following:
-    *   `Department of Treasury - IRS MeF e-File`
-    *   `Department of Treasury - IRS Secure Data Transfer` (recommended)
+3.  You will see a list of government programs. Please choose:
+    *   `Department of Treasury - IRS Secure Data Transfer`
 4.  When prompted for the certificate type, please choose:
     *   `IGC Standard Medium Assurance | Organization Identity | Device`
 
@@ -46,4 +45,4 @@ If the certificate does not have both of these key usages, the IRS will reject i
 
 After completing the purchase, the Certificate Authority will provide you with the certificate file. This is typically a file with a `.pfx` or `.p12` extension, and it will be protected by a password that you create.
 
-This `.pfx` file and its password are what we will need to run the Proof-of-Concept and the final application.
+This `.pfx` file and its password are what we will need to complete and test the application.
