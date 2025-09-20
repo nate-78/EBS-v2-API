@@ -1,5 +1,7 @@
-﻿using System;
+using System;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace AcaApi.Poc
 {
@@ -12,19 +14,29 @@ namespace AcaApi.Poc
 
             try
             {
-                // TODO: Load configuration (cert path, password, endpoints)
-                var config = new AppConfig
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+                var config = configuration.GetSection("AcaApiConfig").Get<AppConfig>();
+
+                if (config == null)
                 {
-                    CertificatePath = "path/to/your/certificate.pfx",
-                    CertificatePassword = "your_password",
-                    SubmissionEndpoint = "https://la.www4.irs.gov/airp/aca/a2a/1095BC_Transmission",
-                    StatusEndpoint = "https://la.www4.irs.gov/airp/aca/a2a/1095BC_Status_Request"
-                };
+                    throw new Exception("Configuration could not be loaded. Make sure appsettings.json is present and correctly formatted.");
+                }
+                
+                if (config.CertificatePassword == "YOUR_PASSWORD_HERE")
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Warning: Please replace 'YOUR_PASSWORD_HERE' in appsettings.json with your actual certificate password.");
+                    Console.ResetColor();
+                }
 
                 Console.WriteLine("Transmitting test submission...");
 
                 var transmitter = new AcaTransmitterService(config);
-                var response = await transmitter.TransmitAsync("path/to/formdata.xml", "path/to/manifest.xml");
+                var response = await transmitter.TransmitAsync(config.FormDataFilePath, config.ManifestFilePath);
 
                 Console.WriteLine("\nResponse from server:");
                 Console.WriteLine(response);
@@ -37,7 +49,6 @@ namespace AcaApi.Poc
             }
 
             Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
         }
     }
 }

@@ -19,3 +19,14 @@ C:\owensdev-git\EBS-v2-API\AcaApi.Poc\obj\Debug\net8.0\refint\AcaApi.Poc.dll
 C:\owensdev-git\EBS-v2-API\AcaApi.Poc\obj\Debug\net8.0\AcaApi.Poc.pdb
 C:\owensdev-git\EBS-v2-API\AcaApi.Poc\obj\Debug\net8.0\AcaApi.Poc.genruntimeconfig.cache
 C:\owensdev-git\EBS-v2-API\AcaApi.Poc\obj\Debug\net8.0\ref\AcaApi.Poc.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\obj\Debug\net8.0\AcaApi.Poc.sourcelink.json
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\appsettings.json
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\owensdev-git\EBS-v2-API\AcaApi.Poc\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll

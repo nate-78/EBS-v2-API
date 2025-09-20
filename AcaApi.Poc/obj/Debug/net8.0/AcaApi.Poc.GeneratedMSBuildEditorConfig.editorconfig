@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AcaApi.Poc
-build_property.ProjectDir = c:\owensdev-git\EBS-v2-API\AcaApi.Poc\
+build_property.ProjectDir = C:\owensdev-git\EBS-v2-API\AcaApi.Poc\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

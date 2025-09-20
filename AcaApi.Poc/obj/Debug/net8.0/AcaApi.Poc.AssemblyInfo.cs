@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcaApi.Poc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+679fe8d6d9b5caaca80cb6ea72bc320b6549548f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcaApi.Poc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcaApi.Poc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

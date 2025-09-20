@@ -1,0 +1,60 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <Action xmlns="http://www.w3.org/2005/08/addressing">BulkRequestTransmitter</Action>
+    <To xmlns="http://www.w3.org/2005/08/addressing">https://la.www4.irs.gov/airp/aca/a2a/1095BC_Transmission_AATS</To>
+    <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-ext-1.0.xsd">
+      <Timestamp p4:Id="_1" xmlns:p4="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+        <p4:Created>2025-09-20T20:12:34.8324853Z</p4:Created>
+        <p4:Expires>2025-09-20T20:17:34.8330230Z</p4:Expires>
+      </Timestamp>
+    </Security>
+    <ACASecurityHeader xmlns="urn:us:gov:treasury:irs:msg:acasecurityheader">
+      <UserId xmlns="">your_asid_here</UserId>
+    </ACASecurityHeader>
+    <ACABusinessHeader xmlns="urn:us:gov:treasury:irs:msg:acabusinessheader">
+      <UniqueTransmissionId xmlns="">16f30884-49d8-4bd5-b305-a38a10470bda::T</UniqueTransmissionId>
+      <Timestamp xmlns="">2025-09-20T20:12:34.8330648Z</Timestamp>
+    </ACABusinessHeader>
+    <ACATransmitterManifestReqDtl xmlns="urn:us:gov:treasury:irs:ext:aca:air:ty25">
+      <PaymentYr xmlns="">2025</PaymentYr>
+      <PriorYearDataInd xmlns="">0</PriorYearDataInd>
+      <EIN xmlns="">00-1234567</EIN>
+      <TransmissionTypeCd xmlns="">O</TransmissionTypeCd>
+      <TestFileCd xmlns="">T</TestFileCd>
+      <TransmitterNameGrp xmlns="">
+        <BusinessNameLine1Txt>EBS Test Corp</BusinessNameLine1Txt>
+      </TransmitterNameGrp>
+      <CompanyInformationGrp xmlns="">
+        <CompanyNm>EBS Test Corp</CompanyNm>
+        <MailingAddressGrp>
+          <USAddressGrp>
+            <AddressLine1Txt>123 Main St</AddressLine1Txt>
+            <CityNm>Anytown</CityNm>
+            <USStateCd>TX</USStateCd>
+            <USZIPCd>75000</USZIPCd>
+          </USAddressGrp>
+        </MailingAddressGrp>
+        <ContactPhoneNum>555-555-1212</ContactPhoneNum>
+      </CompanyInformationGrp>
+      <VendorInformationGrp xmlns="">
+        <VendorNm>Gemini Software</VendorNm>
+        <ContactNameGrp>
+          <PersonFirstNm>Jane</PersonFirstNm>
+          <PersonLastNm>Smith</PersonLastNm>
+        </ContactNameGrp>
+        <ContactPhoneNum>800-555-1212</ContactPhoneNum>
+      </VendorInformationGrp>
+      <TotalPayeeRecordCnt xmlns="">1</TotalPayeeRecordCnt>
+      <TotalPayerRecordCnt xmlns="">1</TotalPayerRecordCnt>
+      <SoftwareId xmlns="">25A0000</SoftwareId>
+      <FormTypeCd xmlns="">1094C</FormTypeCd>
+    </ACATransmitterManifestReqDtl>
+  </soap:Header>
+  <soap:Body>
+    <ACABulkRequestTransmitter xmlns="urn:us:gov:treasury:irs:msg:irsacabulkrequesttransmitter">
+      <BulkExchangeFile xmlns="">
+        <Include href="cid:355b48a6-5c7a-47ce-af0e-8fd9b4ca5466" xmlns="http://www.w3.org/2004/08/xop/include" />
+      </BulkExchangeFile>
+    </ACABulkRequestTransmitter>
+  </soap:Body>
+</soap:Envelope>

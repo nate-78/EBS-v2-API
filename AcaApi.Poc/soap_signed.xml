@@ -1,0 +1,80 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <Action xmlns="http://www.w3.org/2005/08/addressing">BulkRequestTransmitter</Action>
+    <To xmlns="http://www.w3.org/2005/08/addressing">https://la.www4.irs.gov/airp/aca/a2a/1095BC_Transmission_AATS</To>
+    <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-ext-1.0.xsd">
+      <Timestamp Id="_1" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+        <Created>2025-09-20T20:12:34.8324853Z</Created>
+        <Expires>2025-09-20T20:17:34.8330230Z</Expires>
+      </Timestamp>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+          <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+          <Reference URI="">
+            <Transforms>
+              <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+              <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            </Transforms>
+            <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+            <DigestValue>LFqp3XUopaIIDSoCkfU6hurf3XP6JOK96VgcMrTQ9Jw=</DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>pPIMJFwLmY2puLFNg0CtbT//Q+szDLFYUY/wOcgYUGURMLPSD/yx2WIk8ogyaLsTHVTPaB5YTmSLLsDqLY0CeqfK76eZoePAkZxtQuQfM82Jya2h6PS3Izbz+dq2+DKzVmYvKs2aZs4jQ+WpMv8517rTLQlVaBbbXhDiLGab2Jdbk2Sf8TKOm/V1RE4rQOk3IXcKZ2Kz+31GNIw8/1m9p6zxdL2YjKrCJV1WeFFcjzmDp4qvoI0FoYnnBmR83EYWc7mch4QjZkEiBsWu7fsGot2V5gFMdb21YXi+UJmM7JoocUVjrMO112/SFpMF6vTFE0Euup6PqXkT1LeDTohDLg==</SignatureValue>
+        <KeyInfo>
+          <X509Data>
+            <X509Certificate>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</X509Certificate>
+          </X509Data>
+        </KeyInfo>
+      </Signature>
+    </Security>
+    <ACASecurityHeader xmlns="urn:us:gov:treasury:irs:msg:acasecurityheader">
+      <UserId xmlns="">your_asid_here</UserId>
+    </ACASecurityHeader>
+    <ACABusinessHeader xmlns="urn:us:gov:treasury:irs:msg:acabusinessheader">
+      <UniqueTransmissionId xmlns="">16f30884-49d8-4bd5-b305-a38a10470bda::T</UniqueTransmissionId>
+      <Timestamp xmlns="">2025-09-20T20:12:34.8330648Z</Timestamp>
+    </ACABusinessHeader>
+    <ACATransmitterManifestReqDtl xmlns="urn:us:gov:treasury:irs:ext:aca:air:ty25">
+      <PaymentYr xmlns="">2025</PaymentYr>
+      <PriorYearDataInd xmlns="">0</PriorYearDataInd>
+      <EIN xmlns="">00-1234567</EIN>
+      <TransmissionTypeCd xmlns="">O</TransmissionTypeCd>
+      <TestFileCd xmlns="">T</TestFileCd>
+      <TransmitterNameGrp xmlns="">
+        <BusinessNameLine1Txt>EBS Test Corp</BusinessNameLine1Txt>
+      </TransmitterNameGrp>
+      <CompanyInformationGrp xmlns="">
+        <CompanyNm>EBS Test Corp</CompanyNm>
+        <MailingAddressGrp>
+          <USAddressGrp>
+            <AddressLine1Txt>123 Main St</AddressLine1Txt>
+            <CityNm>Anytown</CityNm>
+            <USStateCd>TX</USStateCd>
+            <USZIPCd>75000</USZIPCd>
+          </USAddressGrp>
+        </MailingAddressGrp>
+        <ContactPhoneNum>555-555-1212</ContactPhoneNum>
+      </CompanyInformationGrp>
+      <VendorInformationGrp xmlns="">
+        <VendorNm>Gemini Software</VendorNm>
+        <ContactNameGrp>
+          <PersonFirstNm>Jane</PersonFirstNm>
+          <PersonLastNm>Smith</PersonLastNm>
+        </ContactNameGrp>
+        <ContactPhoneNum>800-555-1212</ContactPhoneNum>
+      </VendorInformationGrp>
+      <TotalPayeeRecordCnt xmlns="">1</TotalPayeeRecordCnt>
+      <TotalPayerRecordCnt xmlns="">1</TotalPayerRecordCnt>
+      <SoftwareId xmlns="">25A0000</SoftwareId>
+      <FormTypeCd xmlns="">1094C</FormTypeCd>
+    </ACATransmitterManifestReqDtl>
+  </soap:Header>
+  <soap:Body>
+    <ACABulkRequestTransmitter xmlns="urn:us:gov:treasury:irs:msg:irsacabulkrequesttransmitter">
+      <BulkExchangeFile xmlns="">
+        <Include href="cid:355b48a6-5c7a-47ce-af0e-8fd9b4ca5466" xmlns="http://www.w3.org/2004/08/xop/include" />
+      </BulkExchangeFile>
+    </ACABulkRequestTransmitter>
+  </soap:Body>
+</soap:Envelope>

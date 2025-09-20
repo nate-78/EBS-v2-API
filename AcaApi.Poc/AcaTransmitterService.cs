@@ -90,8 +90,7 @@ namespace AcaApi.Poc
             XNamespace acaBusHeader = "urn:us:gov:treasury:irs:msg:acabusinessheader";
             XNamespace acaSecHeader = "urn:us:gov:treasury:irs:msg:acasecurityheader";
             XNamespace acaMsg = "urn:us:gov:treasury:irs:msg:irsacabulkrequesttransmitter";
-            XNamespace manifestNs = "urn:us:gov:treasury:irs:ext:aca:air:ty24";
-             XNamespace xop = "http://www.w3.org/2004/08/xop/include";
+                         XNamespace manifestNs = "urn:us:gov:treasury:irs:ext:aca:air:ty25";             XNamespace xop = "http://www.w3.org/2004/08/xop/include";
 
             var soapEnvelope = new XDocument(
                 new XElement(soap + "Envelope",
@@ -169,7 +168,7 @@ namespace AcaApi.Poc
             signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
 
             var reference = new Reference();
-            reference.Uri = "#_1";
+            reference.Uri = ""; // Sign the entire document
             reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
             reference.AddTransform(new XmlDsigExcC14NTransform());
             signedXml.AddReference(reference);
