@@ -1,10 +1,12 @@
+using AcaClient;
 using System;
 using System.IO;
-using System.Net.Http;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace AcaApi.Poc
@@ -12,184 +14,101 @@ namespace AcaApi.Poc
     public class AcaTransmitterService
     {
         private readonly AppConfig _config;
-        private static readonly HttpClient _httpClient = new HttpClient();
 
         public AcaTransmitterService(AppConfig config)
         {
             _config = config;
         }
 
-        public async Task<string> TransmitAsync(string formDataFilePath, string manifestFilePath)
+        public async Task<ACABulkRequestTransmitterResponseType> TransmitAsync(string formDataFilePath, string manifestFilePath)
         {
-            string contentId = "cid:" + Guid.NewGuid().ToString();
-            
-            // 1. Build the core SOAP envelope
-            XDocument soapEnvelope = BuildSoapEnvelope(manifestFilePath, contentId);
-            Console.WriteLine("SOAP Envelope built.");
-            File.WriteAllText("soap_unsigned.xml", soapEnvelope.ToString());
+            Console.WriteLine("Creating WCF client with Custom Binding...");
 
-            // 2. Apply WS-Security signature
-            SignEnvelope(ref soapEnvelope);
-            Console.WriteLine("SOAP Envelope signed.");
-            File.WriteAllText("soap_signed.xml", soapEnvelope.ToString());
+            // 1. Create the binding elements
+            var messageEncoding = new MtomMessageEncodingBindingElement(MessageVersion.Soap11WSAddressing10, Encoding.UTF8);
+            var gzipEncoding = new GzipMessageEncoderBindingElement(messageEncoding);
+            var security = SecurityBindingElement.CreateCertificateOverTransportBindingElement(MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10);
+            var transport = new HttpsTransportBindingElement();
 
-            // 3. Construct the MTOM message
-            var requestContent = CreateMtomMessage(soapEnvelope, formDataFilePath, contentId);
-            Console.WriteLine("MTOM message constructed.");
+            // 2. Create the custom binding
+            var binding = new CustomBinding(gzipEncoding, security, transport);
 
-            // 4. Send the request
-            Console.WriteLine($"Sending request to {_config.SubmissionEndpoint}...");
-            var response = await SendRequestAsync(requestContent);
-            Console.WriteLine("Request sent.");
+            // 3. Create the endpoint
+            var endpoint = new EndpointAddress(_config.SubmissionEndpoint);
 
-            return response;
-        }
+            // 4. Create the client
+            var client = new BulkRequestTransmitterPortTypeClient(binding, endpoint);
 
-        private async Task<string> SendRequestAsync(HttpContent content)
-        {
-            var request = new HttpRequestMessage(HttpMethod.Post, _config.SubmissionEndpoint);
-            request.Content = content;
-            request.Headers.Add("SOAPAction", "\"BulkRequestTransmitter\"");
+            // 5. Set client certificate
+            var certificate = new X509Certificate2(_config.CertificatePath, _config.CertificatePassword, X509KeyStorageFlags.MachineKeySet);
+            client.ClientCredentials.ClientCertificate.Certificate = certificate;
 
-            var response = await _httpClient.SendAsync(request);
-
-            return await response.Content.ReadAsStringAsync();
-        }
-
-        private HttpContent CreateMtomMessage(XDocument soapEnvelope, string formDataFilePath, string contentId)
-        {
-            var boundary = "----=_Part_0_" + Guid.NewGuid().ToString().Replace("-", "");
-            var multipartContent = new MultipartContent("related", boundary);
-            
-            // Add the SOAP part
-            var soapContent = new StringContent(soapEnvelope.ToString(), System.Text.Encoding.UTF8, "application/xop+xml");
-            soapContent.Headers.ContentType.Parameters.Add(new System.Net.Http.Headers.NameValueHeaderValue("type", "\"text/xml\""));
-            soapContent.Headers.Add("Content-ID", "<soap-envelope>");
-            multipartContent.Add(soapContent);
-
-            // Add the binary (form data) part
-            var fileStream = new FileStream(formDataFilePath, FileMode.Open, FileAccess.Read);
-            var streamContent = new StreamContent(fileStream);
-            streamContent.Headers.Add("Content-ID", $"<{contentId.Replace("cid:", "")}>");
-            streamContent.Headers.Add("Content-Transfer-Encoding", "binary");
-            streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-            multipartContent.Add(streamContent);
-
-            return multipartContent;
-        }
-
-        private XDocument BuildSoapEnvelope(string manifestFilePath, string contentId)
-        {
+            // 6. Load manifest and form data
             var manifest = XDocument.Load(manifestFilePath);
-            
-            // Define Namespaces
-            XNamespace soap = "http://schemas.xmlsoap.org/soap/envelope/";
-            XNamespace wsa = "http://www.w3.org/2005/08/addressing";
-            XNamespace wsse = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-ext-1.0.xsd";
-            XNamespace wsu = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
-            XNamespace acaBusHeader = "urn:us:gov:treasury:irs:msg:acabusinessheader";
-            XNamespace acaSecHeader = "urn:us:gov:treasury:irs:msg:acasecurityheader";
-            XNamespace acaMsg = "urn:us:gov:treasury:irs:msg:irsacabulkrequesttransmitter";
-                         XNamespace manifestNs = "urn:us:gov:treasury:irs:ext:aca:air:ty25";             XNamespace xop = "http://www.w3.org/2004/08/xop/include";
+            var formData = await File.ReadAllBytesAsync(formDataFilePath);
+            var checksum = SHA256.Create().ComputeHash(formData);
 
-            var soapEnvelope = new XDocument(
-                new XElement(soap + "Envelope",
-                    new XAttribute(XNamespace.Xmlns + "soap", soap.NamespaceName),
-                    new XElement(soap + "Header",
-                        new XElement(wsa + "Action", "BulkRequestTransmitter"),
-                        new XElement(wsa + "To", _config.SubmissionEndpoint),
-                        new XElement(wsse + "Security",
-                            new XElement(wsu + "Timestamp",
-                                new XAttribute(wsu + "Id", "_1"),
-                                new XElement(wsu + "Created", DateTime.UtcNow.ToString("o")),
-                                new XElement(wsu + "Expires", DateTime.UtcNow.AddMinutes(5).ToString("o"))
-                            )
-                        ),
-                        new XElement(acaSecHeader + "ACASecurityHeader",
-                            new XElement("UserId", "your_asid_here")
-                        ),
-                        new XElement(acaBusHeader + "ACABusinessHeader",
-                            new XElement("UniqueTransmissionId", Guid.NewGuid() + "::T"),
-                            new XElement("Timestamp", DateTime.UtcNow.ToString("o"))
-                        ),
-                        new XElement(manifestNs + "ACATransmitterManifestReqDtl",
-                            new XElement("PaymentYr", manifest.Root.Element("PaymentYr").Value),
-                            new XElement("PriorYearDataInd", manifest.Root.Element("PriorYearDataInd").Value),
-                            new XElement("EIN", manifest.Root.Element("TransmitterInfo").Element("EIN").Value),
-                            new XElement("TransmissionTypeCd", "O"),
-                            new XElement("TestFileCd", "T"),
-                            new XElement("TransmitterNameGrp", new XElement("BusinessNameLine1Txt", manifest.Root.Element("CompanyInformation").Element("CompanyName").Value)),
-                            new XElement("CompanyInformationGrp",
-                                new XElement("CompanyNm", manifest.Root.Element("CompanyInformation").Element("CompanyName").Value),
-                                new XElement("MailingAddressGrp", new XElement("USAddressGrp",
-                                    new XElement("AddressLine1Txt", manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("AddressLine1").Value),
-                                    new XElement("CityNm", manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("City").Value),
-                                    new XElement("USStateCd", manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("State").Value),
-                                    new XElement("USZIPCd", manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("Zip").Value)
-                                )),
-                                new XElement("ContactPhoneNum", manifest.Root.Element("CompanyInformation").Element("ContactPhone").Value)
-                            ),
-                            new XElement("VendorInformationGrp",
-                                new XElement("VendorNm", manifest.Root.Element("VendorInformation").Element("VendorName").Value),
-                                new XElement("ContactNameGrp", new XElement("PersonFirstNm", "Jane"), new XElement("PersonLastNm", "Smith")),
-                                new XElement("ContactPhoneNum", manifest.Root.Element("VendorInformation").Element("ContactPhone").Value)
-                            ),
-                            new XElement("TotalPayeeRecordCnt", manifest.Root.Element("TotalPayeeRecordCnt").Value),
-                            new XElement("TotalPayerRecordCnt", manifest.Root.Element("TotalPayerRecordCnt").Value),
-                            new XElement("SoftwareId", manifest.Root.Element("SoftwareId").Value),
-                            new XElement("FormTypeCd", "1094C")
-                        )
-                    ),
-                    new XElement(soap + "Body",
-                        new XElement(acaMsg + "ACABulkRequestTransmitter",
-                            new XElement("BulkExchangeFile",
-                                new XElement(xop + "Include", new XAttribute("href", contentId))
-                            )
-                        )
-                    )
-                )
-            );
-            return soapEnvelope;
-        }
-
-        private void SignEnvelope(ref XDocument soapEnvelope)
-        {
-            Console.WriteLine("Signing SOAP Envelope...");
-            var certificate = new X509Certificate2(_config.CertificatePath, _config.CertificatePassword, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
-            
-            var xmlDoc = new XmlDocument();
-            using (var xmlReader = soapEnvelope.CreateReader())
+            // 7. Construct the request object
+            var securityHeader = new TransmitterACASecurityHeaderType { Item = "your_asid_here" };
+            var businessHeader = new ACABulkBusinessHeaderRequestType
             {
-                xmlDoc.Load(xmlReader);
-            }
-
-            var signedXml = new SignedXml(xmlDoc);
-            signedXml.SigningKey = certificate.GetRSAPrivateKey();
-            signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
-
-            var reference = new Reference();
-            reference.Uri = ""; // Sign the entire document
-            reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
-            reference.AddTransform(new XmlDsigExcC14NTransform());
-            signedXml.AddReference(reference);
-
-            var keyInfo = new KeyInfo();
-            var keyInfoData = new KeyInfoX509Data(certificate);
-            keyInfo.AddClause(keyInfoData);
-            signedXml.KeyInfo = keyInfo;
-
-            signedXml.ComputeSignature();
-            XmlElement signatureXml = signedXml.GetXml();
-
-            var nsManager = new XmlNamespaceManager(xmlDoc.NameTable);
-            nsManager.AddNamespace("wsse", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-ext-1.0.xsd");
-            var securityHeader = xmlDoc.SelectSingleNode("//wsse:Security", nsManager) as XmlElement;
-            securityHeader.AppendChild(xmlDoc.ImportNode(signatureXml, true));
-
-            using (var nodeReader = new XmlNodeReader(xmlDoc))
+                UniqueTransmissionId = Guid.NewGuid() + "::T",
+                Timestamp = DateTime.UtcNow
+            };
+            var manifestDetail = new ACATrnsmtManifestReqDtlType
             {
-                soapEnvelope = XDocument.Load(nodeReader);
-            }
+                PaymentYr = manifest.Root.Element("PaymentYr").Value,
+                PriorYearDataInd = (DigitBooleanType)Enum.Parse(typeof(DigitBooleanType), "Item" + manifest.Root.Element("PriorYearDataInd").Value),
+                EIN = manifest.Root.Element("TransmitterInfo").Element("EIN").Value,
+                TransmissionTypeCd = TransmissionTypeCdType.O,
+                TestFileCd = "T",
+                TransmitterNameGrp = new BusinessNameType
+                {
+                    BusinessNameLine1Txt = manifest.Root.Element("CompanyInformation").Element("CompanyName").Value
+                },
+                CompanyInformationGrp = new CompanyInformationGrpType
+                {
+                    CompanyNm = manifest.Root.Element("CompanyInformation").Element("CompanyName").Value,
+                    MailingAddressGrp = new BusinessAddressGrpType
+                    {
+                        Item = new USAddressGrpType
+                        {
+                            AddressLine1Txt = manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("AddressLine1").Value,
+                            CityNm = manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("City").Value,
+                            USStateCd = (AcaClient.StateType)Enum.Parse(typeof(AcaClient.StateType), manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("State").Value),
+                            USZIPCd = manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("Zip").Value
+                        }
+                    },
+                    ContactPhoneNum = manifest.Root.Element("CompanyInformation").Element("ContactPhone").Value
+                },
+                VendorInformationGrp = new VendorInformationGrpType
+                {
+                    VendorCd = "I", // Default to 'I' for Independent
+                    ContactNameGrp = new OtherCompletePersonNameType
+                    {
+                        PersonFirstNm = "Jane",
+                        PersonLastNm = "Smith"
+                    },
+                    ContactPhoneNum = manifest.Root.Element("VendorInformation").Element("ContactPhone").Value
+                },
+                TotalPayeeRecordCnt = manifest.Root.Element("TotalPayeeRecordCnt").Value,
+                TotalPayerRecordCnt = manifest.Root.Element("TotalPayerRecordCnt").Value,
+                SoftwareId = manifest.Root.Element("SoftwareId").Value,
+                FormTypeCd = (FormNameType)Enum.Parse(typeof(FormNameType), "Item" + manifest.Root.Element("FormType").Value.Replace("/", "")),
+                BinaryFormatCd = BinaryFormatCodeType.applicationxml,
+                ChecksumAugmentationNum = Convert.ToBase64String(checksum),
+                AttachmentByteSizeNum = formData.Length.ToString(),
+                DocumentSystemFileNm = Path.GetFileName(formDataFilePath)
+            };
+            var bulkRequest = new ACABulkRequestTransmitterType
+            {
+                BulkExchangeFile = formData
+            };
+
+            Console.WriteLine("Sending request via WCF client...");
+            var response = await client.BulkRequestTransmitterAsync(securityHeader, null, businessHeader, manifestDetail, bulkRequest);
+
+            return response.ACABulkRequestTransmitterResponse;
         }
     }
 }

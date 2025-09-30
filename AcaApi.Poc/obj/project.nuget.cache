@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kat+IP3hdyQ=",
+  "dgSpecHash": "DciXDto7S6Y=",
   "success": true,
   "projectFilePath": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\AcaApi.Poc.csproj",
   "expectedPackageFiles": [
@@ -13,10 +13,15 @@
     "C:\\Users\\Nathan\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\8.0.0\\microsoft.extensions.fileproviders.physical.8.0.0.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\8.0.0\\microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\microsoft.extensions.objectpool\\8.0.10\\microsoft.extensions.objectpool.8.0.10.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\system.formats.asn1\\9.0.8\\system.formats.asn1.9.0.8.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.8\\system.security.cryptography.pkcs.9.0.8.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\system.security.cryptography.xml\\9.0.8\\system.security.cryptography.xml.9.0.8.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\system.servicemodel.http\\8.1.2\\system.servicemodel.http.8.1.2.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\system.servicemodel.netframingbase\\8.1.2\\system.servicemodel.netframingbase.8.1.2.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\system.servicemodel.nettcp\\8.1.2\\system.servicemodel.nettcp.8.1.2.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\system.servicemodel.primitives\\8.1.2\\system.servicemodel.primitives.8.1.2.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\Nathan\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
   ],

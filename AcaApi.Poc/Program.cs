@@ -15,7 +15,7 @@ namespace AcaApi.Poc
             try
             {
                 var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 
@@ -39,12 +39,17 @@ namespace AcaApi.Poc
                 var response = await transmitter.TransmitAsync(config.FormDataFilePath, config.ManifestFilePath);
 
                 Console.WriteLine("\nResponse from server:");
-                Console.WriteLine(response);
+                Console.WriteLine($"Receipt ID: {response.ReceiptId}");
+                Console.WriteLine($"Status: {response.TransmissionStatusCd}");
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\nAn error occurred: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"  Inner Exception: {ex.InnerException.Message}");
+                }
                 Console.ResetColor();
             }
 
