@@ -95,6 +95,7 @@ namespace AcaApi.Poc
             using (var gzipStream = new GZipStream(memoryStream, CompressionMode.Compress, leaveOpen: true))
             {
                 gzipStream.Write(buffer.Array!, buffer.Offset, buffer.Count);
+                gzipStream.Flush();
             }
 
             var compressedBytes = memoryStream.ToArray();
@@ -111,6 +112,7 @@ namespace AcaApi.Poc
             using var gzipStream = new GZipStream(memoryStream, CompressionMode.Decompress, leaveOpen: true);
             using var decompressedStream = new MemoryStream();
             gzipStream.CopyTo(decompressedStream);
+            decompressedStream.Flush();
 
             var decompressedBytes = decompressedStream.ToArray();
             var decompressedBuffer = bufferManager.TakeBuffer(decompressedBytes.Length);

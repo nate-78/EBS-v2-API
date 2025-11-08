@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:FormBCTransmitterSubmissionDtl xmlns="urn:us:gov:treasury:irs:ext:aca:air:ty17" xmlns:ns2="urn:us:gov:treasury:irs:common" xmlns:ns3="urn:us:gov:treasury:irs:msg:form1094-1095BCtransmittermessage">
+    <ACATransmitterSubmissionDetail>
+        <TransmitterErrorDetailGrp>
+            <SubmissionLevelStatusCd>Rejected</SubmissionLevelStatusCd>
+            <UniqueSubmissionId>AATS1094C-18-00005964|1</UniqueSubmissionId>
+        </TransmitterErrorDetailGrp>
+        <TransmitterErrorDetailGrp>
+            <UniqueSubmissionId>AATS1094C-18-00005964|1</UniqueSubmissionId>
+            <ns2:ErrorMessageDetail>
+                <ns2:ErrorMessageCd>1094C-087</ns2:ErrorMessageCd>
+                <ns2:ErrorMessageTxt>If Form 1094C 'CorrectedInd' has a choice of "No" indicated, then at least one Form 1095C must be attached.</ns2:ErrorMessageTxt>
+                <ns2:XpathContent>/Form109495CTransmittalUpstream/Form1094CUpstreamDetail/CorrectedInd</ns2:XpathContent>
+            </ns2:ErrorMessageDetail>
+        </TransmitterErrorDetailGrp>
+    </ACATransmitterSubmissionDetail>
+</ns3:FormBCTransmitterSubmissionDtl>

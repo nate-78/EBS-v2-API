@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Manifest>
+    <PaymentYr>2025</PaymentYr>
+    <PriorYearDataInd>0</PriorYearDataInd>
+    <TransmitterInfo>
+        <EIN>00-0000301</EIN>
+    </TransmitterInfo>
+    <CompanyInformation>
+        <CompanyName>SeliTestCorp</CompanyName>
+        <ContactName>John Doe</ContactName>
+        <ContactPhone>555-555-1212</ContactPhone>
+        <MailingAddress>
+            <AddressLine1>123 Main St</AddressLine1>
+            <City>Anytown</City>
+            <State>TX</State>
+            <Zip>75000</Zip>
+        </MailingAddress>
+    </CompanyInformation>
+    <VendorInformation>
+        <VendorName>Gemini Software</VendorName>
+        <ContactName>Jane Smith</ContactName>
+        <ContactPhone>800-555-1212</ContactPhone>
+    </VendorInformation>
+    <TotalPayeeRecordCnt>1</TotalPayeeRecordCnt>
+    <TotalPayerRecordCnt>1</TotalPayerRecordCnt>
+    <SoftwareId>25A0023165</SoftwareId>
+    <FormType>1094/1095C</FormType>
+</Manifest>

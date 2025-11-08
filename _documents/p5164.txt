@@ -1,0 +1,850 @@
+Test Package for
+Electronic Filers of
+Affordable Care Act (ACA)
+Information Returns (AIR)
+PROCESSING YEAR 2025
+PUBLICATION 5164
+
+Publication 5164 (Rev. 11-2024) Catalog Number 66799C Department of the Treasury Internal Revenue Service www.irs.gov
+
+Table of Contents
+Section 1. Introduction
+
+1
+
+1.1 Background. . . . . . . . . . . . . . . . . . . . . . . . . . . .  1
+1.2 References . . . . . . . . . . . . . . . . . . . . . . . . . . . .  1
+1.3 Forms Covered by the Test Package. . . . . . .  1
+
+Section 4.
+Communication Test for Transmitters
+
+7
+
+Section 5.
+Testing Guidelines for Software Developers
+
+8
+
+5.1 Steps for Passing AATS. . . . . . . . . . . . . . . . . .  8
+Section 2.
+ACA Assurance Testing System Overview
+
+5.1.1 TIN Ranges and Name Controls . . . . . . . . .  9
+2
+
+2.1 Who Must Test? . . . . . . . . . . . . . . . . . . . . . . . .  2
+2.2 What Is Tested? . . . . . . . . . . . . . . . . . . . . . . . .  2
+2.3 When to Test?. . . . . . . . . . . . . . . . . . . . . . . . . .  3
+
+5.2 Scenarios . . . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+5.2.1 Correction Scenario. . . . . . . . . . . . . . . . . .  12
+5.3 Formatting the Entities . . . . . . . . . . . . . . . . .  13
+5.4 Signature Requirements . . . . . . . . . . . . . . . .  13
+
+2.4 Why Is Testing Required? . . . . . . . . . . . . . . . .  3
+
+Section 3.
+ACA Assurance Testing Transmissions
+
+Section 6. Appendix A: Acronyms List
+
+14
+
+Section 7. XML Resources
+
+16
+
+4
+
+3.1 Overview of AATS Customer Experience. . . .  4
+3.2 Transmission Channels. . . . . . . . . . . . . . . . . .  5
+3.3 Validating Manifest Elements in Test
+Transmissions. . . . . . . . . . . . . . . . . . . . . . . . . . . . .  5
+3.4 Receipt ID. . . . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+3.5 Acknowledgement Files. . . . . . . . . . . . . . . . . . 6
+
+List of Figures
+
+List of Tables
+
+Figure 5-1: Rendered PDF of Test
+Scenario Example. . . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+
+Table 3-1: AATS Acknowledgement Status, Response
+and Action . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  5
+
+Figure 5-2: XML Schema Example. . . . . . . . . . . . . . . .  12
+
+Table 5-1: Valid EIN Ranges and Name Controls. . . . .  9
+
+Figure 5-3: Formatting Example. . . . . . . . . . . . . . . . . .  13
+
+Table 5-2: Valid SSN Ranges and Name Controls . . .  10
+Table 5-3: Scenarios . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+
+Introduction
+
+Section 1. Introduction
+Publication 5164, Test Package for Electronic Filers of Affordable Care Act (ACA) Information Returns (AIR)
+Processing Year 2025 contains general and program specific testing information for use with ACA Assurance
+Testing System (AATS). AATS refers to both the process and the system used to test software and electronic
+transmissions prior to accepting forms into the Production AIR System. Software Developers must pass IRS
+AATS scenarios for the forms and tax year that the software package will support. See Note in Section 2.1,
+Who must Test? Transmitters and Issuers must pass a one-time communication test for the forms they will file.
+Note: The term, Transmitters, collectively refers to both Issuers and Transmitters throughout this
+document. Please note that all references to Transmitters include Issuers.
+AATS scenarios are available on the IRS.gov Affordable Care Act Assurance Testing System (AATS)
+Information page.
+
+1.1 Background
+In March 2010, Congress proposed two pieces of legislation, later enacted into law—the Health Care and
+Education Reconciliation Act of 2010 (HCERA) and the Patient Protection and Affordable Care Act (PPACA).
+References to the Affordable Care Act (ACA) collectively include the HCERA and PPACA. As part of this law,
+insurers and certain employers must file information returns with the Internal Revenue Service (IRS). The IRS
+receives and processes these information returns.
+1
+
+1.2 References
+The following guides/documents provide additional guidance for electronic filing through AIR:
+■ Publication 5165, Guide for Electronically Filing Affordable Care Act (ACA) Information Returns for
+
+Software Developers and Transmitters
+■ Publication 5308, Automated Enrollment for ACA Providers, “The External Guide”
+■ Publication 5258, Affordable Care Act (ACA) Information Returns (AIR) Submission Composition and
+
+Reference Guide
+Some of the AIR web page references available on IRS.gov are:
+■ Affordable Care Act Information Returns (AIR) Program
+■ Affordable Care Act Information Returns Schemas and Business Rules
+■ Affordable Care Act Assurance Testing System (AATS) Information Returns
+
+1.3 Forms Covered by the Test Package
+The following forms are the information returns conducive to electronic filing through the AIR system for Tax
+Year (TY) 2024:
+■ Form 1094-B, Transmittal of Health Coverage InformationReturns
+■ Form 1095-B, HealthCoverage
+
+Forms 1094/1095-B contain data on parties covered by insurance companies and self-insured employers.
+Forms 1094/1095-C contain information about the insurance coverage offered by Applicable Large
+Employers (ALEs) to employees. Form 1094-C can come in as a standalone form only if it is an Authoritative
+Transmittal needing correction.
+■ Form 1094-C, Transmittal of Employer-Provided Health Insurance Offer and Coverage Information Returns
+■ Form 1095-C, Employer-Provided Health Insurance Offer and Coverage
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+ACA Assurance Testing System Overview
+
+Section 2. ACA Assurance Testing System Overview
+This section describes the general process for completing the AATS test phase in preparation for electronic
+filing of ACA Information Returns:
+■ Schema and Business Rules are validated during AATS testing
+■ AATS environment does not support stress or load testing
+■ Response times in AATS do not mirror expected response times in Production
+■ Live taxpayer data cannot be submitted for AATS testing
+■ Taxpayer Identification Numbers (TINs) will be validated against a mock database of TINs and Name
+
+Controls, see Section 5.1.1, TIN Ranges and Name Controls of this publication
+■ Test submissions will not be processed through IRS downstream systems
+
+For more information on testing schedules and Known Issues and Solutions, see the AATS Information
+Returns Tax Year 2024/Processing Year 2025 page on www.IRS.gov.
+For instructions regarding testing, refer to Section 5, Testing Guidelines for Software Developers.
+
+2.1 Who Must Test?
+Who must test:
+Transmitters: A third-party sending ACA Information Returns directly to IRS on behalf of any business or a
+business filing their own. A business filing their own return may have the Issuer role in the ACA Application
+for TCC. Transmitters are required to complete communication testing only for the first year they will transmit
+information returns to the IRS.
+Software Developers (SWD): An organization writing either origination or transmission software according
+to IRS specifications.
+Note: Software Developers, who passed AATS for a previous tax year, will not have to retest, unless
+adding a new form not previously tested.
+Current Tax Year Software Packages will be moved into Production status for those who passed software
+testing in a previous year. SWD Transmitter Control Codes (TCC) will remain in Test.
+Software Developers need a new Software ID for each tax year and for each ACA Information Return Type
+they support. The software information must be updated yearly on the ACA Application for TCC. Go to IRS.
+gov and search the e-Services page to locate the Affordable Care Act (ACA) Services links to select the
+application.
+
+2.2 What Is Tested?
+For current year testing, see Section 5.2, Scenarios of this publication.
+Software Developer Testing
+The forms selected on the ACA Application for TCC determines the number and type of scenarios that
+new software developers must complete. Each scenario must have an “Accepted” status to pass AATS
+successfully.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+2
+
+ACA Assurance Testing System Overview
+
+Transmitter Communication Testing
+Transmitters must pass a one-time communication test to be able to submit in Production. One of the
+posted AATS Scenarios may be submitted to complete the communications test.
+Note: Software Developers, who also have a Transmitter role, do not have to complete Communication
+Testing. Software Developer Testing establishes the ability to ‘communicate’ with the IRS.
+
+2.3 When to Test?
+AATS testing typically begins in early November for first-time Software Developers and Transmitters.
+Software Developers who passed AATS for a prior year, can continue to use the test environment for optional
+testing.
+
+2.4 Why Is Testing Required?
+The purpose of required AATS testing prior to AIR Production is to ensure that:
+■ IRS can receive and process the electronic information returns
+■ Software Developers and Transmitters can send electronic information returns and retrieve
+
+Acknowledgements
+■ Software Developers and Transmitters use the correct format and electronic filing specifications for the
+
+Information Returns Platform
+3
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+ACA Assurance Testing Transmissions
+
+Section 3. ACA Assurance Testing Transmissions
+This section describes the general process for transmitting AATS scenarios.
+
+3.1 Overview of AATS Customer Experience
+Using the information provided in Section 5.2, Scenarios, the SWD creates the applicable files in Extensible
+Markup Language (XML) format for the forms they will test. The SWD will send the AATS files to AIR based
+on the transmission channels referenced in Section 3.2.
+Many fields within the schema are optional because required data varies among reporting types. It is
+essential for the filer to review the form instructions, business rules, and schema to identify the required
+data for that specific reporting type. Form instructions provide guidance for required data and explain the
+codes to enter depending on filing needs. Business Rules enforce the filing requirements identified in the
+form instructions. All data provided in submissions are subject to schema and business rule level validations.
+Inclusion of blank tags, empty tags or null tags will result in rejection of the transmission.
+Each AATS transmission to AIR must include a new Unique Transmission Identifier (UTID). Information
+regarding the UTID is included in Publication 5165, Guide for Electronically Filing Affordable Care Act
+(ACA) Information Returns for Software Developers and Transmitters, and Publication 5258, Affordable
+Care Act (ACA) Information Returns (AIR) Submission Composition and Reference Guide.
+Note: When resubmitting a rejected transmission, make sure a new UTID is generated for the
+resubmission.
+Once the transmission processes, a status will be provided in the Acknowledgement. The Receipt ID (refer to
+Section 3.4, Receipt ID for more information) or UTID is used to retrieve the Acknowledgement after the IRS
+processes the transmission. Information regarding retrieving the Acknowledgement is included in Publication
+5165.
+Table 3-1 below, defines the statuses that may be present in the Acknowledgement. A status of “Processing”
+indicates that validation is not complete.
+A status of “Accepted” denotes that the submitter should contact the Help Desk for final validation review.
+Upon contact with the Help Desk a case number will be provided and should be used on subsequent
+contacts concerning an AATS review.
+A status of “Rejected,” “Accepted with Errors,” or “Partially Accepted” alerts the submitter to fix the errors
+and resubmit prior to contacting the Help Desk for an AATS Review.
+Once a submission receives “Accepted” status in AATS, the submitter can then test the correction process
+using the optional Correction Scenario.
+Note: In AATS only, resubmit scenarios as original transmissions until a status of “Accepted” is received.
+In Production, a replacement or correction transmission should never be resubmitted as an original
+transmission.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+4
+
+ACA Assurance Testing Transmissions
+
+Table 3-1: AATS Acknowledgement Status, Response and Action
+Status
+
+Response
+
+Action
+
+Processing
+
+IRS has not completed processing
+the transmission.
+
+Check back later, but if this status persists for more
+than two days, contact the Help Desk for further
+assistance: 1- 866-937-4130.
+
+Accepted
+
+IRS has completed processing the
+transmission and found no errors.
+
+Accepted with
+Errors, Partially
+Accepted or
+Rejected
+
+IRS has found an error in the
+transmission or submission.
+
+Not Found
+
+IRS could not find a transmission
+corresponding to the Receipt ID or
+UTID provided.
+
+Contact the Help Desk for a review of the AATS
+Scenarios: 1-866-937-4130.
+The TCC and/or Form Indicator updates upon
+confirmation that the scenarios have passed AATS.
+Fix any errors and resubmit all scenarios containing
+errors as an original transmission1 prior to
+contacting the Help Desk for an AATS review.
+Verify Receipt ID or UTID and resubmit
+Acknowledgement request using Receipt ID or
+UTID.
+
+For additional information on the status indicators, please refer to Publication 5258, Affordable Care Act
+(ACA) Information Returns (AIR) Submission Composition and Reference Guide.
+
+3.2 Transmission Channels
+The IRS has two transmission channels for the AATS testing environment for AIR:
+■ The Information Submission Service (ISS)-UI (UI) channel – A Web Browser based Graphical User
+
+Interface that allows Transmitters to upload two XML files (one with manifest information and one
+with forms data) to the IRS and to retrieve the Acknowledgement/Status of each submission via Web
+Browser.
+■ The ISS-A2A (A2A) channel – Simple Object Access Protocol (SOAP) messaging with Message
+
+Transmission Optimization Mechanism (MTOM) attachments built on a Services Oriented Architecture
+(SOA) that allows Transmitters to file forms with the IRS and check submission status via applications
+running on local computer systems. For additional information, see Publication 5165.
+
+3.3 Validating Manifest Elements in Test Transmissions
+AATS test transmissions must include the following information in the manifest:
+■ Test transmission requires the inclusion of a Test File Indicator (XML TestFileCd) set to “T” to match
+
+that status of the Form T/P Indicator. If the Test File Indicator is not set to “T,” the transmission will be
+rejected.
+■ The TCC is required as part of the Unique Transmission ID (XML UniqueTransmissionId). AIR will
+
+extract the TCC from the Unique Transmission ID. AIR will verify the TCC exists. If the TCC does not
+exist or the TCC is in a state other than “Active”, or the Application is not in “completed status”, the
+transmission will be rejected.
+1 This is for AATS only. If there are errors in Production, file corrections or replacements by following the guidelines in Publication 5165,
+Section 7.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+5
+
+ACA Assurance Testing Transmissions
+
+■ The transmission requires the inclusion of a Form Type Code (XML FormTypeCd) to identify the forms
+
+that are being submitted. The Form Type Code must be either “1094/1095-B” or “1094/1095-C.” The
+IRS maintains a status for each Form Type Code for each TCC based on the request in the ACA TCC
+Application and the forms types being submitted into AATS.
+■ The transmission must include a verifiable Software ID (XML SoftwareId). Unlike the AIR Production
+
+system where the Software ID status must be in Production, AATS will accept transmissions from a
+verifiable Software ID regardless of the Software ID status (“Production” or “Test”). If AATS cannot verify
+the Software ID, the transmission will be rejected.
+For more information on the AIR Manifest, refer to Publication 5258, on the AIR Program Overview page
+located at IRS.gov. For technical assistance in resolving manifest errors, contact the AIR Mailbox.
+
+3.4 Receipt ID
+The Software Developer and Transmitter will receive a Receipt ID as part of the synchronous session when
+submitting a transmission to the IRS, given the transmission passes the initial validation by ISS. The Receipt
+ID does not provide proof that the transmission was accepted. Note: For proof that the IRS has accepted the
+transmission, you will need to request the acknowledgement status; see Section 3.5 and refer to Table 3-1,
+AATS Acknowledgement Status. The Receipt ID will either be returned in the SOAP Response (A2A Channel)
+or on a web page in their Web Browser (ISS-UI Channel). The user retains the Receipt ID to request the
+Acknowledgement for that transmission from the IRS and provides it as a reference number when forwarding
+questions to the Help Desk or AIR Mailbox.
+
+3.5 Acknowledgement Files
+
+6
+
+Upon receipt of the AATS transmission, AIR will execute schema validations on the ACA Information Returns.
+Any condition which triggers an error will be identified and reported in the MTOM attachment that will be
+returned in the SOAP Response (A2A Channel) or on a web page in their Web Browser (ISS-UI Channel).
+The Receipt ID or UTID will be used to retrieve the Acknowledgement applicable to the specific transmission.
+For more information on the statuses returned in the Acknowledgement, refer to Table 3-1, AATS
+Acknowledgement Status, Response and Action in this publication.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Communication Test for Transmitters
+
+Section 4. Communication Test for Transmitters
+Transmitters must use approved software that has already passed AATS and complete a communication test
+to prepare and transmit ACA Information Returns.
+The communication test can be completed by selecting one test scenario from the AIR AATS webpage
+or the scenario list in Section 5.2, Scenarios. The communication test is considered passed when the
+customer receives their acknowledgement with a status of “Accepted” or “Accepted with Errors” or “Partially
+Accepted”. Transmitters must then contact the Help Desk at 1-866-937-4130 and provide their Receipt ID
+to have their Transmitter Form T/P Indicator moved to Production (P), this will complete the communication
+test. Further communication testing is not required when adding additional forms.
+Software Developers, who are also Transmitters, are not required to perform a separate communication test.
+Note: If a communication test was previously passed, there is no need to conduct an additional
+communication test. New transmitters must perform communication test using the same application
+software used to transmit information returns:
+■ When transmitting ACA Information Returns through ISS-UI, perform the communication test through
+
+ISS-UI
+■ When transmitting ACA Information Returns through ISS-A2A, perform the communication test through
+
+ISS-A2A
+7
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Testing Guidelines for Software Developers
+
+Section 5. Testing Guidelines for Software Developers
+For the Software Developer role, the TCC is permanently set to “T” for test. The following rules apply to
+transmissions:
+■ A transmission must contain a manifest file and at least one or more submissions of either Forms
+
+1094/1095-B or Forms 1094/1095-C, but not both.
+■ A submission consists of one transmittal (Form 1094) and the associated records (Form(s) 1095)
+
+Exception: A correction to Form 1094-C, Authoritative Transmittal, must be submitted without a 1095-C
+attached.
+
+5.1 Steps for Passing AATS
+1. SWDs must create an e-Services account using a two-factor authentication process called Secure
+Access Authentication and complete the ACA Application for TCC prior to submitting into the AATS
+environment. For detailed information on submitting the ACA Application for Transmitter Control Code
+(TCC), see Publication 5165, Guide for Electronically Filing Affordable Care Act (ACA) Information
+Returns for Software Developers and Transmitters.
+Note: If needed, refer to the ACA Application for TCC Tutorial located on the External Services
+Authorization Management (ESAM) toolbar by selecting Online Tutorials tab when completing the ACA
+Application for TCC.
+2. SWDs should choose the required scenarios based on form type.
+3. All transmissions submitted should be error free and receive a status of “Accepted.”
+4. SWDs should contact the Help Desk at 1-866-937-4130 to request a review of their AATS “Accepted”
+ReceiptIds. They will need to provide the following to the Help Desk:
+■ “Accepted” ReceiptIds
+■ TCC
+■ Software Package Id
+■ Form Type
+■ Transmission Method
+■ Contact information, including an email address
+
+Once all scenarios have passed AATS, the Software Package Status and the Software ID status will be
+moved from “Test” to “Production.”
+Once Software Package Status and the Software ID Status has been moved from “Test” to “Production,”
+there is a 48-hour waiting period before transmissions can be sent to the Production environment. If the
+timeframe is not met, a manifest error or header error stating the TCC is not valid will set. IRS will not send
+a notification when the Software Package Status and the Software ID status indicators have been moved to
+Production status.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+8
+
+Testing Guidelines for Software Developers
+
+5.1.1 TIN Ranges and Name Controls
+The IRS requires that Software Developers use only the ranges for Social Security Numbers (SSNs)/
+Employer Identification Numbers (EINs) and name controls provided for AATS in Tables 5-1 and 5-2 below.
+For more information on how to create name controls see Publication 4164, Modernized e-File (MeF) Guide
+for Software Developers and Transmitters, and Publication 4163, Modernized e-File (MeF) Guide for
+Authorized IRS e-File Providers for Business Returns, for business name controls.
+Do not use live individual or business names, Taxpayer Identification Numbers (TINs), EINs or SSNs. The
+AATS environment is not a secure environment and testing of those live names and TINs will result in a
+rejection.
+Table 5-1: Valid EIN Ranges and Name Controls
+EIN RANGE
+
+NAME CONTROL
+
+00-0000001 through 00-0000100
+
+HELP
+
+00-0000101 through 00-0000200
+
+HIDE
+
+00-0000201 through 00-0000300
+
+WORK
+
+00-0000301 through 00-0000400
+
+SELI
+
+00-0000401 through 00-0000500
+
+GAMM
+
+00-0000501 through 00-0000600
+
+DARR
+
+00-0000601 through 00-0000700
+
+PARK
+
+00-0000701 through 00-0000800
+
+CARR
+
+00-0000801 through 00-0000900
+
+PATT
+
+00-0000901 through 00-0001000
+
+SACR
+
+Senstive but Unclassified
+
+9
+
+Publication 5164 | Internal Revenue Service
+
+Testing Guidelines for Software Developers
+
+Table 5-2: Valid SSN Ranges and Name Controls
+SSN RANGE
+
+NAME CONTROL
+
+000-00-0001 through 000-00-0100
+
+HERR
+
+000-00-0101 through 000-00-0200
+
+MART
+
+000-00-0201 through 000-00-0300
+
+WILL
+
+000-00-0301 through 000-00-0400
+
+SOUT
+
+000-00-0401 through 000-00-0500
+
+GAVI
+
+000-00-0501 through 000-00-0600
+
+DAVI
+
+000-00-0601 through 000-00-0700
+
+NICH
+
+000-00-0701 through 000-00-0800
+
+CAME
+
+000-00-0801 through 000-00-0900
+
+JONE
+
+000-00-0901 through 000-00-1000
+
+SCOT
+10
+
+5.2 Scenarios
+Table 5-3 below identifies the required scenarios for each form type. Each scenario contains all the
+information needed to prepare the XML. The scenarios test the functionality of the business rules. Each test
+submission must match the scenarios exactly to pass AATS. The Correction scenarios are optional.
+Employer of Self-Insured Coverage Exception – Software Developers who do not develop software for
+employers sponsoring self-insured coverage are not required to submit Scenario 2. To request an exception
+for AATS testing, notate on the ACA Application for TCC, in the comments section of the SWD package list
+page: “Software is only for use by an employer who does not offer self-insured coverage.”
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Testing Guidelines for Software Developers
+
+Table 5-3: Scenarios
+Required AATS Scenarios
+
+Optional AATS Scenarios
+
+B Form Required Scenarios
+
+B Form Correction Scenarios
+
+Scenario 1
+1-0, 1-1, 1-2
+
+1C-0, 1C-1
+
+C Form Required Scenarios
+Scenario 2*
+2-0, 2-1, 2-2
+Scenario 3
+3-0, 3-1
+
+C Form Correction Scenarios
+2C-0, 2C-2
+
+3C-0
+
+*Scenario 2 is not required for SWDs who do not develop software for employers sponsoring selfinsured coverage. See Section 5.2.
+Figure 5-1 illustrates a scenario example containing mock data rendered in PDF format for Form 1094-B:
+11
+
+Figure 5-1: Rendered PDF of Test Scenario Example
+To successfully execute a test scenario, include only the data on this form, exactly as it appears. The data on
+the form above must be represented in XML format based on the XML Schema for the Form 1094-B. AATS
+transmissions are subject to the same XML Schema validation performed in the AIR Production System.
+Figure 5-2 illustrates what the XML will look like reporting data on Form 1094-B:
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Testing Guidelines for Software Developers
+
+12
+
+Figure 5-2: XML Schema Example
+5.2.1 Correction Scenario
+The correction scenarios are optional. They provide experience prior to submitting corrections in Production.
+The correction process in AATS is as follows:
+■ Prerequisite: An “Accepted Acknowledgement” from the previously submitted scenario submission,
+
+before submitting the corrected scenario
+■ The Transmission Manifest will have ‘TransmissionTypeCd’ “C” and the form data file will include a
+
+1094- C Authoritative Transmittal or 1095- B/C record(s) that are marked as corrected forms (XML
+CorrectedInd)
+■ The ‘CorrectedInd’ will be checked (value = “1”) for the form that is being corrected
+■ If it is a corrected 1094-C, populate the ‘CorrectedUniqueSubmissionID’ with the Unique Submission ID
+
+(USID) that the IRS returned in the “Accepted Acknowledgement” for the original submission
+■ If it is a Corrected 1095B/C, populate the ‘CorrectedUniqueRecordId’ (CURID) with the
+
+‘UniqueRecordId’ (URID) that the IRS returned in the “Accepted Acknowledgement” for the original
+submission
+For additional information on the corrections process, please refer to Publication 5165, Guide for Electronically
+Filing Affordable Care Act (ACA) Information Returns for Software Developers and Transmitters.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Testing Guidelines for Software Developers
+
+5.3 Formatting the Entities
+The business entities presented in scenarios are shown in common usage. Refer to Publication 5165 for
+proper formatting of business name lines and addresses using XML e-file Types.
+Example: Test Scenario
+
+Figure 5-3: Formatting Example
+
+13
+
+5.4 Signature Requirements
+For Forms 1094-B and 1094-C, there are no electronic signature requirements. However, there are
+requirements to sign certain parts of the message to ensure safe and secure communication for A2A. For
+specifics on digitally signing portions of the SOAP message, Transmitters are required to have a valid x.509
+Digital Certificate. Please refer to Publication 5258, Affordable Care Act (ACA) Information Returns (AIR)
+Submission Composition and Reference Guide.
+Transmissions that do not meet this requirement will be rejected.
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Appendix A: Acronyms List
+
+Section 6. Appendix A: Acronyms List
+Acronym
+
+Definition
+
+A2A
+
+Application-to-Application
+
+AATS
+
+ACA Assurance Testing System
+
+ACA
+
+Affordable Care Act
+
+AIR
+
+ACA Information Returns
+
+ALE
+
+Applicable Large Employer
+
+CURID
+
+Corrected Unique Record ID
+
+EIN
+
+Employer Identification Number
+
+HCERA
+
+Health Care and Education Reconciliation Act of 2010
+
+ID
+
+Identification
+
+IRS
+
+Internal Revenue Service
+
+ISS
+
+Information Submission Service
+
+MeF
+
+Modernized e-File
+
+14
+
+MSXML
+
+Microsoft XML
+
+MTOM
+
+Message Transmission Optimization Mechanism
+
+P
+
+Production
+
+PPACA
+
+The Patient Protection and Affordable Care Act
+
+SOA
+
+Services Oriented Architecture
+
+SOAP
+
+Simple Object Access Protocol
+
+SSN
+
+Social Security Number
+
+SWD
+
+Software Developer
+
+TCC
+
+Transmitter Control Code
+
+TIN
+
+Taxpayer Identification Number
+
+TY
+
+Tax Year
+
+UI
+
+User Interface
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+Appendix A: Acronyms List
+
+Acronym
+
+Definition
+
+URID
+
+Unique Record ID
+
+USID
+
+Unique Submission ID
+
+UTID
+
+Unique Transmission Identification
+
+W3C
+
+World Wide Web Consortium
+
+XML
+
+Extensible Markup Language
+
+XSL
+
+Extensible Style Sheet Language
+
+15
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+XML Resources
+
+Section 7. XML Resources
+Listed below are XML-related resources: specifications, editors, and parsing frameworks. The IRS does not
+endorse any third-party XML products, whether commercial, open source, or privately produced. All references
+listed in the following sections are provided for informational purposes only. Any third-party editor or parser
+yielding valid, well-formed XML may be used.
+World Wide Web Consortium (W3C) XML Specifications and General Information
+■ XML
+■ XML Schema
+■ The Extensible Style sheet Language Family (XSL)
+■ SOAP Specifications
+■ SOAP MTOM
+■ SOAP 1.1 Binding for MTOM 1.0
+
+XML Editors with Validating Parser Support
+■ Altova XMLSpy XML Editor
+■ Notepad
+■ Oxygen XML Editor
+■ Stylus Studio
+
+16
+
+Validating Parser Frameworks
+■ Apache Xerces Project – xerces.apache.org
+■ Microsoft Core XML Services (MSXML) 6.0
+
+Senstive but Unclassified
+
+Publication 5164 | Internal Revenue Service
+
+

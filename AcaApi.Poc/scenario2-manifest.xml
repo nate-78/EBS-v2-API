@@ -3,10 +3,10 @@
     <PaymentYr>2025</PaymentYr>
     <PriorYearDataInd>0</PriorYearDataInd>
     <TransmitterInfo>
-        <EIN>00-1234567</EIN>
+        <EIN>00-0000401</EIN>
     </TransmitterInfo>
     <CompanyInformation>
-        <CompanyName>EBS Test Corp</CompanyName>
+        <CompanyName>GammaTestCorp</CompanyName>
         <ContactName>John Doe</ContactName>
         <ContactPhone>555-555-1212</ContactPhone>
         <MailingAddress>
@@ -23,6 +23,6 @@
     </VendorInformation>
     <TotalPayeeRecordCnt>1</TotalPayeeRecordCnt>
     <TotalPayerRecordCnt>1</TotalPayerRecordCnt>
-    <SoftwareId>25A0000</SoftwareId>
+    <SoftwareId>25A0023165</SoftwareId>
     <FormType>1094/1095C</FormType>
 </Manifest>

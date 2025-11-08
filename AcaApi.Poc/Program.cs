@@ -33,23 +33,20 @@ namespace AcaApi.Poc
                     Console.ResetColor();
                 }
 
-                Console.WriteLine("Transmitting test submission...");
+                var service = new AcaTransmitterService(config);
 
-                var transmitter = new AcaTransmitterService(config);
-                var response = await transmitter.TransmitAsync(config.FormDataFilePath, config.ManifestFilePath);
+                Console.WriteLine("Transmitting Scenario 2...");
+                await service.TransmitAsync(config.Scenario2_FormDataFilePath, config.Scenario2_ManifestFilePath);
 
-                Console.WriteLine("\nResponse from server:");
-                Console.WriteLine($"Receipt ID: {response.ReceiptId}");
-                Console.WriteLine($"Status: {response.TransmissionStatusCd}");
+                Console.WriteLine("\nTransmitting Scenario 3...");
+                await service.TransmitAsync(config.Scenario3_FormDataFilePath, config.Scenario3_ManifestFilePath);
+
+                Console.WriteLine("\nTransmissions complete.");
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nAn error occurred: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"  Inner Exception: {ex.InnerException.Message}");
-                }
+                Console.WriteLine($"\nAn error occurred: {ex}");
                 Console.ResetColor();
             }
 

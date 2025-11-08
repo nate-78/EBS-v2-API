@@ -3,7 +3,7 @@
   "version": "8.0.0",
   "options": {
     "inputs": [
-      "../AcaSchemas/SRV/ACAGetTransmitterBulkRequestService.wsdl"
+      "../../wsdl/AIR FS26-TY25 AATS WSDL Package Nov 2025_v1.0/ACA-A2A/TY2025-v1.0/SRV/ACAGetTransmitterBulkRequestService.wsdl"
     ],
     "namespaceMappings": [
       "*, AcaClient"

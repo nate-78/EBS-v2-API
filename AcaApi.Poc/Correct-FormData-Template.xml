@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:Form109495CTransmittalUpstream xmlns:p="urn:us:gov:treasury:irs:msg:form1094-1095Ctransmitterupstreammessage" xmlns:p1="urn:us:gov:treasury:irs:ext:aca:air:ty25" xmlns:p2="urn:us:gov:treasury:irs:common" xmlns:p3="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:us:gov:treasury:irs:msg:form1094-1095Ctransmitterupstreammessage IRS-Form1094-1095CTransmitterUpstreamMessage.xsd ">
+  <p1:Form1094CUpstreamDetail lineNum="0" recordType="">
+<p1:TaxYr>2025</p1:TaxYr>
+    <p1:CorrectedInd>0</p1:CorrectedInd>
+    <p1:EmployerInformationGrp>
+      <p1:BusinessName>
+        <p1:BusinessNameLine1Txt>%%COMPANY_NAME%%</p1:BusinessNameLine1Txt>
+      </p1:BusinessName>
+      <p1:BusinessNameControlTxt>%%NAME_CONTROL%%</p1:BusinessNameControlTxt>
+      <p2:TINRequestTypeCd>BUSINESS_TIN</p2:TINRequestTypeCd>
+      <p2:EmployerEIN>%%EMPLOYER_EIN%%</p2:EmployerEIN>
+      <p1:MailingAddressGrp>
+        <p1:USAddressGrp>
+          <p1:AddressLine1Txt>%%ADDRESS%%</p1:AddressLine1Txt>
+          <p2:CityNm>%%CITY%%</p2:CityNm>
+          <p1:USStateCd>%%STATE%%</p1:USStateCd>
+          <p2:USZIPCd>%%ZIP%%</p2:USZIPCd>
+        </p1:USAddressGrp>
+      </p1:MailingAddressGrp>
+    </p1:EmployerInformationGrp>
+    <p1:Form1095CAttachedCnt>1</p1:Form1095CAttachedCnt>
+    <p1:AuthoritativeTransmittalInd>1</p1:AuthoritativeTransmittalInd>
+    <p1:Form1095CUpstreamDetail recordType="" lineNum="0">
+      <p1:RecordId>1</p1:RecordId>
+      <p1:CorrectedInd>0</p1:CorrectedInd>
+      <p1:TaxYr>2025</p1:TaxYr>
+      <p1:EmployeeInfoGrp>
+        <p1:OtherCompletePersonName>
+          <p1:PersonFirstNm>%%EMPLOYEE_FIRST_NAME%%</p1:PersonFirstNm>
+          <p1:PersonLastNm>%%EMPLOYEE_LAST_NAME%%</p1:PersonLastNm>
+        </p1:OtherCompletePersonName>
+        <p2:SSN>%%EMPLOYEE_SSN%%</p2:SSN>
+      </p1:EmployeeInfoGrp>
+      <p1:EmployeeOfferAndCoverageGrp>
+        <p1:AnnualOfferOfCoverageCd>1A</p1:AnnualOfferOfCoverageCd>
+      </p1:EmployeeOfferAndCoverageGrp>
+    </p1:Form1095CUpstreamDetail>
+  </p1:Form1094CUpstreamDetail>
+</p:Form109495CTransmittalUpstream>

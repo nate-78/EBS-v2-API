@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form1094CUpstream>
+    <Form1094CUpstreamDetail recordType="" lineNum="0">
+        <SubmissionId>12346</SubmissionId>
+        <TaxYr>2024</TaxYr>
+        <CorrectedInd>0</CorrectedInd>
+        <EmployerInformationGrp>
+            <BusinessName>
+                <BusinessNameLine1Txt>GammaTestCorp</BusinessNameLine1Txt>
+            </BusinessName>
+            <EmployerEIN>00-0000401</EmployerEIN>
+            <MailingAddressGrp>
+                <USAddressGrp>
+                    <AddressLine1Txt>123 Main St</AddressLine1Txt>
+                    <CityNm>Anytown</CityNm>
+                    <USStateCd>TX</USStateCd>
+                    <USZIPCd>75000</USZIPCd>
+                </USAddressGrp>
+            </MailingAddressGrp>
+        </EmployerInformationGrp>
+        <Form1095CAttachedCnt>1</Form1095CAttachedCnt>
+        <AuthoritativeTransmittalInd>1</AuthoritativeTransmittalInd>
+        <Form1095CUpstreamDetail recordType="" lineNum="0">
+            <RecordId>1</RecordId>
+            <CorrectedInd>0</CorrectedInd>
+            <TaxYr>2024</TaxYr>
+            <EmployeeInfoGrp>
+                <OtherCompletePersonName>
+                    <PersonFirstNm>Gavin</PersonFirstNm>
+                    <PersonLastNm>Gavin</PersonLastNm>
+                </OtherCompletePersonName>
+                <SSN>000-00-0401</SSN>
+            </EmployeeInfoGrp>
+            <EmployeeOfferAndCoverageGrp>
+                <AnnualOfferOfCoverageCd>1A</AnnualOfferOfCoverageCd>
+            </EmployeeOfferAndCoverageGrp>
+        </Form1095CUpstreamDetail>
+    </Form1094CUpstreamDetail>
+</Form1094CUpstream>
