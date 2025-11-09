@@ -34,3 +34,34 @@ The implementation of this manual approach is primarily contained in the followi
 -   `AcaApi.Poc/SignedXmlWithId.cs`: This is a small helper class that inherits from `SignedXml`. It was created to correctly resolve the `wsu:Id` attribute on the `<Timestamp>` element during the signing process, which the base `SignedXml` class cannot do on its own.
 
 Care should be taken when modifying these files, as they are critical to the successful transmission of data to the IRS.
+
+---
+
+## Current Status: TPE1105 Error Investigation (As of 2025-11-08)
+
+Despite successfully resolving the initial transport-level errors, the project is currently blocked by a persistent `TPE1105` error from the IRS A2A test service. The error message is generic: "The message was not formatted properly and/or cannot be interpreted."
+
+### Investigation Summary
+
+An exhaustive, step-by-step investigation was conducted to align every aspect of the generated SOAP request with the official examples in the IRS Publication 5258 (`p5258.txt`).
+
+The key areas of investigation and the changes implemented in the code include:
+1.  **SOAP Header Order**: The order of the main header elements (`<wsse:Security>`, `<ACATransmitterManifestReqDtl>`, etc.) was corrected to match the documentation.
+2.  **`wsa:Action` Header**: This header was removed as it is not present in the documentation's submission examples.
+3.  **`wsse:Security` Structure**: This was the most complex area. The code was significantly refactored to ensure the generated `<Signature>` block precisely matches the IRS example. This involved:
+    *   **Correcting the `KeyInfo` structure**: Changed from directly embedding the certificate (`KeyInfoX509Data`) to using a `<SecurityTokenReference>` that points to a `<BinarySecurityToken>` containing the certificate data.
+    *   **Correcting the `<Transforms>`**: Removed an extra `XmlDsigExcC14NTransform` that was being added to the signature's `<Reference>`. The documentation only specifies the `enveloped-signature` transform.
+    *   **Correcting Element Order**: Ensured the `<Signature>` and `<BinarySecurityToken>` elements appear before the `<Timestamp>` within the `<Security>` header.
+4.  **Unused Namespaces**: The unused `xmlns:wsa` declaration was removed from the root `<Envelope>` element.
+5.  **Canonicalization Algorithm**: As a final test, the canonicalization method was switched from the modern default (`xml-exc-c14n#`) to an older, non-exclusive version (`xml-c14n#`). This required registering the legacy algorithm at runtime but still resulted in a `TPE1105` error. The code has been reverted to use the modern `xml-exc-c14n#` algorithm.
+
+### Conclusion and Next Steps
+
+The code in its current state generates a SOAP request that, based on visual inspection and analysis, is a perfect match for the structure specified in the `p5258.txt` documentation. We have exhausted all reasonable technical avenues for debugging the request structure on our end.
+
+The persistent `TPE1105` error is therefore believed to be caused by an external factor, such as:
+-   An issue with the IRS's A2A test server environment.
+-   A discrepancy between the published `p5258.txt` documentation and the actual server-side validation logic.
+-   Another undocumented requirement that is not discoverable through the provided materials.
+
+**Recommended Next Step:** Contact the IRS help desk for support. Provide them with the last successfully generated SOAP request XML (available in the console output when running the `AcaApi.Poc` project) and the `TPE1105` error code.
