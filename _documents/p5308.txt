@@ -1,0 +1,1756 @@
+Guide for
+Automated
+Enrollment For
+Affordable Care Act
+(ACA) Providers
+The Externals Guide
+PROCESSING YEAR 2026
+PUBLICATION 5308
+
+Publication 5308 (Rev. 6-2025) Catalog Number 71629B Department of the Treasury Internal Revenue Service www.irs.gov
+
+﻿
+
+Last Updated 06/04/2025
+Change/Document History
+It will be assured that this document is current. Printed documents and locally copied files may become
+obsolete due to changes to the master document.
+Date
+
+Summary of Changes
+
+06/04/2025
+
+Corrected formatting issues and grammar throughout publication
+
+Changes Marked
+No
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+i
+
+﻿
+
+Table of Contents
+Section 1 About This Guide................................................................................................................... 2
+1.1 | Who Should Use This Guide . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.2 | How to Use This Guide. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.3 | Assumptions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+
+Section 2 Automated Enrollment Overview........................................................................................... 4
+2.1 | Features and Functions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2.2 | Data Attributes. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.3 | IRS A2A Services . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.4 | Allowed Status Changes. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+2.5 | Revoked or Expired Certificates. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+Section 3 Displaying your ASIDs............................................................................................................ 9
+3.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+3.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+3.3 | IEP Login. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+3.4 | Getting around Automated Enrollment. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+Section 4 Enrolling an Application System.......................................................................................... 21
+4.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+4.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+4.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+Section 5 Updating an Application System.......................................................................................... 27
+5.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+5.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+5.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+ii
+
+﻿
+
+Section 6 Un-Enrolling an Application System.................................................................................... 33
+6.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+6.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+6.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+
+Section 7 Inactivating an Application System..................................................................................... 38
+7.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+7.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+7.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+
+Section 8 Activating an Application System........................................................................................ 43
+8.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+8.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+8.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+
+Section 9 Replacing a Certificate........................................................................................................ 48
+9.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+9.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+9.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+
+Section 10 Bulk Certificate Upload...................................................................................................... 53
+10.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+10.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+10.3 | Confirmation Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+
+Section 11 Viewing an Un-Enrolled Application System...................................................................... 58
+11.1 | Prerequisites. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+11.2 | How to Do It . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+iii
+
+﻿
+
+Appendix A List of Abbreviations......................................................................................................... 62
+
+Appendix B Handling Errors................................................................................................................. 64
+
+Appendix C AIR Help Desk................................................................................................................... 67
+
+List of Tables
+Table 2-1 AE Functions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Table 2-2 AE Data Elements. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Table 2-3 AE Available Services. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Table 2-4 AE Status Matrix. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+List of Figures
+Figure 3-1 IRS Home Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Figure 3-2 Tax Professionals Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Figure 3-3 e-Services – Online Tools for Tax Professionals Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Figure 3-4 Affordable Care Act (ACA) Services Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Figure 3-5 Login Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Figure 3-6 Password Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Figure 3-7 Security Code Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Figure 3-8 Login History Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Figure 3-9 IRS Select Organization Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Figure 3-10 AE Application Search Results Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Figure 3-11 Error occurred displaying the search results page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Figure 4-1 depicts the navigation steps to enroll an Application System.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Figure 4-2 Create New A2A Client System ID Button . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Figure 4-3 Create New AIR A2A Client System ID Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Figure 4-4 A data entry error occurred enrolling an Application System. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Figure 4-5 depicts the Application System confirmation page.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Figure 5-1 depicts the navigation steps to change an Application System.. . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Figure 5-2 Selecting the Application System to update . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Figure 5-3 Edit AIR A2A Client System ID Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Figure 5-4 A data entry error occurred updating an Application System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+iv
+
+﻿
+
+Figure 5-5 Confirmation Page for updating an Application System. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Figure 6-1 How to un-enroll an Application System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Figure 6-2 Selecting the Application System to un-enroll. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Figure 6-3 Un-enrolling an Application System. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Figure 6-4 depicts the Application System confirmation page.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Figure 7-1 depicts the navigation steps to inactivate an Application System.. . . . . . . . . . . . . . . . . . . . . . . . . 38
+Figure 7-2 Selecting the Application System to inactivate. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Figure 7-3 Inactivating an Application System. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Figure 7-4 Confirmation for inactivating an Application System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Figure 8-1 depicts the navigation steps to activate an Application System.. . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Figure 8-2 Selecting the Application System to activate. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Figure 8-3 Activating an Application System. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Figure 8-4 depicts the Application System confirmation page.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Figure 9-1 How to Replace a Certificate. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+Figure 9-2 Replace Certificate Link. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+Figure 9-3 Replace Certificate Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+Figure 9-4 A data entry error occurred replacing a certificate. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+Figure 9-5 depicts the Replace Certificate confirmation page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+Figure 10-1 How to upload a certificate to many Application Systems. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+Figure 10-2 Upload Certificate to Multiple A2A Client System ID’s Button. . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Figure 10-3 Bulk Upload Page. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+Figure 10-4 A data entry error occurred during a bulk upload. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+Figure 10-5 depicts the Bulk Certificate Upload confirmation page.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+Figure 11-1 depicts the navigation steps to view an un-enrolled Application System.. . . . . . . . . . . . . . . . . . 58
+Figure 11-2 Locating an un-enrolled Application System. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+Figure 11-3 View AIR A2A Client System Id Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+Figure B-1 AE Error Page Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+v
+
+Section
+1
+1
+
+About This Guide
+
+Section 1 About This Guide
+1.1 | Who Should Use This Guide
+The IRS developed this guide for the Affordable Care Act Information Returns (AIR) Application’s authorized
+contacts who want to use Automated Enrollment (AE) to enroll A2A Client Application Systems into the IRS
+Application to Application (A2A) channel.
+
+1.2 | How to Use This Guide
+The purpose of this document is to describe the User Interface (UI) for the AE for ACA Providers Application,
+hereunto, referred to as AE Application. You may or may not need to read this guide from beginning to end
+depending on your level of experience with Automated Enrollment. You can reference the table of contents
+to help locate sections of the guide pertaining to the task you need to complete. Section 3.4 Getting around
+Automated Enrollment also guides you to specific tasks and features, so when you have a question about an
+AE function, it is easy to locate the answer.
+1.2.1 | Overview of Contents
+This guide provides instructions on how to enroll and maintain A2A Client Application Systems using the IRS
+Enterprise Portal (IEP). Its scope is limited to the ACA functionality of the AE Application. However, this guide
+does not discuss any administrative aspects of the AE Application nor does it discuss how to use the IEP
+other than the aspects you need to know to access the AE Application.
+1.2.2 | Highlighting
+This guide uses the following elements to emphasize key points:
+■ Bold
+
+Highlight items and indicate specific items from the UI.
+■ “Tip, Note, and Important!” Tags
+
+Highlight additional information related to the current task or topic.
+ The “Tip” tag provides alternative methods of performing a task.
+ The “Note” tag explains how the system works or provides information you may use to alter the
+
+way you perform a task.
+ The “Important!” tag warns when an action could cause critical system errors.
+
+1.3 | Assumptions
+You must have the following to use the AE Application:
+■ You successfully proved your identity at the required level of assurance
+■ An IEP username and password with the e-Services ATCC role
+■ The use of Windows 10 or higher and one of the following Web browsers:
+ Internet Explorer 11 or Microsoft Edge
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+2
+
+Section
+2
+3
+
+Automated Enrollment Overview
+
+Section 2 Automated Enrollment Overview
+The AE Application provides a user interface for enrolling and maintaining A2A Client Application Systems
+for the IRS A2A Channel. It assigns a unique A2A Client Application System ID (ASID) to each Application
+System enrolled. The IRS A2A Channel uses the ASID and the Application System’s X509 certificate to
+authenticate and authorize access to IRS A2A services. The section below summarizes the functionality of the
+AE Application.
+
+2.1 | Features and Functions
+Table 2-1 provides a description of the functions available in the AE Application.
+Table 2-1 AE Functions
+Function
+
+Description
+
+enrollAppSystem
+
+AE Application allows you to enroll an A2A Client
+Application System into the IRS A2A Channel.
+Each Application System enrolled must be
+assigned at least one IRS A2A Service and have
+certificate authentication.
+
+updateAppSystem
+
+AE Application allows you to modify the A2A Client
+Application System definition. As an example, you
+can modify an A2A Client Application System to
+include additional IRS A2A Services or you can
+inactivate or un-enroll it.
+
+Replace Certificate
+
+AE Application allows you to change the certificate
+associated to an A2A Client Application System.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+4
+
+Automated Enrollment Overview
+
+2.2 | Data Attributes
+Table 2-2 describes the data elements used in the AE Application.
+Table 2-2 AE Data Elements
+
+Data Element
+
+Description
+
+TCC
+
+An active Transmission Control Code (TCC)
+assigned to the Customer's organization
+
+Customer Name
+
+The Legal Name of the Customer's organization
+associated to the TCC.
+
+Doing Business As
+
+The Doing Business As name of the Customer’s
+organization associated to the TCC
+
+A2A Client System ID (ASID)
+
+A2A Client System ID (8 characters): This
+is a unique field assigned to the A2A Client
+Application System during the enrollment
+process. The ASID is a combination of the
+digit ’1’, TCC + ASID Sequence Number. AE
+Application prefixes the digit ‘1’ to the created
+ASID.
+
+Application System Name
+
+The name assigned to the A2A Client Application
+System. It is limited to 30 alphanumeric
+characters.
+
+Description
+
+A description you want to use to identify an
+A2A Client Application System. It is limited to 50
+alphanumeric characters.
+
+Location
+
+The location of the A2A Client Application System
+This is usually the City and State where an A2A
+Client Application System resides. It is limited to
+30 alphanumeric characters.
+
+A2A System ID Status
+
+The status assigned to the A2A Client Application
+System. Table 2-4 describes the available
+statuses for an Application System.
+
+Available Services
+
+The IRS A2A Services that are available for ACA
+transmitters (see Table 2-3 for a description of
+the available services).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+5
+
+Automated Enrollment Overview
+
+Data Element
+
+Description
+
+Selected Services
+
+The IRS A2A Services assigned to an A2A
+Client Application System (see Table 2-3 for a
+description of the available services).
+
+Credential Type
+
+The authentication method the A2A Client
+Application System uses when accessing IRS
+A2A Services. Default to certificate. You cannot
+change the authentication method.
+
+Certificate File Name
+
+The X509 certificate used to authenticate an
+A2A Client Application System in the IRS A2A
+channel.
+
+Certificate Authority
+
+The CA is the trusted entity that issued the digital
+certificate.
+
+Certificate Expiration
+
+The date the digital certificate is no longer
+valid.
+
+2.3 | IRS A2A Services
+Table 2-3 describes the list of IRS A2A services for ACA Transmitters.
+Table 2-3 AE Available Services
+Service
+
+Description
+
+IRS-ACASubmitService
+
+Third Party, Issuer, Employer transmits 1094/1095
+B/C Information Return to IRS in SOAP Request
+- IRS returns receipt or SOAP fault in SOAP
+Response.
+
+IRS-ACAAckngService
+
+Third Party, Issuer, Employer requests status/
+detailed acknowledgement of 1094/1095 B/C
+Information Return processing from IRS in SOAP
+Request - IRS returns status/detailed acknowledgement or SOAP fault in SOAP Response.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+6
+
+Automated Enrollment Overview
+
+2.4 | Allowed Status Changes
+Table 2-4 AE Status Matrix summarizes the A2A Client Application System status changes.
+Table 2-4 AE Status Matrix
+Current
+
+Request
+
+New
+
+Action
+
+new
+
+active
+
+Allowed
+
+active
+
+inactivate
+
+inactive
+
+Allowed
+
+active
+
+un-enroll
+
+deleted
+
+Allowed
+
+inactive
+
+activate
+
+active
+
+Allowed
+
+inactive
+
+un-enroll
+
+deleted
+
+Allowed
+
+disabled
+
+activate
+
+disabled
+
+Disallowed
+
+disabled
+
+un-enroll
+
+disabled
+
+Disallowed
+
+■ “Current Status” is the Status of the Application System
+■ “Request Status” is the status change request
+■ “New Status” is the Application System status after the status change request completes
+■ “Action” indicates whether you can perform the change
+
+Note: AE Application changes the status from new to active after it enrolls an Application System.
+Note: Un-enrolling the Application System effectively deletes the ASID from the AE Application, and
+means you cannot update it again, while inactivating an Application System allows you to inactivate and
+activate as necessary.
+Important! The AIR Help Desk will initiate a referral for the disabled status when an Application System
+violated the policies of the IRS.
+Note: Once disabled, the Application System cannot access IRS A2A Services; however, the AIR Help
+Desk can initiate a referral to activate the disabled Application System (see Appendix C) for instructions on
+how to contact the AIR Help Desk.
+
+2.5 | Revoked or Expired Certificates
+Note: You will receive a 401 error if you upload a certificate that has been revoked or expired. Contact the
+certificate authority to obtain a valid certificate.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+7
+
+Section
+3
+8
+
+Displaying your ASIDs
+
+Section 3 Displaying your ASIDs
+You access the AE Application by logging into a secured environment known as the “IRS Enterprise Portal
+(IEP)”. This section explains the recommended path you should use to launch the AE Application and
+introduces you to the user interface.
+
+3.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+
+3.2 | How to Do It
+Type www.irs.gov into your browser. The IRS Home page opens (see Figure 3-1).
+
+Figure 3-1 IRS Home Page
+■ Type www.irs.gov into your browser. The IRS Home page opens (see Figure 3-1). Click the "Tax Pros"
+
+heading. The Tax Professionals page opens (see Figure 3-2)
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+9
+
+Displaying your ASIDs
+
+Figure 3-2 Tax Professionals Page
+■ Click the “Access e-Services” link. The e-Services – Online Tools for Tax Professionals page opens (see
+
+Figure 3-3).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+10
+
+Displaying your ASIDs
+
+Figure 3-3 e-Services – Online Tools for Tax Professionals Page
+■ Scroll down to the “Affordable Care Act (ACA) Services” section and select the link. The Affordable
+
+Care Act (ACA) Services Page opens, (see Figure 3-4).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+11
+
+Displaying your ASIDs
+
+Figure 3-4 Affordable Care Act (ACA) Services Page
+■ Select the Button "Access ISS-A2A Automated Enrollment". The Login Page Opens, (see Figure 3-5).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+12
+
+Displaying your ASIDs
+
+3.3 | IEP Login
+Tip: You can access the Login Page by directly typing the URL https://la.www4.irs.gov/ae_rup_atcc/ into the
+browser.
+
+Figure 3-5 Login Page
+■ You can logon with your existing credentials by clicking the 'Sign in with an existing IRS Username'
+
+button.
+■ Enter your username and click the LOG IN button. The Password Page opens (see Figure 3-6).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+13
+
+Displaying your ASIDs
+
+Figure 3-6 Password Page
+■ Enter your password and click the Submit button. The Security Code page opens (see Figure 3-7).
+
+Figure 3-7 Security Code Page
+■ Enter your six-digit security code and click the Submit button. Your login history page opens (see Figure
+
+3-8).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+14
+
+Displaying your ASIDs
+
+Figure 3-8 Login History Page
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+15
+
+Displaying your ASIDs
+
+Figure 3-9 IRS Select Organization Page
+■ Click the Select button to choose your ACA organization. The AE Application Search Results Page
+
+opens (see Section 3.4 Getting around Automated Enrollment)
+Important! When you are finished with your AE Application session please close your browser.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+16
+
+Displaying your ASIDs
+
+3.4 | Getting around Automated Enrollment
+The AE Application Search Results page (see Figure 3-10) is the launch pad to all of the features and functions
+of the AE Application. It displays a list of A2A Client Application Systems for the selected organization. From
+here, you can enroll and maintain A2A Client Application Systems.
+
+Figure 3-10 AE Application Search Results Page
+
+Number
+
+Instruction
+
+➊
+
+Scroll through the list of Application Systems. The maximum number of records is set to 200
+
+➋
+
+By default, the AE Application sorts the list by ASID.
+
+➌
+
+Click the arrow to the right of the TCCs field and select a TCC to filter the list.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+17
+
+Displaying your ASIDs
+
+Number
+
+Instruction
+
+➍
+
+Click the Create New A2A Client System ID button to enroll a new A2A Client Application
+System (see Section 4 Enrolling an Application System).
+
+➎
+
+Click the Upload Certificate to Multiple A2A Client System ID’s button to upload a
+certificate to many Application Systems in one transaction (see Section 10 Bulk Certificate
+Upload)
+
+➏
+
+Click the Edit link to change an A2A Client Application System definition (see Section 5
+Updating an Application System). Here you can change the status of the Application System
+or you can change any of the following Application System attributes:
+■ Application System name
+■ Description
+■ Location
+■ Certificate
+■ Services
+
+➐
+
+Click the Replace Certificate link to replace the certificate for an Application System (see
+Section 9 Replacing a Certificate).
+
+➑
+
+Click the View link to display an un-enrolled Application System (see Section 11 Viewing an
+Un-Enrolled Application System).
+
+➒
+
+The AE Application displays your organizations legal name and doing business as (DBA)
+name provided during the ACA application process
+
+Note: In the event of an error displaying your Application Systems, an error page opens (see Figure 3-11).
+Refer to Appendix B, to assist in resolving your error.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+18
+
+Displaying your ASIDs
+
+Figure 3-11 Error occurred displaying the search results page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+19
+
+Section
+4
+20
+
+Enrolling an Application System
+
+Section 4 Enrolling an Application System
+This section describes the actions required to enroll an A2A Client Application System into the IRS A2A
+Channel.
+
+4.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+■ You have a valid X509 certificate accessible from the local system.
+
+4.2 | How to Do It
+Figure 4-1 depicts the navigation steps to enroll an Application System.
+
+Figure 4-1 How to Enroll an Application System
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 4-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+21
+
+Enrolling an Application System
+
+Figure 4-2 Create New A2A Client System ID Button
+
+Number
+
+➊
+
+Instruction
+Click the Create New A2A Client System ID button. The Create New AIR A2A Client
+System ID page opens (see Figure 4-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+22
+
+Enrolling an Application System
+
+Figure 4-3 Create New AIR A2A Client System ID Page
+Fill in the form and click Save to enroll the Application System, refer to Section 2.2 Data Attributes for a
+description of each field.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+23
+
+Enrolling an Application System
+
+Number
+
+Instruction
+
+➊
+
+TCC: Click the arrow to the right of the TCC field and select a TCC from the list.
+
+➋
+
+ASID Sequence Number: Enter a unique 2-digit sequence number. Enter a unique value in
+the range of 00 to 99
+
+➌
+
+Application: System Name: Enter the name for the Application System.
+
+➍
+
+Description: Enter the Description for the Application System.
+
+➎
+
+Location: Enter the Location for the Application System.
+
+➏
+
+Click the Browse button to select the certificate to assign to this Application System. The
+certificate must be accessible from the local system.
+
+➐
+
+Select at least one IRS A2A Service from the Available Services list and click the
+Add button. Refer to Table 2-3 for a description of the available services.
+
+➑
+
+Click Save, if the request is successful the Confirmation for AIR A2A Client System ID page
+opens (see Figure 4-5).
+
+➒
+
+Click Cancel to return to the AE Application Search Results page.
+
+Note: In the event of a data entry error, an error dialog opens (see Figure 4-4). Follow the instructions in
+the dialog and click OK to return to the Create New AIR A2A Client System ID page to correct the error.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+24
+
+Enrolling an Application System
+
+Figure 4-4 A data entry error occurred enrolling an Application System
+
+4.3 | Confirmation Page
+Figure 4-5 depicts the Application System confirmation page.
+
+Figure 4-5 Confirmation for enrolling an Application System
+
+Number
+
+Instruction
+
+➊
+
+The ASID assigned to the enrolled Application System
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+25
+
+Section
+5
+26
+
+Updating an Application System
+
+Section 5 Updating an Application System
+This section describes the actions required to change an A2A Client Application System definition.
+
+5.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+
+5.2 | How to Do It
+Figure 5-1 depicts the navigation steps to change an Application System.
+
+Figure 5-1 How to Edit an Application System
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 5-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+27
+
+Updating an Application System
+
+Figure 5-2 Selecting the Application System to update
+
+Number
+
+➊
+
+Instruction
+Locate the ASID and click the Edit link under the Actions column. The Edit AIR A2A Client
+System ID page opens (see Figure 5-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+28
+
+Updating an Application System
+
+Figure 5-3 Edit AIR A2A Client System ID Page
+Update the form and click Save to change the Application System definition, refer to Section 2.2 Data
+Attributes for a description of each field.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+29
+
+Updating an Application System
+
+Number
+
+Instruction
+
+➊
+
+Application System Name: If you wish, change the name of the Application System.
+
+➋
+
+Description: If you wish, change the description of the Application System.
+
+➌
+
+Location: If you wish, change the location of the Application System.
+
+➍
+
+If you wish, click the arrow to the right of the A2A Client System ID Status field and select
+another value from the list. Refer to Table 2-4 for a list of allowed status changes for an A2A
+Client Application System.
+
+➎
+
+If you wish, click the Browse button to select a new certificate to assign to this Application
+System. The certificate must be accessible from the local system.
+
+➏
+
+If you wish, change the Selected Services list. To add an IRS A2A Service, select the service
+from the Available Services list and click the Add button. To remove an IRS A2A Service,
+select the service from the Selected Service list and click the Remove button.
+
+➐
+
+Click Save, if the request is successful the Confirmation for AIR A2A Client System ID page
+opens (see Figure 5-5).
+
+➑
+
+Click Save, if the request is successful the Confirmation for AIR A2A Client System ID page
+opens (see Figure 4-5).
+
+Note: In the event of a data entry error, an error dialog opens (see Figure 5-4). Follow the instructions in
+the dialog and click OK to return to the Edit AIR A2A Client System ID page to correct the error.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+30
+
+Figure 5-4 A data entry error occurred updating an Application System
+
+5.3 | Confirmation Page
+Figure 5-5 depicts the Application System confirmation page.
+
+Figure 5-5 Confirmation Page for updating an Application System
+
+Number
+
+Instruction
+
+➊
+
+The Application System has been updated
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page.
+
+Important! If you replaced the certificate, the Application System must use the new certificate to access IRS
+A2A Services.
+
+Guide for ACA Information Returns Submission Composition and Reference Guide
+
+31
+
+Section
+6
+32
+
+Un-Enrolling an Application System
+
+Section 6 Un-Enrolling an Application System
+This section describes the actions required to un-enroll an A2A Client Application System from the IRS A2A
+Channel.
+
+6.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+
+6.2 | How to Do It
+Figure 6-1 depicts the navigation steps to un-enroll an Application System.
+
+Figure 6-1 How to un-enroll an Application System
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 6-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+33
+
+Un-Enrolling an Application System
+
+Figure 6-2 Selecting the Application System to un-enroll
+
+Number
+
+➊
+
+Instruction
+Locate an active or inactive ASID and click the Edit link under the Actions column. The Edit
+AIR A2A Client System ID page opens (see Figure 6-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+34
+
+Un-Enrolling an Application System
+
+Figure 6-3 Un-enrolling an Application System
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+35
+
+Un-Enrolling an Application System
+
+Number
+
+Instruction
+
+➊
+
+Click the arrow to the right of the A2A Client System ID Status field and select “un- enroll”.
+
+➋
+
+Click Save, if the request is successful the Confirmation for AIR A2A Client System ID page
+opens (see Figure 6-4).
+
+➌
+
+Click Cancel to return to the AE Application Search Results page.
+
+6.3 | Confirmation Page
+Figure 6-4 depicts the Application System confirmation page.
+
+Figure 6-4 Confirmation for un-enrolling an Application System
+
+Number
+
+Instruction
+
+➊
+
+This Application System has been un-enrolled and can no longer access IRS A2A Services
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+36
+
+Section
+7
+37
+
+Inactivating an Application System
+
+Section 7 Inactivating an Application System
+This section describes the actions required to inactivate an A2A Client Application System.
+
+7.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+
+7.2 | How to Do It
+Figure 7-1 depicts the navigation steps to inactivate an Application System.
+
+Figure 7-1 How to Inactivate an Application System
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 7-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+38
+
+Inactivating an Application System
+
+Figure 7-2 Selecting the Application System to inactivate
+
+Number
+
+➊
+
+Instruction
+Locate an active ASID and click the Edit link under the Actions column. The Edit AIR A2A
+Client System ID page opens (see Figure 7-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+39
+
+Inactivating an Application System
+
+Figure 7-3 Inactivating an Application System
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+40
+
+Inactivating an Application System
+
+Number
+
+Instruction
+
+➊
+
+Click the arrow to the right of the A2A Client System ID Status field and select inactivate
+
+➋
+
+Click Save, if the request is successful the Confirmation for AIR A2A Client System ID page
+opens (see Figure 7-4).
+
+➌
+
+Click Cancel to return to the AE Application Search Results page.
+
+7.3 | Confirmation Page
+Figure 7-4 depicts the Application System confirmation page.
+
+Figure 7-4 Confirmation for inactivating an Application System
+
+Number
+
+Instruction
+
+➊
+
+This Application System has been inactivated and can no longer access IRS A2A Services
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+41
+
+Section
+8
+42
+
+Activating an Application System
+
+Section 8 Activating an Application System
+This section describes the actions required to activate an A2A Client Application System.
+
+8.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+
+8.2 | How to Do It
+Figure 8-1 depicts the navigation steps to activate an Application System.
+
+Figure 8-1 How to activate an Application System
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see FFigure 8-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+43
+
+Activating an Application System
+
+Figure 8-2 Selecting the Application System to activate
+
+Number
+
+➊
+
+Instruction
+Locate an inactive ASID and click the Edit link under the Actions column. The Edit AIR A2A
+Client System ID page opens (see Figure 8-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+44
+
+Activating an Application System
+
+Figure 8-3 Activating an Application System
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+45
+
+Activating an Application System
+
+Number
+
+Instruction
+
+➊
+
+Click the arrow to the right of the A2A Client System ID Status field and select activate.
+
+➋
+
+If you wish, click the Browse button to select a new certificate to assign to this Application
+System. The certificate must be accessible from the local system.
+
+➌
+
+Click Save, if the request is successful the Confirmation for AIR A2A Client System ID page
+opens (see Figure 8-4).
+
+➍
+
+Click Cancel to return to the AE Application Search Results page..
+
+8.3 | Confirmation Page
+Figure 8-4 depicts the Application System confirmation page.
+
+Figure 8-4 Confirmation for activating an Application System
+Number
+
+Instruction
+
+➊
+
+This Application System has been activated and can now access IRS A2A Services
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page
+
+Important! If you replaced the certificate, the Application System must use the new certificate to access IRS
+A2A services.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+46
+
+Section
+9
+47
+
+Replacing a Certificate
+
+Section 9 Replacing a Certificate
+This section describes the actions required to replace the certificate for an A2A Client Application System.
+
+9.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+■ You have a valid X509 certificate accessible from the local system.
+
+9.2 | How to Do It
+Figure 9-1 depicts the navigation steps to replace the certificate.
+
+Figure 9-1 How to Replace a Certificate
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 9-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+48
+
+Replacing a Certificate
+
+Figure 9-2 Replace Certificate Link
+
+Number
+
+➊
+
+Instruction
+Locate the ASID and click the Replace Certificate link under the Actions column. The
+Replace Certificate page opens (see Figure 9-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+49
+
+Replacing a Certificate
+
+Figure 9-3 Replace Certificate Page
+
+Number
+
+Instruction
+
+➊
+
+Click the Browse button to select the new certificate. The certificate must be accessiblefrom
+the local system
+
+➋
+
+Click Save, if the request is successful the Confirmation for AIR Replace Certificate page
+opens (see Figure 9-5).
+
+➌
+
+Click Cancel to return to the AE Application Search Results page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+50
+
+Replacing a Certificate
+
+Note: In the event of a data entry error, an error dialog opens (see Figure 9-4). Follow the instructions in
+the dialog and click OK to return to the Replace Certificate page to correct the error.
+
+Figure 9-4 A data entry error occurred replacing a certificate
+
+9.3 | Confirmation Page
+Figure 9-5 depicts the Replace Certificate confirmation page
+
+Figure 9-5 Replace Certificate Confirmation
+
+Number
+
+Instruction
+
+➊
+
+The Application System must use the new certificate to access IRS A2A services
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page
+
+Tip: You can also replace the certificate when you change an Application System.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+51
+
+Section
+10
+52
+
+Bulk Certificate Upload
+
+Section 10 Bulk Certificate Upload
+This section describes the actions required to replace the certificate for many A2A Client Application Systems
+in one transaction.
+
+10.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+■ You have a valid X509 certificate accessible from the local system.
+
+10.2 | How to Do It
+Figure 10-1 depicts the navigation steps to do a bulk certificate upload
+
+Figure 10-1 How to upload a certificate to many Application Systems
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 10-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+53
+
+Bulk Certificate Upload
+
+Figure 10-2 Upload Certificate to Multiple A2A Client System ID’s Button
+
+Number
+
+➊
+
+Instruction
+Click the Upload Certificate to Multiple A2A Client ID’s button. The Upload Certificate to
+Multiple A2A Client System ID’s page opens (see Figure 10-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+54
+
+Bulk Certificate Upload
+
+Figure 10-3 Bulk Upload Page
+
+Number
+
+Instruction
+
+➊
+
+Select one or more ASIDs from the Available ASIDs list and click the Add button.
+
+➋
+
+Click Browse to select the new certificate. The certificate must be accessible from the local
+system.
+
+➌
+
+Click Save, if the request is successful the Confirmation for AIR Replace Certificate page
+opens (see Figure 10-5).
+
+➍
+
+Click Cancel to return to the AE Application Search Results page.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+55
+
+Bulk Certificate Upload
+
+Note: In the event of a data entry error, an error dialog opens (see Figure 10-4). Follow the instructions in
+the dialog and click OK to return to the Upload Certificate to Multiple A2A Client ID’s page to correct the
+error.
+
+Figure 10-4 A data entry error occurred during a bulk upload
+
+10.3 | Confirmation Page
+Figure 10-5 depicts the Bulk Certificate Upload confirmation page.
+
+Figure 10-5 Bulk Upload Confirmation
+
+Number
+
+Instruction
+
+➊
+
+The Application Systems must use the new certificate to access IRS A2A services
+
+➋
+
+The Confirmation Message
+
+➌
+
+Click OK to return to the AE Application Search Results page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+56
+
+Section
+11
+57
+
+Viewing an Un-Enrolled Application System
+
+Section 11 Viewing an Un-Enrolled Application
+System
+This section describes the actions required to view un-enrolled A2A Client Applications Systems.
+
+11.1 | Prerequisites
+■ You have the e-Services ACA role assigned to your IEP user account.
+
+11.2 | How to Do It
+Figure 11-1 depicts the navigation steps to view an un-enrolled Application System.
+
+Figure 11-1 How to View an un-enrolled Application System
+■ Login to the IEP (see Section 3.3 IEP Login)
+■ After entering your username, password and security code. Your login history page opens (see Figure
+
+3-8).
+■ Click the Continue button. The IRS Select Organization page opens (see Figure 3-9)
+■ Select your ACA organization and click the Submit button. The AE Application Search Results page
+
+opens (see Figure 11-2).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+58
+
+Viewing an Un-Enrolled Application System
+
+Figure 11-2 Locating an un-enrolled Application System
+
+Number
+
+➊
+
+Instruction
+Locate an un-enrolled Application System (an ASID with a deleted status), and click the View
+link under the Actions column. The View AIR A2A Client System Id page opens (see Figure
+11-3).
+
+Note: The AE Application displays an ‘Error Messages’ page in the event of any error. Refer to Appendix B
+to obtain information on how to handle AE Application errors.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+59
+
+Viewing an Un-Enrolled Application System
+
+Figure 11-3 View AIR A2A Client System Id Page
+
+Number
+
+➊
+
+Instruction
+Click Cancel to return to the AE Application Search Results page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+60
+
+Appendix
+
+A
+61
+
+Viewing an Un-Enrolled Application System
+
+Appendix A List of Abbreviations
+A2A.................................... Application to Application
+AC..................................... Access Control
+ACA................................... Affordable Care Act
+AE...................................... Automated Enrollment
+AI....................................... Application Integration
+AIR.................................... ACA Information Returns
+ASID.................................. A2A Client System ID
+Authorized Contact......... Registered ACA Authorized user or other ACA Third Party Transmitter user.
+CA..................................... Certificate Authority
+DBA................................... Doing Business As
+IE....................................... Internet Explorer
+IEP..................................... Integrated Enterprise Portal
+IRS..................................... Internal Revenue Service
+LOA................................... Level of Assurance
+SA...................................... Strong Authentication
+TCC................................... Transmission Control Code
+TLS.................................... Transport Layer Security
+UI....................................... User Interface
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+62
+
+Appendix
+
+B
+63
+
+Viewing an Un-Enrolled Application System
+
+Appendix B Handling Errors
+The AE Application displays an error page when an unexpected condition occurs processing your request.
+If the error is recoverable, the AE Application returns to the previous page where you can provide additional
+information and retry the request. Figure B-1 shows the format of the AE Error page.
+Figure B-1 AE Error page.
+
+Figure B-1 AE Error Page Format
+The AE application display user-friendly error messages. The section below lists the error code and error
+message description, tells what each means, and recommends the action you should take.
+Error Code
+
+Error Code Description
+
+Resolution
+
+110
+
+The TCC entered is not found.
+Pleasetry again with a valid
+TCC.
+
+The TCC value is invalid or does
+not exist. Review your TCC
+assigned to you organization
+and try again by entering a valid
+TCC that exists.
+
+112
+
+No search criteria entered.
+Please tryagain with a valid
+search criteria.
+
+Close your session/browser
+and verify the URL link. Try your
+request again.
+
+302
+
+Certificate Validation Failed.
+Please try again with a valid
+Certificate.
+
+The loaded certificate has
+failed validation or has expired.
+Try again by loading a valid
+certificate.
+
+303
+
+A root certificate could not be
+found.
+
+Try again by loading a valid
+certificate.
+
+304
+
+Invalid or incomplete certificate
+is contained in the certificate
+file.
+
+A valid certificate could not be
+found. Try again by loading a
+valid certificate.
+
+305
+
+Certificate format is not
+supported
+
+The certificate format is not
+supported. Try again by loading
+a valid certificate.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+64
+
+Viewing an Un-Enrolled Application System
+
+Error Code
+
+Error Code Description
+
+Resolution
+
+306
+
+There are two or more Base 64
+certificates in the file.
+
+A valid root certificate could
+not be determined. Try again by
+loading a valid certificate.
+
+307
+
+No certificates found in file.
+
+No certificate found in file.
+Try again by loading a valid
+certificate.
+
+308
+
+The certificate file could not be
+parsed.
+
+The certificate file was not
+readable. Try again by loading a
+valid certificate.
+
+Any error
+Message
+not listed
+above OR
+you are
+unable to
+resolve the
+issue.
+
+Various
+
+Contact the AIR Help Desk at
+1- 866-937-4130 and provide
+the error number and error
+message. The AIR Help Desk
+will refer as appropriate.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+65
+
+Appendix
+
+C
+66
+
+Viewing an Un-Enrolled Application System
+
+Appendix C
+
+AIR Help Desk
+
+AIR Help Desk
+Toll-Free 1-866-937-4130
+Monday - Friday
+6:30 a.m. - 6:00 p.m. Central Time
+■ Provide the error code and describe the action you were performing when the error occurred.
+ For example, “I received error code 401 when I attempted to enroll an Application System.”
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+67
+
+

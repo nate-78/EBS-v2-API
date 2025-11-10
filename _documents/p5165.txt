@@ -1,0 +1,4403 @@
+Guide for
+Electronically Filing
+Affordable Care
+Act (ACA)
+Information Returns
+For Software Developers
+and Transmitters
+PROCESSING YEAR 2026
+PUBLICATION 5165
+
+Publication 5165 (Rev. 7-2025) Catalog Number 66800S Department of the Treasury Internal Revenue Service www.irs.gov
+
+﻿
+
+Last updated 07/11/2025
+Change/Document History
+It will be assured that this document is current. Printed documents and locally copied files may become
+obsolete due to changes to the master document.
+Date
+
+Summary of Changes
+
+07/11/2025
+
+Updated section 2 page 8—Change to read’ Responsible Officials and Contacts must
+create an e-Services account before you can apply for your TCC.
+
+07/11/2025
+
+Updated table 4-1 with https://orc.widepoint.com/certificates-and-credentials/eca/
+
+06/04/2025
+
+Corrected formatting issues and grammer throughout publication
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+ii
+
+﻿
+
+Table of Contents
+Section 1 Introduction
+
+2
+
+1.1 | Purpose. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.2 | Communications. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.2.1 | AIR Web Site. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.3 | Filing ACA Returns through a Third-Party Transmitter. . . . . . . . . . . . . . . . . . . 4
+1.3.1 | When filing through a Third-Party Transmitter obtain the following
+for each submission filed on your behalf
+(1094-B or C and accompanying 1095 records):. . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+Section 2 Submitting the ACA Application for Transmitter Control Code (TCC)
+
+6
+
+2.1 | Transmitter and Issuer TCCs. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2.2 | Software Developer TCCs. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+Section 3 Transmissions and Submissions
+
+13
+
+3.1 | Transmission/Submission Definitions and Limitations. . . . . . . . . . . . . . . . . . 13
+3.2 | Uniquely Identifying the Transmission. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+Section 4 Transmitting Information Returns
+
+18
+
+4.1 | Transmitting via the User Interface (UI) Channel. . . . . . . . . . . . . . . . . . . . . . . 18
+4.2 | Transmitting via the Application to Application (A2A) Channel. . . . . . . . . . . 20
+4.2.1 | Transmission File and Soap Message via A2A. . . . . . . . . . . . . . . . . . . . 21
+4.2.2 | Strong Authentication. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+4.2.3 | Certificate Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+4.2.4 | Authorized Certificate Authorities. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+4.3 | XML Overview for AIR. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+4.3.1 | AIR XML Schema Package Structure. . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+iii
+
+﻿
+
+4.3.2 | AIR XML Structure. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+4.3.3 | Prohibited and Constrained Special Characters. . . . . . . . . . . . . . . . . . . 26
+4.3.4 | Tag Names. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+4.3.5 | Attributes. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+4.3.6 | Repeating Group. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+4.3.7 | AIR Schema and Business Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+4.3.8 | Validating Schema Versions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+4.3.9 | Example of Schema Versioning. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+4.4 | Threat Mitigations in AIR Transmissions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+4.4.1 | Threat Mitigation through ISS-UI:. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+4.4.2 | Threat Mitigation through ISS-A2A. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+
+Section 5 Validating the Transmission and Return Data
+
+53
+
+5.1 | Transmission Validation. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+5.1.1 | Missing or Multiple Attachments. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+5.1.2 | Error Reading or Persisting the Form Data File. . . . . . . . . . . . . . . . . . . . 55
+5.1.3 | Manifest Verification Failure. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+5.1.4 | Duplicate XML File Detected. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+5.1.5 | Manifest and XML File Schema Validation Failure. . . . . . . . . . . . . . . . . 56
+5.1.6 | Business Rule Errors. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+
+Section 6 Acknowledgement Files
+
+60
+
+6.1 | Acknowledgement Schema. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+6.2 | Retrieving Acknowledgements. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+6.2.1 | Error Data File. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+6.2.2 | Retrieving Acknowledgements via the UI Channel. . . . . . . . . . . . . . . . . 65
+6.2.3 | Retrieving Acknowledgements via the A2A Channel . . . . . . . . . . . . . . . 66
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+iv
+
+﻿
+
+Section 7 Corrections and Replacements
+
+68
+
+7.1 | Corrections Process. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+7.1.1 | Transmitting Corrections. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+7.1.2 | Transmitting Form 1094-C Corrections (Authoritative Transmittals Only).70
+7.1.3 | Transmitting Forms 1095-B or 1095-C Corrections . . . . . . . . . . . . . . . . 71
+7.1.4 | Transmitting Form 1094-C and Form 1095-C Corrections. . . . . . . . . . . 71
+7.2 | Rejected Transmissions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+7.2.1 | Transmissions Rejected by Portal. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+7.2.2 | Transmissions/Submissions Rejected by AIR. . . . . . . . . . . . . . . . . . . . . 72
+7.3 | Replacement Process - Transmitting Replacements. . . . . . . . . . . . . . . . . . . 73
+7.3.1 | Replacement Transmissions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+7.3.2 | Replacement Submissions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+
+Section 8 Extension of Time to File
+
+81
+
+8.1 | Request for an Additional Extension of Time to File. . . . . . . . . . . . . . . . . . . . 81
+8.2 | Extension of Time to Provide the Recipient Copy. . . . . . . . . . . . . . . . . . . . . . 81
+
+Section 9 Waiver from Filing Electronically
+
+83
+
+Section 10 Appendix A: AIR Transmission Checklist (A2A) for TY2025
+
+85
+
+Section 11 Appendix B: AIR Transmission Checklist (UI) for (TY) 2025
+
+91
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+v
+
+﻿
+
+List of Tables
+Table 2-1: TCC Roles. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Table 2-2: Responsible Official Titles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Table 3-1: Transmissions Types. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Table 4-1: List of Authorized Certificate Authorities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Table 4-2: Special Characters Not to Be Included in Any Data. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Table 4-3: Allowable Characters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Tax Year 2017 Forms 1094-B, 1094-C, 1095-B, and 1095-C. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Table 4-4: List of Fault Codes (TPE Errors) for Tax Years 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
+2024 and 2025 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Table 5-1: AIR Error Categories. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 5-2: Schema Validation Business Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+Table 6-1: AIR Forms Acknowledgement Schema Elements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+
+List of Figures
+Figure 2-1: Example of Transmitter TCC and Form Status. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Figure 2-2: Software Package Identifiers and Status Indicators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Figure 2-3: Add Software Developer Package. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Figure 3-1: Conceptual Structure of IRS AIR SOAP MTOM Attachments. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Figure 3-2: Layout of Unique Transmission Identifier (UTID) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Figure 4-1: Sample of a Receipt ID via UI Channel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Figure 4-2: Sample XML of Receipt ID through A2A Channel (footnote in screenshot above,
+see reference below). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Figure 4-3: SOAP Message Structure. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Figure 4-4: Form 1094-B Schema Structure. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Figure 4-7: Example of AIR Schema Information. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Figure 4-9: Sample of an A2A Channel Fault Message. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+Figure 4-10: Sample of a UI Channel Fault Message. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Figure 4-11: Example of UI Upload Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+Figure 4-12: UI Check Transmission Status Page Showing the Search Error. . . . . . . . . . . . . . . . . . . . . . . . . . 51
+Figure 6-1: Sample of an Error Data File. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+vi
+
+﻿
+
+Figure 6-2: Sample of an Error Data File with TIN Validation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+Figure 7-1: Reference Records to be Corrected . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+Figure 7-2: Replacing a Rejected Transmission. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+Figure 7-3: Visual depicting the first-rejected submission in a chain of rejections that should be replaced.78
+Figure 7-3A illustrates a similar situation when the entire replacement transmission was rejected. . . . . . . 78
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+vii
+
+Section
+1
+
+Section 1 Introduction
+Publication 5165, Guide for Electronically Filing Affordable Care Act (ACA) Information Returns (AIR) for
+Software Developers and Transmitters (Processing Year [PY] 2026), outlines the communication procedures,
+transmission formats, business rules and validation procedures for information returns transmitted
+electronically through the AIR System. To develop software for use with the AIR System, Software Developers,
+Transmitters, and Issuers should use the guidelines provided in this publication along with the Extensible
+Markup Language (XML) Schemas published on IRS.gov. The procedures in this publication should be used
+when the following information returns are transmitted electronically for Tax Year (TY) 2015, TY2016, TY2017,
+TY2018, TY2019, TY2020, TY2021, TY2022, TY2024, TY2025 in PY2026:
+■ Form 1094-B, Transmittal of Health Coverage Information Returns
+■ Form 1095-B, Health Coverage
+■ Form 1094-C, Transmittal of Employer-Provided Health Insurance Offer and Coverage Information
+
+Returns
+■ Form 1095-C, Employer-Provided Health Insurance Offer and Coverage
+
+Note: This publication does not contain information or procedures for filing Form 1095-A.
+The transmittal Forms 1094-B and 1094-C provide information about the Issuer of the ACA Information
+Returns and the Forms 1095-B and 1095-C provide information about the covered individuals. Generally, the
+Forms 1095B and 1095C will be submitted with their associated transmittals, Forms 1094-B and 1094-C;
+however, in certain circumstances, the Form 1094-C can be submitted alone. After these forms are processed
+by AIR, the status of each submission and a detailed acknowledgment is made available to each Transmitter.
+The procedures in this publication should also be used in conjunction with the most current version of the
+following publications:
+■ Publication 4557 - Safeguarding Taxpayer Data: A Guide for Your Business: The purpose of this
+
+publication is to provide information on legal requirements to safeguard taxpayer data. The target
+audience is non-government businesses involved in the preparation and filing of income tax returns.
+■ Publication 5164 - Test Package for Electronic Filers of Affordable Care Act (ACA) Information Returns
+
+(AIR): This publication contains general and program specific testing information for use in completing
+the ACA Assurance Testing System (AATS) process for business submissions. AATS is a process to test
+software and electronic transmissions prior to accepting Software Developers, Transmitters, and Issuers
+into the AIR program.
+■ Publication 5258 - Affordable Care Act Information Returns (AIR) Submission Composition and
+
+Reference Guide. Guidance to Internal Revenue Service (IRS) external partners (Software Developers,
+Transmitters, and Issuers) with composing submissions and transmission files that are sent to IRS for
+processing. Description of the interaction between AIR and the Transmitter through the Information
+Submission Services (ISS) User Interface (UI) and Application to Application (A2A) channels.
+■ Publication 5308 - Automated Enrollment for ACA Providers IRS developed this guide for the
+
+AIR System authorized contacts who want to use Automated Enrollment (AE) to enroll A2A Client
+Application Systems into the IRS Application to Application (A2A) channel. The Automated Enrollment
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+2
+
+Introduction
+
+(AE) application provides authorized, delegated users the ability to enroll and update the A2A Client
+Application System ID (ASID) using the Integrated Enterprise Portal (IEP).
+AIR publications and guides are located on the Affordable Care Act Information Returns (AIR) page.
+
+1.1 | Purpose
+The purpose of this publication is to provide the specifications to electronically file the ACA Information
+Returns (Forms 1094/1095-B and 1094/1095-C) with IRS.
+Forms 1094/1095-B and 1094/1095-C are information returns under Section 6011(e)(2)(A) of the Internal
+Revenue Code which provides that any person, including a corporation, partnership, individual, estate, or
+trust, who is required to file 10 or more information returns, must file such returns electronically. 10 or more
+Information Return requirement applies separately for each type of return and separately to each type of
+corrected return.
+Treas. Reg. (TD 9972) reduced the threshold from 250 to10 and requires corrected information returns to be
+filed in the same manner as original information returns.
+Note: All filers are encouraged to file the ACA Information Returns electronically even if they file less than
+10 information returns. Final regulations were issued June 27, 2023, by the Department of the Treasury
+and the Internal Revenue Service. These regulations reduced the 250-Return threshold to generally require
+electronic filing by filers of 10 or more returns in a calendar year beginning in Tax Year 2023, Processing
+Year 2024.
+All filing requirements apply individually to each reporting entity as defined by its separate Tax Identification
+Number (TIN). Issuers should retain a copy of information returns (or have the ability to reconstruct the data)
+for at least three years from the reporting due date.
+
+1.2 | Communications
+IRS worked in partnership with many AIR stakeholders to develop the information contained within this
+publication. The ACA Information Return (AIR) Help Desk has been designated as the first point of contact for
+electronic filing issues Software Developers, Transmitters and Issuers should contact the AIR Help Desk toll
+free at 1-866-937-4130, for domestic calls, or 470-769-5100 (not toll-free) for international calls. The AIR Help
+Desk provides assistance in the following areas:
+■ ACA Application for Transmitter Control Code (TCC)
+■ ACA Assurance Testing System (AATS) and Communication Testing
+■ Business Rules and Error Code Resolution
+
+For inquiries regarding issues with the AIR System and the new development of the forms related to the ACA
+Program please contact AIR Help Desk - 1-866-937-4130
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+3
+
+Introduction
+
+1.2.1 | AIR Web Site
+For information regarding the AIR System and electronic filing Affordable Care Act Information Returns go to
+Affordable Care Act Information Returns (AIR) webpage. The AIR page provides:
+■ Online ACA Information Returns (AIR) System (Production and Testing) Status
+■ ACA Information Returns (AIR) Program Overview
+■ Affordable Care Act Assurance Testing System (AATS) Information
+■ Resources to ACA Information Returns (AIR) Publications, Schemas, Business Rules and much more
+
+If you encounter an issue or limitation that prevents an ACA Information Return from being submitted
+electronically through AIR, and the solution is not posted on the Affordable Care Act Information Return
+(AIR) webpage, please contact the AIR Help Desk. The Service will then work on making the appropriate
+corrections or assisting with the issue or limitation. Until corrections can be implemented, AIR may develop
+“workarounds" which are temporary changes to allow the return to be transmitted electronically. Workarounds
+will be posted by Tax Year (TY) and linked to the Schema and Business Rules page under the “Known Issues.”
+AIR uses QuickAlerts, an IRS e-mail and SMS service, to disseminate information quickly regarding AIR
+issues to subscribers. This service keeps tax professionals up to date on AIR issues throughout the year,
+with emphasis on issues during the filing season. After subscribing, customers will receive “round the clock”
+communications issues such as electronic specifications and system information needed for Software
+Developers and Transmitters to transmit the Forms 1094/1095-B and 1094/1095-C to IRS. New subscribers
+may sign up through the "subscription page" link located on the QuickAlerts "More" e-file Benefits for Tax
+Professionals page.
+
+1.3 | Filing ACA Returns through a Third-Party Transmitter
+If you do not have an in-house programmer familiar with XML or software that is certified to support the ACA
+forms that you plan to file, you can file through a Third-Party Transmitter.
+Only those persons listed as an Authorized User on the ACA Application for TCC qualify to receive
+information about a Receipt ID associated with a TCC listed on that application.
+If your Third-Party Transmitter needs technical assistance regarding a Receipt ID associated with records that
+were submitted on behalf of your organization, they should contact the AIR Help Desk at 1-866-937-4130.
+1.3.1 | When filing through a Third-Party Transmitter obtain the following for each submission filed on
+your behalf (1094-B or C and accompanying 1095 records):
+■ A copy of all electronic records within each submission, along with the Receipt ID for the transmission in
+
+which they were filed.
+■ The transmission Status that is returned when processing is complete (Accepted, Accepted With Errors,
+
+Partially Accepted, Rejected).
+■ The Error Data File if the status is anything other than “Accepted.” The Error Data File will provide a
+
+detailed list of errors, such as TIN Validation and Business Rule errors.
+Note: The items cited above are critical to your ability to make corrections should your Third-party
+Transmitter go out of business or be otherwise unavailable to file corrections on your behalf.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+4
+
+Section
+2
+
+Section 2 Submitting the ACA Application for
+Transmitter Control Code (TCC)
+If you are an employer or insurance issuer/carrier responsible for filing 10 or more ACA Information Returns,
+you are required to file them electronically. ACA Information Returns must be filed through AIR using an ACA
+Transmitter Control Code (TCC). ACA Information Returns may not be filed using any other Transmitter Control
+Code. For example, FIRE TCC or Electronic Identification Filing Number (EFIN).
+Treas. Reg. (TD 9972) reduces the threshold from 250 to 10 and requires corrected information returns to be
+filed in the same manner as original information returns.
+“Who should apply for an ACA Transmitter Control Code”?
+If you are transmitting information returns to IRS or if you are developing software to file information returns
+electronically, you must apply for one or more TCCs using the ACA Application for Transmitter Control
+Code (TCC) available online from e-Services. A single application can be used to apply for multiple roles and
+the necessary TCCs.
+The ACA Application for TCC contains three separate roles: Software Developer, Transmitter, and Issuer.
+Complete the ACA Application for TCC if your firm or organization is performing one or more of the
+following roles:
+■ Software Developer – An organization writing either origination or transmission software according to
+
+IRS specifications.
+■ Transmitter – A Third-Party sending the electronic information returns data directly to IRS on behalf of
+
+any business.
+Note: If you are transmitting returns for your own company, in addition to transmitting returns on behalf
+of another business, you do not need both the Transmitter and Issuer role. You can file all returns as a
+Transmitter.
+■ Issuer – A business filing their own ACA Information Returns regardless of whether they are required
+
+to file electronically (transmit 10 or more of the same type of information return) or volunteer to file
+electronically. The term “Issuer” includes any person required to report coverage on Form 1095-B
+and any applicable large employer required to report offers of coverage on Form 1095-C and file the
+associated transmittal Form 1094-B or Form 1094-C.
+Treas. Reg. (TD 9972) reduces the threshold from 250 to 100 and requires corrected information returns to be
+filed in the same manner as original information returns.
+If you are an Employer or Insurance Issuer/Carrier using a Third Party to prepare and transmit your information
+returns to IRS, you do not need to obtain a TCC.
+Note: Issuers and Transmitters are collectively referred to as Transmitters throughout this document.
+These roles are not mutually exclusive, for example, a firm or organization may be both a Transmitter and a
+Software Developer. In addition to the roles the firm or organization will perform, the application will require
+the transmission method for Transmitters and Issuers or the transmission method(s) the software packages
+will support.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+6
+
+Submitting the ACA Application for Transmitter Control Code (TCC)
+
+Each role will receive its own TCC to be used based on the activity being performed. For example, Software
+Developers performing Testing will use the Software Developer TCC. Do not use the Software Developer TCC
+to transmit Production files.
+Note: If an organization requires more than one TCC for any given role, a Responsible Official listed on the
+application should contact the AIR help desk to request an additional TCC.
+The table below provides examples of who should apply for a TCC.
+Table 2-1: TCC Roles
+What roles should I select on my ACA Application for Transmitter Control Code?
+Software
+Purchased or
+Developed?
+
+If…
+
+And
+
+Then
+
+Developed
+
+I am a commercial
+Software Developer
+developing software and
+selling software packages
+to employers and
+insurance issuers/carriers,
+
+I will transmit information
+for employers or
+insurance issuers/
+carriers.
+
+Select both the
+Software Developer
+role and the
+Transmitter role on your
+application.
+
+Developed
+
+I am an employer or
+insurance issuer/carrier
+developing my own
+software package, or
+who has contracted with
+someone to develop a
+unique package for my
+sole use,
+
+I will perform the
+software testing with IRS
+and transmit my own
+information returns.
+
+Select the roles of
+Software Developer
+and Issuer on your
+application.
+
+Select the role of Issuer
+on your application.
+Purchased
+
+I am an employer or
+insurance issuer/carrier
+purchasing a software
+package,
+
+I will transmit my own
+information returns.
+
+Note: You may not
+use an Issuer TCC to
+transmit information
+returns for other
+employers or insurance
+issuers/carriers.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+7
+
+Submitting the ACA Application for Transmitter Control Code (TCC)
+
+What roles should I select on my ACA Application for Transmitter Control Code?
+Software
+Purchased or
+Developed?
+
+If…
+
+And
+
+Then
+
+Select the role of
+Transmitter on your
+application.
+
+Purchased
+
+I am an employer or
+insurance issuer/carrier
+purchasing a software
+package,
+
+I will transmit my own
+information returns
+and transmit for other
+employers or insurance
+issuers/carriers.
+
+Note: The TCC for
+a Transmitter can
+be used to transmit
+your own returns and
+others. You may not
+use an Issuer TCC to
+transmit information
+returns for other
+employers or insurance
+issuers/carriers.
+
+E-Services transitioned the AIR Production application to a modernized sign-in system that requires users
+to register and sign in with ID.me to access the e-Services suite of online applications. ID.me is an account
+created, maintained, and secured by a technology provider. Responsible Officials and Contacts must create
+an e-Services account before they can apply for a TCC. Each Responsible Official will need to sign the
+ACA Application for TCC on the Application Submission page by accepting the Terms of Agreement box
+and entering their PIN created during the registration process. Below are the available titles for Responsible
+Officials.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+8
+
+Submitting the ACA Application for Transmitter Control Code (TCC)
+
+Table 2-2: Responsible Official Titles
+Business Type
+
+Title
+
+Partnership and Limited
+Liability Partnership
+
+Partner, General Partner, Limited Partner, LLC Member, Manager,
+Member, Managing Member, President, Owner, Tax Matter Partner (TMP)
+
+Corporations, Personal
+Service Corporation
+and Limited Liability
+Corporations
+
+President, Vice President, Corporate Treasurer/Treasurer, Assistant
+Treasurer, Chief Accounting Officer (CAO), Chief Executive Officer (CEO),
+Chief Financial Officer (CFO), Tax Officer, Chief Operating Officer (COO),
+Corporate Secretary/Secretary, Secretary Treasurer, Member
+
+Association, Credit Union,
+Volunteer Organization,
+State Government Agency
+
+President, Vice President, Treasurer, Assistant Treasurer, Chief
+Accounting Officer (CAO), Tax Officer, Chief Operating Officer (COO),
+Chief Executive Officer (CEO), Chief Financial Officer (CFO), Executive
+Director/Director, Chairman, Executive Administrator/Administrator,
+Receiver, Pastor, Assistant to Religious Leader, Reverend, Priest,
+Minister, Rabbi, Chairman, Secretary, Director of Taxation, Director of
+Personnel, Tax Officer
+
+Sole Proprietor
+
+Owner, Sole Proprietor, Member, Sole Member, Tribes
+
+After all listed Responsible Officials have entered their PIN on the Application Submission page, submit the
+application for processing.
+Note: All Responsible Officials and Contacts on the application must create an account by registering and
+signing in with ID.me to access the e-Services suite of online applications before the application can be
+submitted.
+Responsible Official – Individuals with responsibility for, or the authority over the electronic filing of ACA
+Information Returns operation at the firm or organization location. Responsible Officials are also the first point
+of contact with IRS, and have authority to sign original/revised ACA Application for TCC and are responsible
+for ensuring that all requirements are adhered to. At least two Responsible Officials will need to be listed on
+the application. All Responsible Officials will be required to sign the application. A Responsible Official can
+also be a Contact on the application.
+Contact – individuals who may be responsible for transmitting and/or are available for inquiries from IRS daily.
+There is a minimum of 2 required Contacts and a maximum of 10 Contacts allowed per application.
+Note: The Contact provided here is not required to be the same Contact provided on the Form 1094-B or
+Form 1094-C.
+The application does not have to be completed in a single session. A tracking number is provided when the
+application is submitted or when the application is in “Saved” status.
+Note: In certain situations, the information submitted requires further review by IRS before a TCC can
+be issued. In these cases, IRS will contact the Responsible Official of record regarding any additional
+information that may be needed.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+9
+
+Submitting the ACA Application for Transmitter Control Code (TCC)
+
+Once an ACA Application for TCC is processed and completed, TCCs and Software IDs, if applicable, are
+sent via United States Postal Service (USPS) and are also available to be viewed on the summary screen of
+the applicant’s online application. Applicants will receive a separate letter containing the TCC for each role
+selected on their application.
+
+2.1 | Transmitter and Issuer TCCs
+Depending on the roles selected on the application, one or more TCCs will be assigned. Each TCC will have
+an indicator of Test "T" or Production "P" and status of Active, Inactive, or Dropped. Transmitters and Issuers
+are issued a TCC in Production status. The Form T/P Indicator (1094/1095-B or 1094/1095-C) is in Test “T”
+status, until required Communication Testing is conducted and passed. See the example 2-1 below. Once
+Communication Testing is passed, the Transmitter should contact the AIR Help Desk, toll-free, at 1-866-9374130, to request the associated Form T/P Indicators be moved to Production “P” status. Transmitters must
+then wait 48 hours after the Form T/P Indicators are moved to Production before they can use the TCC to
+transmit live data to Production. Once a Form T/P Indicator is moved to Production, the TCC cannot be used
+to transmit to the test environment. See the example below:
+
+Figure 2-1: Example of Transmitter TCC and Form Status
+
+2.2 | Software Developer TCCs
+After selecting the Software Developer role on the application, additional information about the transmission
+method and the software package (type, year and forms supported) being developed is required. The TCC
+is permanently assigned in “Test” status. A separate Software ID is also assigned for each package. The tax
+year(s) for the information returns supported, transmission method(s), form type, and software package type
+(Commercial Off the Shelf (COTS), Online, In-house) are also required. Each Software Package and form type
+has a separate status; if your Software Package supports more than one form type (e.g. Forms 1094/1095-B
+and 1094/1095-C), both forms must be in Production before the Software Package is moved from "Test"
+status to "Production" status.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+10
+
+Submitting the ACA Application for Transmitter Control Code (TCC)
+
+Figure 2-2: Software Package Identifiers and Status Indicators
+Software Package information must be updated annually through the ACA Application for TCC located
+on e-Services at IRS.gov. New Software IDs will be assigned for each tax year. To update your application,
+the Responsible Official should go to the Application Details page and click the "Add" button under the
+Software Developer Package List.
+
+Figure 2-3: Add Software Developer Package
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+11
+
+Section
+3
+
+Transmissions and Submissions
+
+Section 3 Transmissions and Submissions
+3.1 | Transmission/Submission Definitions and Limitations
+A transmission is defined as a separate package of electronic AIR documents which includes the Manifest
+and the Form Data File.
+■ The Manifest contains information about the Transmitter, transmission and the payload.
+■ The Form Data File contains one or more submissions in XML format.
+
+Transmission Requirements:
+■ Must consist of one or more submissions
+■ Must not contain submissions of different types (must not have both Forms 1094/1095-B and
+
+1094/1095-C in the same transmission)
+■ Must not contain submissions for more than one tax year (for example, must not have Tax Year 2020 and
+
+Tax Year 2021 in the same transmission)
+■ Must not contain multiple Transmission types (Original, Correction, and Replacement)
+■ The Form Data File (UI) or Message Transmission Optimization Mechanism (MTOM) (A2A) attachments
+
+may not exceed 100 MB of uncompressed native XML
+■ Must include the “TransmissionTypeCd” that identifies the type of transmission as follows:
+
+Table 3-1: Transmissions Types
+Allowed Data Value
+
+Description
+
+‘O’
+
+A transmission containing original records
+
+‘C’
+
+A transmission containing correction records
+
+‘R’
+
+A transmission containing replacement records
+
+Message Transmission Optimization Mechanism (MTOM) attachment is a World Wide Web Consortium
+(W3C) standard that provides a method of efficiently sending binary data to and from Web services.
+For the purposes of this document, a submission is defined as the combination of a single transmittal form
+(Form 1094-B or Form 1094-C) and its associated information return (Form 1095-B or Form 1095-C). For
+example, a submission is either:
+■ One Form 1094-B and one or more Form(s) 1095-B or
+■ One Form 1094-C and one or more Form(s) 1095-C or
+■ One Form 1094-C and zero Forms 1095-C, whenever the Form 1094-C is marked as a correction to an
+
+Authoritative Transmittal (for a previously accepted Form 1094-C)
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+13
+
+Transmissions and Submissions
+
+Submission (Form Data File) Requirements:
+■ The reported number of information returns on the transmittal form (Form 1094-B or 1094-C) must match
+
+the actual number of information returns (Form 1095-B or 1095-C) in the submission
+■ If a submission is larger than 100 MB, it must be split into two or more transmissions in the following way:
+■ in one transmission, the first submission will consist of a single Form 1094 and as many associated
+
+Forms 1095 as will fit within the 100 MB limit
+■ in the next transmission, the second or subsequent submission(s) will consist of a single Form
+
+1094, and the remainder of as many associated Forms 1095 as can be contained without
+exceeding the 100 MB size limit
+■ Must not contain records of different form types (e.g., must not have both Forms 1095-B and Forms
+
+1095-C in the same submission)
+■ Must not contain records for more than one tax year in the same submission
+■ If an ALE Member files more than one Form 1094-C, one (and only one) Form 1094-C filed by the ALE
+
+Member must be identified on line 19, Part I, as the Authoritative Transmittal
+■ If an ALE Member files only one Form 1094-C, it must be identified on line 19, Part I, as the Authoritative
+
+Transmittal
+The conceptual structure of AIR Simple Object Access Protocol (SOAP) MTOM attachments (A2A channel)
+and the Form Data File attachment (UI channel) are depicted in Figure 3-1.
+
+Figure 3-1: Conceptual Structure of IRS AIR SOAP MTOM Attachments
+
+3.2 | Uniquely Identifying the Transmission
+The XML Schemas for Forms 1094/1095-B and 1094/1095-C include elements designed to uniquely identify
+ACA Information Returns transmissions, submissions within the transmission, and records within the
+submission.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+14
+
+Transmissions and Submissions
+
+Transmitters must uniquely identify each transmission with a Unique Transmission ID (UTID). The format for
+the UTID includes various fields separated by colons (:) as follows:
+■ UUID – a universally unique identifier (UUID) is an identifier standard defined by the Internet
+
+Engineering Task Force (IETF) in Request for Comments (RFC) 4122. The UUID consists of a 16-octet
+(128-bit) number. This is a mandatory field: the UUID is represented by 32 hexadecimal digits, displayed
+in five groups separated by hyphens. For example: 550e8400-e29b-41d4-a716-446655440000
+■ Application ID – the Application ID will be SYS12 and is a mandatory field.
+■ Transmitter Control Code – is an uppercase alphanumeric field that will contain the Transmitter’s TCC
+
+and is mandatory.
+■ Reserved – is an empty field (no space between colons).
+■ Request Type – the Request Type defines the type of request which must be “T” (Transactional) and is
+
+mandatory.
+The UTID for the transmission will be 550e8400-e29b-41d4-a716-446655440000:SYS12:BB002::T
+Unique Transmission Identifier (UTID)
+
+Figure 3-2: Layout of Unique Transmission Identifier (UTID)
+Every transmission that AIR receives is validated to ensure that the UTID is unique (has not been previously
+submitted to the AIR System, including previously submitted rejected returns) and conforms to the pattern
+assigned in the XML Schema. If a UTID is missing, not sequential or not unique, the transmission is rejected,
+and no further processing occurs. For TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2021, TY2022,
+TY2023, TY2024 and TY2025 the UTID can also be used to check the status of a transmission. The Schema
+allows either the TCC and Receipt ID or UTID to check the status.
+Each transmittal (Form 1094) within a transmission will include a Submission Identifier (SID) that will start at
+one and increment by one for each subsequent transmittal. Do not include leading zeros. The SID is defined in
+the XML Schema as a non-negative integer which is sufficiently large enough that the 100 MB Form Data File
+constraint dictates the number of submissions that can be included in a transmission.
+Each record (Form 1095) within a submission will include a Record Identifier (RID) that will start at one and
+increment by one for each subsequent record.
+When an error is identified, both Form 1094 and Form 1095 records are uniquely identified within a
+transmission by combining the Receipt ID, SID, and RID (as applicable), using the pipe symbol “|” as separator
+and returning them to the Transmitter as follows:
+UniqueSubmissionId = RECEIPTID|SID
+UniqueRecordId = RECEIPTID|SID|RID
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+15
+
+Transmissions and Submissions
+
+Unique Submission Identifier (USID) and Unique Record Identifier (URID) enable:
+■ IRS to report errors to Transmitters that are clearly related to the specific record(s) within the submission
+
+and the transmission
+■ Transmitters to send corrected records to the IRS precisely identifying the record to be corrected
+■ Both IRS and Transmitters to track transmissions and submissions
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+16
+
+Section
+4
+
+Transmitting Information Returns
+
+Section 4 Transmitting Information Returns
+This section provides an overview of transmission methodology, transmission composition, as well as data
+structure needed to successfully transmit ACA Information Returns to IRS. The data exchanged between the
+Transmitters and the ACA Information Return (AIR) System via XML files or messages conforms to the Simple
+Object Access Protocol (SOAP). There are two data communication channels between external clients and
+the AIR System: Both channels require the submissions to be self-contained in a single uncompressed XML
+formatted file. AIR will allow the Transmitter to transmit submissions to IRS and retrieve acknowledgements for
+those transmissions from IRS.
+■ The ISS-User Interface (UI) Channel (Web Browser) –The XML forms are created using the published
+
+XML schemas located on the Affordable Care Act Information Returns (AIR) page and then uploaded
+to the AIR System via the UI Channel. This data is exchanged using the Hyper Text Transfer Protocol
+Secure (HTTPS) protocol over a Transport Layer Security (TLS) connection and then converted to SOAP.
+Transport Layer Security (TLS) versions 1.0 and 1.1 have been deprecated by the industry. According to
+NIST SP 800-52r2 guidelines, all government agencies, including IRS, should move off these versions
+and preferably move to TLS version 1.3 (TLS version 1.2 is also acceptable).
+■ The ISS-Application to Application (A2A) Channel –The data is exchanged in SOAP messages using
+
+the Web Application request-response model transport mechanism over an HTTPS connection.
+All information returns transmitted to IRS undergo a series of checks in the Portal. If any of these checks fail,
+the Transmitter will receive a fault response (an error prefixed with “TPE”), and a Receipt ID is not provided.
+The list of “TPE” errors is shown in Table 4-4 If every validation passes, the transmission continues to be
+processed in AIR, where additional validations are performed, (i.e., Schema and Manifest TCC) and a Receipt
+ID is generated.
+Generally, the Receipt ID is returned to the Transmitter almost immediately after a successful transmission.
+For ISS-UI, the Receipt ID will be displayed via web browser upon successful transmission. For ISS-A2A, the
+Receipt ID will be part of the system-to-system response. The Receipt ID does not provide proof that the ACA
+Information Returns in the transmission were either accepted or rejected. The Receipt ID does provide proof
+that IRS received the file. The Transmitter must retrieve their Acknowledgement to obtain proof of acceptance
+or rejection. The Correction and Replacement process also utilize the Receipt ID in combination with the
+Submission and Record Identifiers as described later in Section 7.
+For more information on how to compose submission and transmission files sent to IRS for processing using
+the AIR System, refer to Publication 5258, AIR Submission Composition and Reference Guide, located on the
+Affordable Care Act Information Returns (AIR) page.
+
+4.1 | Transmitting via the User Interface (UI) Channel
+Transmitters must have registered with ID.me to access the e-Services suite of online applications, must
+have an ACA Transmitter Control Code (TCC), and must be using IRS approved software to submit returns
+and retrieve acknowledgments. See Section 2 above for information on creating an e-Services account and
+applying for an ACA TCC. The Transmitter will be required to log in to the IEP using the links found on the
+Affordable Care Act Information Returns (AIR) Program page:
+■ AIR UI Channel Login AATS (Testing)
+■ AIR UI Channel Login Production
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+18
+
+Transmitting Information Returns
+
+The Transmitter is required to upload two uncompressed native XML files to the AIR System: A Manifest
+File, which includes all the Transmitter’s information and the Form Data File, which includes the Forms
+1094/1095-B or Forms 1094/1095-C data.
+IRS Portal will perform authentication and authorization, threat mitigation, and initial validation on the
+transmission. IRS Portal will return a fault response (an error prefixed with “TPE”), if a transmission contains a
+threat, or if a transmission fails initial validation. The list of “TPE” errors is shown in Table 4-4.
+If threats are detected or XML Schema validation fails, IRS will reject the transmission and inform the
+Transmitter of the rejection. If no security threats are detected, AIR returns a Receipt ID, UTID and a
+Timestamp to the Transmitter in the web browser as part of the synchronous session.
+The AIR System validates the Manifest and Form Data File and performs additional security checks and XML
+Schema validation on the inbound transmission. The Receipt ID and UTID are the key information required for
+a Transmitter to retrieve the acknowledgement for the respective transmission. See sample in Figure 4-1.
+Note: The Receipt ID returned to the Transmitter should be kept with the transmission and protected from
+loss or deletion.
+If the Transmitter does not receive the Receipt ID for some reason (e.g., the session times out or is
+terminated) or it is accidentally lost or deleted, request the Acknowledgement File using the UTID before
+calling the AIR Help Desk, toll-free, at 1-866-937-4130, for domestic calls, or 470-769-5100 (not toll-free)
+for international calls to request the Receipt ID for the transmission. The AIR Help Desk assistor will require
+the user to identify themselves and the UTID for the transmission in question to provide the respective
+Receipt ID.
+
+Figure 4-1: Sample of a Receipt ID via UI Channel
+For more specific information on creating transmission files for the UI channel, refer to Publication 5258, AIR
+Submission Composition and Reference Guide, located on the Affordable Care Act Information Returns
+(AIR) page.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+19
+
+Transmitting Information Returns
+
+4.2 | Transmitting via the Application to Application (A2A) Channel
+To invoke the A2A channel, Transmitters must have an active IRS e-Services account and an ACA Transmitter
+Control Code (TCC). In addition, they must have completed the Automated Enrollment application and be
+using IRS approved Software to submit returns and retrieve acknowledgements in Production. See Section 2
+for information about obtaining an account and applying for an ACA TCC.
+The TCC in the UTID must be the same as the TCC in the UserId. The UserId must match the ASID in the A2A
+Client Application.
+IRS uses SOAP with HyperText Transfer Protocol (HTTP) binding for the transmission file, which are SOAP
+messages transported over a HTTPS connection (HTTP over TLS – Transport Layer Security) protocol. A
+comprehensive understanding of Web Service SOAP messaging and Web Services Standards is necessary in
+order to create software capable of transmitting data to IRS.
+The Transmitter will be required to include their digital certificate and a digitally signed hash of certain message
+structures in the WS-Security Header of the SOAP Message and invoke the appropriate URL for the Web Service
+endpoint that exposes the IRS-ACASubmitService within the ACAGetTransmitterBulkRequestService.wsdl. The
+Transmitter is required to transmit a SOAP Message in a SOAP Envelope that consists of the SOAP Header, and
+the SOAP Body. The SOAP Header includes the Transmitter information. The SOAP Body consists of Forms
+1094/1095-B or Forms 1094/1095-C data in an uncompressed native XML file that is attached to the SOAP
+Message as an MTOM encoded attachment.
+SOAP messages are exchanged with IRS using the Web Services request-response model transport
+mechanism using the HTTPS protocol. For specific information on creating A2A Messages, please refer to
+Publication 5258, AIR Submission Composition and Reference Guide is located on the Affordable Care Act
+Information Returns (AIR) page.
+IRS Portal will perform authentication and authorization, threat mitigation, and initial validation on the
+transmission. IRS Portal will return a fault response (an error prefixed with “TPE”), if a transmission contains a
+threat, if a transmission fails initial validation, or if a connection with the endpoint cannot be established. The
+list of “TPE” errors is shown in Table 4-4.
+The AIR System validates the SOAP message and performs additional security checks and Manifest Schema
+validation on the inbound transmission. If threats are detected or Manifest Schema validation fails, IRS will
+reject the transmission and inform the Transmitter of the rejection. If no security threats or Manifest schema
+validation failure are detected, AIR returns a Receipt ID, the UTID, and a Timestamp to the Transmitter in
+the SOAP Response message as part of the synchronous session. The Receipt ID or the UTID is the key
+information required for a Transmitter to retrieve the acknowledgement for the respective transmission.
+Note: The Receipt ID returned to the Transmitter should be kept with the transmission and protected from
+loss or deletion.
+If the Transmitter does not receive the Receipt ID for some reason (e.g., the session times out or is terminated)
+or it is accidentally lost or deleted, request the Acknowledgement File using the UTID before calling the AIR
+Help Desk, toll-free, at 1-866-937-4130, for domestic calls, or 470-769-5100 (not toll-free) for international
+calls to request the Receipt ID for the transmission. The AIR Help Desk assistor will require the user to identify
+themselves and the UTID for the transmission in question to provide the respective Receipt ID.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+20
+
+Transmitting Information Returns
+
+Figure 4-2: Sample XML of Receipt ID through A2A Channel (footnote1 in screenshot above, see reference below)
+For more specific information on creating transmission files for the A2A channel, refer to Publication 5258,
+AIR Submission Composition and Reference Guide, located on the Affordable Care Act Information Returns
+(AIR) page.
+4.2.1 | Transmission File and Soap Message via A2A
+The AIR transmission file is a MIME (Multipurpose Internet Mail Extensions) multipart document that contains
+two parts that conforms to “SOAP message with attachments” standard as given below:
+■ The first part of the multi-part document is the SOAP envelope that contains transmission level
+
+information
+■ The second part of the document is a SOAP attachment that contains the ACA Information Return
+
+Submissions
+1 Author replaced ty21 with tyYY - Use of generic namespace text to minimize need for Current Tax Year updates and continued
+document maintenance.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+21
+
+Transmitting Information Returns
+
+SOAP is an XML based protocol used to encode the information in Web Service request and response
+messages before transmitting them over a network. A SOAP message is a simple XML document that
+consists of a SOAP Envelope with the following elements:
+■ A SOAP Header element that contains header information (ACA Header, WS-Addressing and Manifest)
+■ A SOAP Body element that contains request and response information and the reference to the MTOM
+
+(Message Transmission Optimization Mechanism) attachment
+■ A SOAP Fault element containing errors and status information
+
+The second part of the message, MIME (Multipurpose Internet Mail Extension), is the SOAP attachment
+which contains the ACA Information Return Submission(s) as an MTOM encoded attachment. See example
+below.
+
+Figure 4-3: SOAP Message Structure
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+22
+
+Transmitting Information Returns
+
+4.2.2 | Strong Authentication
+All external partner communication will need to support encryption using TLS 1.2 or 1.3 Federal Information
+Processing Standards (FIPS) Publication 140-2. Compliant cryptography will be used for strong and secure
+communication between Transmitters and IRS.
+The A2A registration and enrollment process for Transmitters and their application system is an automated
+process. The authorized user can perform the following functions relative to their A2A Client System ID (ASID)
+for their organization:
+■ Enroll, Update, and Un-enroll ASID
+■ View a deleted ASID
+■ Inactivate, Activate ASID
+■ Replace the certificate for ASID
+
+Publication 5308, The Automated Enrollment for ACA Providers External Guide describes the automated
+enrollment process and can be found on the Affordable Care Act Information Returns (AIR) page.
+IRS requires strong authentication when transmitting via the A2A channel, which will affect authentication
+techniques for all A2A Web services. The strong authentication certificate/credential will replace the password
+and the ACA Information Returns Web Service Endpoint, Web Services Description Language (WSDL) will
+accommodate this credential. Each Transmitter will be required to register their certificate with AIR through the
+Automated Enrollment (AE) application. Software Developers must use the set of WSDL files provided by IRS
+to build their application so that they can use strong authentication. The WSDL files are not automatically sent
+upon download of the certificate/credential.
+Note: A Responsible Official, or an official identified as a Contact on the ACA Application for TCC, should
+call AIR Help Desk - 1-866-937-4130 to request the WSDLs.
+Publication 5258, AIR Submission Composition and Reference Guide, explains the integration and uses of
+this IRS- provided client code sample to support certificate-based authentication for AIR A2A Web services.
+In addition to the code itself, this guide provides necessary information for developers to use when integrating
+the new feature into client software that communicates with A2A Web services.
+4.2.3 | Certificate Management
+IRS requires the use of client digital (X.509) certificates issued by IRS-designated certificate authorities (see
+listing of approved Certificate Authorities (CA) in Section 4.2.4) to provide enhanced authentication of external
+partner application systems for A2A Web service processing. This capability is intended to mitigate threats
+defined in Treasury Department Publication 85-01, Department of the Treasury Information Technology (IT)
+Security Program, Vol. II, Handbook, Part 1, Section 5.4.4 Sensitive Systems.
+To meet the requirements stated in the Treasury directive, the system will:
+1.
+
+Provide verification of a digital signature of appropriate message parts produced using the private key
+for the X.509 certificate submitted with the authentication request and shall prevent (fail) authentication
+if this verification fails.
+
+2.
+
+Verify that a submitted X.509 certificate is properly formatted and is verified by appropriate CA
+signature and shall prevent (fail) authentication if this verification fails.
+
+3.
+
+Provide checks to ascertain that a submitted X.509 certificate has not been revoked, using most
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+23
+
+Transmitting Information Returns
+
+current Certificate Revocation List (CRL) resources from IRS-designated CAs, and shall prevent (fail)
+authentication if the certificate has been revoked. CRLs will be retrieved from each IRS-designated CA
+based on the schedule of available updates for that CA, so that the most up-to-date CRL will be made
+available for A2A authentication.
+4.
+
+KeyInfo should use the KeyIdentifier tag which has the Base64 encoded certificate as its value. The
+Base64 encoded certificate should include the entire certificate chain including the root certificate and
+all the authorized CA certificates to pass the authentication process.
+
+5.
+
+Provide checks to ensure that a submitted X.509 certificate has not expired and shall prevent (fail)
+authentication if the certificate has expired.
+
+6.
+
+Ensure that a submitted X.509 certificate matches a certificate previously registered for the application
+system using data stored in IRS directory by an enrollment process and shall prevent (fail) authentication if the match cannot be made.
+
+7.
+
+Mitigate replay attacks for authentication.
+
+8.
+
+Provide error handling by which any external failing strong authentication for any reason will receive a
+SOAP fault response message stating that “Authentication Failed.”
+
+9.
+
+Provide adequate capacity for A2A certificate-based authentication.
+
+10. Ensure that authentication attempts and results are audited and incorporated into log files for audit and
+forensic purposes.
+11. Accommodate external users that have one or more sites (and client certificates) associated with a
+single Public Key Infrastructure (PKI) sponsor.
+12. Register valid certificates for each enrolled external application system using an automated enrollment
+process. The authentication credentials structure shall be changed for all A2A Web service requests to
+accommodate session-less requests.
+A2A Transmitters must use digital certificates (X.509) versus passwords upon proper enrollment and
+registration of the certificate. The registered certificate’s Key Usage attribute should ONLY list BOTH of
+the values “digital signature” and “key encipherment.” Any additional values for this attribute will result in
+submission rejection due to the strict Key Usage Enforcement policy at the IRS portal. Encryption of the
+signing key is important on your system. Do not store an unencrypted copy of the signing key on your system.
+The signing key should be stored in a standard encrypted key store.
+4.2.4 | Authorized Certificate Authorities
+Digital certificates bind digital information to physical identities and provide non-repudiation and data integrity.
+Before you begin the Automated Enrollment (AE) process, each entity should obtain one valid digital certificate
+issued by an approved Certificate Authority (CA). Automated Enrollment (AE) only recognizes and accepts
+digital certificates issued by IRS approved certificate authorities, listed below.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+24
+
+Transmitting Information Returns
+
+Table 4-1: List of Authorized Certificate Authorities
+Certificate Authority
+
+Type of Certificate
+Go to ORC ECA and On the screen for order, please
+choose “Buy Now”.
+
+ORC ECA, naming a server
+
+IGC Medium Assurance Device, naming a
+device
+
+Go to Identrust Government Agencies and click on
+“Buy Now”, you’ll see a long list of Government programs
+for which you can get a certificate and select the
+"Department of Treasury - IRS MeF e-File"
+or "Department of Treasury - IRS Secure Data Transfer”.
+The type to choose is IGC Standard Medium Assurance |
+Organization Identity | Device
+
+IGC Medium Assurance Affiliated or IGC
+Medium Assurance Affiliated Hardware, naming
+an individual
+
+Go to Identrust Government Agencies and click
+on “Buy Now”, you’ll see a long list of Government
+programs for which you can get a certificate and
+select the “Department of Treasury - IRS MeF e-File” or
+“Department of Treasury - IRS Secure Data Transfer”. The
+types to choose are IGC Standard Medium Assurance |
+Organization Identity | Device or IGC | Medium Assurance
+| Business Identity | Hardware Storage
+
+4.3 | XML Overview for AIR
+IRS uses XML, a language that specifies the structure and content of electronic documents and files to
+define the electronic format of ACA Information Returns. This section explains some of the elements of an
+XML document. For detailed information regarding the IRS Submission File structure, including the XML
+Schema containing the required Tag Names/Element Names and Namespaces, refer to Publication 5258, AIR
+Submission Composition and Reference Guide.
+4.3.1 | AIR XML Schema Package Structure
+This section describes the AIR XML Schema file structure and how the schemas will be packaged as of the
+date this publication was issued.
+Schemas for a given ACA Information Return are developed by the respective projects and submitted to the
+IRS Data Engineering (DE) Group. The DE Group integrates the project XML Schemas into a standard ACA
+XML Common Library. The ACA XML Common Library consists of several common XML Schema building
+blocks as follows:
+■ IRS-CAC.xsd – contains common aggregate components
+■ IRS-CBC.xsd – contains common basic components
+■ IRS-SDT.xsd – contains specialized data types
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+25
+
+Transmitting Information Returns
+
+The ACA XML Common Library is built following IRS Enterprise Standards, Naming, and Design Rules.
+The common XML Schema building blocks are packaged into a COMMON folder within the XML Library
+structure as follows:
+XML Library n.n
+COMMON
+The ACA XML Library for AIR includes the following folders:
+EXT
+IRS-EXT-ACA-AIR-1094BC.xsd
+MSG
+Various .xsd and .xml – contains the Message, Form Data File, Manifest File, and Error Data File
+SRV
+ACAGetTransmitterBulkRequestService – the WSDL for the transmission endpoint
+ACAGetTransmitterBulkRequestStatus – the WSDL for the retrieve acknowledgements endpoint
+In addition to the schema files, there are six business rule files, one for each Form 1094-B, Form 1095-B,
+Form 1094-C, Form 1095-C, one for the Shared rules, and one for the Manifest/Header.
+The schema and business rule files can be found on the Affordable Care Act Information Returns (AIR) page.
+4.3.2 | AIR XML Structure
+When entering character data into an XML document, it is important to ensure that the specified encoding
+supports the characters provided. By design, AIR uses Unicode Transformation Format-8 (UTF-8), without
+Byte Order Mark (BOM). AIR does not support any other encoding scheme (for example, UTF-16 and UTF-32).
+4.3.3 | Prohibited and Constrained Special Characters
+Software Developers and Transmitters must not include certain special characters in any character data
+included in the XML of the SOAP message or the XML file attached to the SOAP message. The following
+special characters must not be included in any of the data fields for either Forms 1094/1095-B or Forms
+1094/1095-C transmissions:
+Table 4-2: Special Characters Not to Be Included in Any Data
+Character
+
+Character Description
+
+--
+
+Double Dash
+
+#
+
+Hash Key
+
+IRS will reject a transmission that contains any of the special characters identified in Table 4-2, either in the
+SOAP Message or in the XML file, upon receipt.
+Example 1: If a record has a last name data field containing MyCorp #10, then the transmission must not
+include the hash key/pound sign, so that the data field instead contains MyCorp 10.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+26
+
+Transmitting Information Returns
+
+Example 2: If a record has an address data field containing NoPlaceWay--Suite 4, then the transmission
+must not include the double dash, so that the data field instead contains NoPlaceWay-Suite 4.
+The following special characters must be escaped before they are included in the data fields that allow
+escaped characters of either Forms 1094/1095-B or Forms 1094/1095-C transmissions:
+Table 4-3: Allowable Characters
+Character
+
+Escape
+Characters
+
+Escape Character
+Allowed
+
+Character Description
+
+Character Allowed?
+
+&
+
+Ampersand
+
+Rejected
+
+&amp;
+
+Allowed
+
+‘
+
+Apostrophe
+
+Rejected
+
+&apos;
+
+Allowed
+
+<
+
+Less Than
+
+Rejected
+
+&lt;
+
+Allowed
+
+“
+
+Quotation Mark
+
+Rejected
+
+&quot;
+
+Allowed
+
+>
+
+Greater Than
+
+Allowed
+
+&gt;
+
+Allowed
+
+*Caution: “PersonFirstNm”, “PersonMiddleNm”, and “PersonLastNm” cannot contain any special characters.
+For example, if a record has a last name data field containing an apostrophe, such as “O’Malley”, the
+transmission cannot include the apostrophe or the escaped apostrophe characters. The apostrophe must
+be stripped, and the last name data must be entered as “OMalley”. The transmission will be rejected if the
+apostrophe is used. As a rule, the schema definitions must be followed.
+However, the escaped apostrophe will be allowed in the “BusinessNameLine1Txt” and
+“BusinessNameLine2Txt” schema elements. Any special characters that are not listed in the Table 4-3 or
+Table 4-4 will be allowed as-is. For example, a hyphen is allowed in the “PersonFirstNm”, “PersonMiddleNm”,
+“PersonLastNm”, “BusinessNameLine1Txt” and “BusinessNameLine2Txt”.
+Additional elements may also be restricted by XML schema data element definitions. For example, the
+schema does not allow the use of escaped Less Than or escaped Quotation within “BusinessNameLine1Txt”
+and “BusinessNameLine2Txt”.
+4.3.4 | Tag Names
+Each field on the AIR Forms 1094/1095-B or Forms 1094/1095-C is identified using an XML tag name within
+the XML schema.
+Tag names were created using the following conventions:
+■ A meaningful phrase with the first letter of each word capitalized and using no spaces (upper Camel case)
+■ A length of not more than 30 characters
+■ Standard abbreviations to meet the tag name 30-character limit
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+27
+
+Transmitting Information Returns
+
+The Tag Names, also known as Element Names, were standardized by IRS for all ACA Information Return
+forms. A notional example of a simple XML element that identifies the record number in a submission would be:
+<xsd:element ref="UniqueRecordId" minOccurs="1" maxOccurs="unbounded"/>
+A notional example of a complex XML element that identifies all the data elements required for Form 1094-B
+would be:
+
+Figure 4-4: Form 1094-B Schema Structure
+4.3.5 | Attributes
+Attributes provide additional information or describe a constraint of a data element.
+■ The first letter of the first word of an attribute name is lower case; the first letter of each subsequent
+
+word is capitalized (lower camel case).
+For instance, in the example of the simple XML element Form1094BUpstreamDetail above, the attribute
+maxOccurs="unbounded" identifies that there is no limit to the number of Forms 1095-B that can be included
+in the XML. (However, the number of Forms 1095-B included in a submission is constrained by the 100 MB file
+size limit.)
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+28
+
+Transmitting Information Returns
+
+4.3.6 | Repeating Group
+Repeating groups are specified in XML schema definitions using the minOccurs and maxOccurs facets on
+sequence or choice definitions. An example of a repeating group is as follows:
+<xsd:element ref="CoveredIndividualGrp" minOccurs="0" maxOccurs="99"/>
+The element ‘CoveredIndividualGrp’ allows a maximum of 99 groups within each 1095 record that is
+submitted. Beginning and ending tags are necessary for each group submitted. The reference element
+resolves to the eFile Type EmployerCoveredIndividualType:
+<xsd:element name="CoveredIndividualGrp" type="EmployerCoveredIndividualType">
+EmployerCoveredIndividualType is a complex data element that includes the nodes Covered Individual Name,
+Social Security Number or Date of Birth, and several other indicators required for the repeating group. All the
+elements of the EmployerCoveredIndividualType repeat as each CoveredIndividualGrp are reported.
+
+Figure 4-5: Example of the Covered Individual Repeating Group
+The ability to repeat information within the XML Schema is the electronic equivalent of attaching additional
+forms when there is insufficient space on the form to include all the information that must be filed (e.g., If there
+are more than six covered individuals, see Form 1095-B Part IV, Continuation Sheet(s), for information about
+the additional covered individuals.).
+4.3.7 | AIR Schema and Business Rules
+A schema is an XML document that specifies the data elements, structure and rules for the transmission
+Manifest and each form or document. In addition to formats defined by schemas, information returns must
+also adhere to business rules, which provide a second level of validation for information returns processed by
+the AIR System.
+IRS created an XML schema for each of the different types of ACA Information Returns (Form 1094-B, Form
+1094-C, Form 1095-B, and Form 1095-C), Transmission File, and Acknowledgement File. Each schema also
+has a respective set of business rules that are used during AIR validation.
+Within the XML schema, data elements are the basic building blocks of an XML document. Schemas
+recognize two categories of element types: simple and complex. A simple type element contains only one
+data type and may only have documentation attributes, such as description or line number. A complex type
+element is an element that has one or more attributes or is the parent to one or more child elements.
+The Transmitter and Issuer have the responsibility to provide information as specified by IRS forms,
+instructions and regulations.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+29
+
+Transmitting Information Returns
+
+Note: The software used to transmit AIR documents to IRS must be capable of putting the information in the
+specified schema while also abiding by all applicable business rules.
+The AIR schemas do not allow empty or null values within schema tags. All data elements present by virtue
+of an opening and a closing tag must contain a value. Empty or null tags (even for optional data elements) will
+result in a transmission rejection. Do not include tags for optional data elements that are empty.
+Each year, new legislation and/or improvements to IRS programs impact IRS forms and processing
+procedures. IRS evaluates these changes to determine if updates to the XML schemas and business rules are
+necessary.
+When the AIR schemas are posted on the Affordable Care Act Information Returns (AIR) page, IRS will identify
+when the schemas are available in the AATS and Production environments. Software Developers are not
+required to retest when new schemas (minor or major) are posted. However, IRS strongly recommends the
+use of AATS to retest when Software Developers update their software in response to schema changes. Links
+to the AIR XML Schemas and Business Rules are located on the Affordable Care Act Information Returns
+(AIR) page.
+Note: If there are critical changes required due to late legislation changes, national disasters, or errors
+identified during testing or production, IRS may issue updated XML schemas and business rules after
+December and during the processing year.
+General Information about Version Numbers follows:
+Each version of the XML Schemas and the corresponding business rules has a unique version number
+assigned. It is important to note the following principles regarding version numbers:
+■ Each information return’s schema version has an associated set of business rules with the same version
+
+number. This ensures that each updated schema version includes an updated set of business rules.
+■ The “FormnnnnUpstreamDetailType” complex element includes a documentation element and
+
+dictionary entry name that identifies the form including the major and minor version numbers of the
+schema for each return type as well as the effective begin date for the XML Schema. For example, the
+“Form1095BUpstreamDetailType” from IRS-Form1094-1095BTransmitterUpstreamMessage.xsd file
+shown below identifies the schema version as v1.0 with an effective date of 2015-01-27.
+
+Figure 4-6: 1095-B Upstream Detail Type
+■ Each business rule documents version number identifies the version and effective begin date of the
+
+business rules.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+30
+
+Transmitting Information Returns
+
+■ The “Active Validating Schema Version” specifies the business rules and schema version that will be
+
+used to validate an information return that has been received by IRS during a timeframe. This provides a
+mechanism for different versions to be accepted at the same time. It also enables an older version to be
+validated against a newer version’s set of schemas and business rules. IRS will publish all valid schema/
+business rule versions.
+The active validating schema version will be the most recent schema version posted on the Affordable
+Care Act Information Returns (AIR) page. IRS will provide the “Start” dates when schemas are available in
+Production and AATS. These “Start” dates also represent when the latest schema posted becomes the active
+validating schema.
+4.3.8 | Validating Schema Versions
+Throughout the year, multiple versions of XML Schemas and Business Rules may be posted to IRS.gov
+depending upon whether a change to the schema is major or minor; AIR may not require that the schema
+version used to submit the return data match the schema version used by AIR during validation. In general,
+there is one active validating schema version for each return type in a tax year. The Schema/Business Rules
+tables will include the Start dates and End dates, if applicable, for AATS and Production. IRS strives to limit
+the number of schema and/or business rule revisions, especially after production opens. A QuickAlerts
+message is issued when a new version of the XML Schemas and Business Rules are posted on the
+Affordable Care Act Information Returns (AIR) page.
+Minor Schema Changes – When IRS issues revised schemas for an information return type and changes the
+increment for the minor number, AIR continues to accept returns composed using previous schema versions.
+When the minor number is changed, IRS allows Software Developers to decide for themselves whether they
+need to use the latest version or not based on what is included in their tax preparation software and what
+changes were made to the schemas.
+Returns may be composed using previously published schema versions, but IRS will only validate against the
+“active validating schema version” when the return is processed. For example:
+If the current schema version is 1.0 and the schema change is minor, IRS will assign the new number 1.1. The
+active validating schema version is 1.1. AIR will continue to accept returns composed using version
+1.0. However, all returns (whether composed with version 1.0 or 1.1) will be validated with the latest
+version, 1.1.
+Major Schema Change – When IRS issues revised schemas for an information return type and changes
+the increment for the major number, all returns must be composed by software using the latest version. If
+information returns are composed using previously published schema versions, they will not validate against
+the active validating schema version when the return is processed and will be rejected.
+For example, if the current version is 1.1 and IRS determines it can no longer accept information returns
+composed using schema version 1.1 (or v1.0), it will assign the new major number 2.0. The active validating
+schema version is 2.0. Returns submitted with version 1.1 or earlier will be rejected for using an unsupported
+schema version.
+Software Developers and Transmitters should select the applicable form type on the AIR Schemas and
+Business Rules page to get information about all active and prior year schemas and business rules used by
+the AIR Production and AATS.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+31
+
+Transmitting Information Returns
+
+Tax Year 2017 Forms 1094-B, 1094-C, 1095-B, and 1095-C
+Version
+
+Date Posted
+
+TY2017v1.0
+
+Start Date:
+10/30/2017
+
+Updates:
+05/25/2018 New posting of
+revised Release
+
+AATS Dates
+
+07/02/2017
+
+Note: Schemas v1.0
+and Business Rules
+v1.1, v1.2, v1.3,
+and v1.4 are valid
+for AATS. End Date:
+TBD
+
+Memo and
+business rule
+v1.1, v1.2,
+
+Production Dates
+Start Date: 1/22/2018
+Note: Schemas v1.0 and
+Business Rules v1.1,
+v1.2, v1.3, and v1.4 are
+valid for Production.
+End Date: TBD
+
+v1.3, and v1.4
+Figure 4-7: Example of AIR Schema Information
+4.3.9 | Example of Schema Versioning
+The Affordable Care Act Information Returns (AIR) page provides information and technical guidance for
+Software Developers and Transmitters who are interested in developing software for AIR for Tax Years 2015,
+2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 and 2025. Included are the XML Schemas, Business
+Rules, Release Memorandums and specific instructions.
+Note: When creating payload for prior year (TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2021,
+TY2022, TY2023, TY2024 and TY2025) data, please use the schemas and business rules that were in
+effect for that tax year. Do not use the current year schemas and rules. In addition, do not mix or combine
+tax years within the same submission or the same transmission. Transmitters should use the latest schema
+package Filing Season (FS) 2026 (TY2025) Manifest schema to generate A2A SOAP message or the UI
+Manifest file regardless of which tax year is being submitted.
+Below is a sample of the AIR Forms XML Schema Version
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+32
+
+Transmitting Information Returns
+
+Figure 4-8: Samples of Schema Versioning for AIR Forms
+
+4.4 | Threat Mitigations in AIR Transmissions
+Information Submission Services (ISS) will only accept XML files and attachments. Each file, message and/
+or attachment transmitted through the ISS-A2A or ISS-UI channels will be checked for threats before being
+routed to AIR back-end systems. In the event the system detects a threat in the Transmission File, the
+following steps will be taken:
+■ ISS will perform threat mitigation and initial validation on authorized connections
+■ The Transmission will be rejected and a fault code (TPE Error) response will be returned
+■ The Transmitter must remove the infected data and then retransmit the file
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+33
+
+Transmitting Information Returns
+
+Figure 4-9: Sample of an A2A Channel Fault Message
+
+Figure 4-10: Sample of a UI Channel Fault Message
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+34
+
+Transmitting Information Returns
+
+Table 4-4 below defines fault codes and messages from the ISS.
+Table 4-4: List of Fault Codes (TPE Errors) for Tax Years 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+2023, 2024 and 2025
+Fault
+Code
+
+TPE1001
+
+TPE1101
+
+TPE1102
+
+Service
+Leg
+
+Request
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+We are experiencing a technical issue.
+Please try your request again later. We
+apologize for the inconvenience.
+
+UI
+
+We are experiencing a technical issue
+[Error Code 6052]. Please try your
+request again later. We apologize for the
+inconvenience.
+
+A2A
+
+Our system detected invalid or outdated
+XML namespaces in your message.
+Please review the XML standards
+outlined in Section 3 of Publication
+5258, AIR Submission Composition
+and Reference Guide, correct any
+issues, and try again.
+
+UI
+
+[TPE1101] Our system detected invalid
+or outdated XML namespaces in the
+Manifest file. Please review the XML
+standards outlined in Section 3 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Manifest file,
+and try again.
+
+A2A
+
+The requested service is not available at
+this time. Please resubmit during normal
+operation hours.
+
+UI
+
+*Error not applicable to ISS-UI
+
+Message Delivery
+Failure
+
+Invalid/Incorrect
+Namespace
+
+Service Window
+Closed
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+35
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1104
+
+Service
+Leg
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+The request is not compliant with web
+service policy requirements. Please
+review the transmission instructions
+outlined in Section 5 of the Publication
+5258, AIR Submission Composition
+and Reference Guide, correct any
+issues, and try again.
+
+Request is not
+compliant
+
+UI
+
+TPE1105
+
+Request
+
+We are experiencing a technical issue
+[Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+A2A
+
+The message was not formatted
+properly and/or cannot be interpreted.
+Please review the XML standards
+outlined in Section 3 of the Publication
+5258, AIR Submission Composition
+and Reference Guide, correct any
+issues, and try again.
+
+UI
+
+[TPE1105] Our system has detected a
+potential threat in the Manifest file you
+are attempting to transmit, and it cannot
+be transmitted. This may be due to
+malformed XML. Please review the XML
+standards outlined in Section 3 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Manifest file,
+and try again.
+
+XML is not
+well-formed
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+36
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1106
+
+TPE1107
+
+Service
+Leg
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+The message did not match our current
+WSDL and/or schema. Please see
+the Fault Details information below for
+the particular element(s) our system
+has detected a potential issue with.
+Please review the published WSDLs
+and schemas located on the AIR page,
+correct any issues, and try again.
+
+UI
+
+[TPE1106] The Manifest file does not
+match our current schema. In particular,
+our system has detected a potential
+issue with the following element(s):
+<Element1>, <Element2>, <Element3>,
+and others. Please review the published
+schemas on the AIR page, correct any
+issues, and try again.
+
+A2A
+
+Request message exceeds the 100
+MB maximum size limit. Please review
+the XML file standards outlined in
+Section 3 of the Publication 5258,
+AIR Submission Composition and
+Reference Guide, correct any issues
+with the request, and try again.
+
+UI
+
+[TPE1107] The Form file exceeds the
+100 MB size limit. Please review the XML
+file standards outlined in Section 3 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues with the request, and
+try again.
+
+SOAP message
+does not conform to
+WSDL
+
+Message exceeds
+maximum size limit
+of 100 MB
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+37
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1108
+
+TPE1109
+
+Service
+Leg
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+Our system has detected a potential
+threat in the transmission and it cannot
+be transmitted. Please review the XML
+standards outlined in Section 3 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+[TPE1108] Our system has detected a
+potential threat in the Manifest file and it
+cannot be transmitted. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Manifest file,
+and try again.
+
+A2A
+
+Our system has detected a potential
+threat in the transmission and it cannot
+be transmitted. Please review the XML
+standards outlined in Section 3 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+[TPE1109] Our system has detected a
+potential threat in the Manifest file and it
+cannot be transmitted. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Manifest file,
+and try again.
+
+Potential Code
+Injection Threat
+
+Potential SQL
+Injection Threat
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+38
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1110
+
+TPE1112
+
+TPE1114
+
+TPE1115
+
+Service
+Leg
+
+Request
+
+Request
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A)
+
+Our system has detected a potential
+threat in the transmission, and it cannot
+be transmitted. Please review the XML
+standards outlined in Section 3 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+[TPE1110] Our system has detected a
+potential threat in the Manifest file and it
+cannot be transmitted. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Manifest file,
+and try again.
+
+A2A
+
+The request message must be sent
+using HTTP compression (RFC 1952 GZIP). Please review the transmission
+instructions outlined in Section 5 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+The request message must be MTOM
+encoded. Please review the transmission
+instructions outlined in Section 5 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+We are experiencing a technical issue.
+Please try your request again later. We
+apologize for the inconvenience.
+
+UI
+
+*Error not applicable to ISS-UI
+
+Potential Document
+Structure Threat
+
+HTTP Compression
+Failure
+
+Message not MTOM
+encoded
+
+Unable to decode
+MTOM encoded
+request message
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+39
+
+Transmitting Information Returns
+
+Fault
+Code
+
+Service
+Leg
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+UI only
+
+Our system has detected UTF-8 BOM
+encoding in the Manifest file and cannot
+be interpreted. Please review the XML
+standards outlined in Section 10 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+A2A
+
+Our system identified an issue with the
+WS-Security Header in your message.
+Please review the WS-Security
+instructions outlined in Section 5 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+Our system identified an issue with one
+or more signed parts in your message.
+Please review the WS-Security
+instructions outlined in Section 5 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+We are experiencing a technical issue.
+Please try your request again later. We
+apologize for the inconvenience.
+
+UTF-8 BOM
+TPE1118
+
+TPE1122
+
+TPE1123
+
+TPE1126
+
+Request
+
+Request
+
+Request
+
+Request
+
+encoding in the
+Manifest file
+and cannot be
+interpreted
+
+Invalid WS Security
+Signature (Keystore,
+Password)
+
+Invalid Digital
+Signature (Signed
+Parts)
+
+Failed to connect to
+the Authentication
+Policy Server
+UI
+
+We are experiencing a technical issue
+[Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+40
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1127
+
+Service
+Leg
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+Message not formatted properly and is
+missing HTTP credentials. Please check
+message and try again.
+
+Missing credentials
+in HTTP request
+UI
+
+We are experiencing a technical issue
+[Error Code 6064]. Please try your
+request again later. We apologize for the
+inconvenience.
+
+TPE1128
+
+Request
+
+Failed to authenticate with the
+Authentication
+Policy Server
+
+A2A
+
+UI
+
+A2A
+TPE1129
+
+Request
+
+Failed to
+authorize with the
+Authentication
+Policy Server
+UI
+
+We were unable to authenticate
+your credentials. Please review the
+information about digital certificates
+included in Section 5 of the Publication
+5258, AIR Submission Composition
+and Reference Guide, ensure that the
+credentials are valid, and try again.
+We are experiencing a technical issue
+[Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+We were unable to authenticate
+your credentials. Please review the
+information about digital certificates
+included in Section 5 of the Publication
+5258, AIR Submission Composition
+and Reference Guide, ensure that the
+credentials are valid, and try again.
+We are experiencing a technical issue
+[Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+41
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1130
+
+TPE1131
+
+Service
+Leg
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+Our system has detected an error with
+the Test File Code. Please check the
+message and try again. Please note
+that the Test File Code value of 'T' is
+used for AATS transmissions and the
+Test File Code value of 'P' is used
+for transmissions intended for IRS
+compliance processing.
+
+UI
+
+[TPE1130] Our system has detected
+an error with the Test File Code of your
+Manifest file. Please check the file and
+try again. Please note that the Test
+File Code value of 'T' is used for AATS
+transmissions and the Test File Code
+value of 'P' is used for transmissions
+intended for IRS compliance processing.
+
+A2A
+
+Our system has detected an error with
+the Unique Transmission ID. Please
+review the UTID format outlined in
+Section 5 of Publication 5258, AIR
+Submission Composition and
+Reference Guide, correct any issues,
+and try again.
+
+UI
+
+[TPE1131] Our system has detected an
+error with the Unique Transmission ID
+of your Manifest file. Please review the
+UTID format outlined in Section 3 of the
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Manifest file,
+and try again.
+
+Request contains
+Invalid Test File
+Code value
+
+Request message
+UTID is either
+missing or invalid
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+42
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1132
+
+Service
+Leg
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+“ChecksumAugmentationNum” value in
+your transmission against the calculated
+value of the form data file attachment.
+Please review Publication 5258,
+AIR Submission Composition and
+Reference Guide, Section 3.4.3,
+Computing Checksum, correct the
+checksum value, and retransmit.
+
+Failed due to
+checksum validation
+error
+
+UI
+
+TPE1133
+
+TPE1134
+
+TPE1135
+
+Request
+
+Request
+
+Request
+
+Unable to extract
+UserId from
+Manifest
+
+Unauthorized
+request
+
+Unauthorized
+request
+
+[TPE1132] Our system detected
+an error while validating the
+“ChecksumAugmentationNum” value in
+your manifest file against the calculated
+value of the form data file.
+Please review Publication 5258,
+AIR Submission Composition and
+Reference Guide, Section 3.4.3,
+Computing Checksum. Correct the
+checksum value and retransmit.
+
+A2A
+
+Our system has detected an
+error with the UserId field of the
+ACASecurityHeader. Please verify that
+your A2A Client Application System ID
+(ASID) is included in the UserId field.
+For more information, please review the
+UserId guidelines outlined in section 5
+of Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+*Error not applicable to A2A
+
+UI
+
+403 Static Error Page
+
+A2A
+
+*Error not applicable to A2A
+
+UI
+
+[TPE1135] Our system has detected an
+issue with your request. Please return to
+the homepage and try again.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+43
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1136
+
+TPE1137
+
+TPE1138
+
+TPE1139
+
+TPE1141
+
+Service
+Leg
+
+Request
+
+Request
+
+Request
+
+Request
+
+Request
+
+Reason
+
+Unauthorized
+request
+
+Unauthorized
+request
+
+Unauthorized
+request
+
+Unable to process
+provided certificate
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+*Error not applicable to A2A
+
+UI
+
+[TPE1136] Our system has detected an
+issue with your request. Please return to
+the homepage and try again.
+
+A2A
+
+*Error not applicable to A2A
+
+UI
+
+[TPE1137] Our system has detected an
+issue with your request. Please return to
+the homepage and try again.
+
+A2A
+
+*Error not applicable to A2A
+
+UI
+
+[TPE1138] Our system has detected an
+issue with your request. Please return to
+the homepage and try again.
+
+A2A
+
+Our system has detected an issue with
+the transmission's certificate. Please
+check the request and try again.
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+*Error not applicable to A2A
+
+UI
+
+[TPE1141] Our system has detected an
+issue with your request. Please return to
+the homepage and try again.
+
+Invalid request
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+44
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1201
+
+TPE1203
+
+Service
+Leg
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+The attachment was not formatted
+properly and/or cannot be interpreted.
+Please review the XML standards
+outlined in Section 3 of Publication
+5258, AIR Submission Composition
+and Reference Guide, correct any
+issues, and try again.
+
+UI
+
+[TPE1201] Our system has detected a
+potential threat in the Form file, and it
+cannot be transmitted. This may be due
+to malformed XML. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Form file, and
+try again.
+
+A2A
+
+Our system has detected a potential
+threat in the request message
+attachment. Please review the XML
+standards outlined in Section 3 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+[TPE1203] Our system has detected a
+potential threat in the Form file and it
+cannot be transmitted. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Form file, and
+try again.
+
+Attachment is
+malformed
+
+Potential Code
+Injection in
+Attachment
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+45
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1204
+
+TPE1205
+
+Service
+Leg
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+Our system has detected a potential
+threat in the request message
+attachment. Please review the XML
+standards outlined in Section 3 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+[TPE1204] Our system has detected a
+potential threat in the Form file and it
+cannot be transmitted. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Form file and
+try again.
+
+A2A
+
+Our system has detected a potential
+threat in the request message
+attachment. Please review the XML
+standards outlined in Section 3 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+UI
+
+[TPE1205] Our system has detected a
+potential threat in the Form file and it
+cannot be transmitted. Please review the
+XML standards outlined in Section 3 of
+the Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues on the Form file, and
+try again.
+
+Potential SQL
+Injection in
+Attachment
+
+Potential Document
+Structure Threat in
+Attachment
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+46
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE1206
+
+TPE1207
+
+Service
+Leg
+
+Request
+
+Request
+
+Reason
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+The request message contains more
+than one attachment. Please review
+the transmission instructions outlined
+in Section 5 of Publication 5258,
+AIR Submission Composition and
+Reference Guide, and resubmit with
+only one attachment.
+
+UI
+
+*Error not applicable to ISS-UI
+
+A2A
+
+The request message is missing
+an attachment. Please review the
+transmission instructions outlined in
+Section 5 of Publication 5258, AIR
+Submission Composition and
+Reference Guide, add an attachment
+to the request, and resubmit.
+
+Extra attachment(s)
+
+Missing
+attachment(s)
+
+UI
+
+TPE1208
+
+TPE2001
+
+Request
+
+Response
+
+UTF-8 BOM
+encoding in the
+Form file and cannot
+be interpreted
+
+We are experiencing a technical issue
+[Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+UI and
+A2A
+
+Our system has detected UTF-8 BOM
+encoding in the Form file and cannot
+be interpreted. Please review the XML
+standards outlined in Section 10 of
+Publication 5258, AIR Submission
+Composition and Reference Guide,
+correct any issues, and try again.
+
+A2A
+
+Unable to deliver response message to
+transmitter.
+
+UI
+
+TPE2001 is deprecated in the A2A
+service policy. Can be triggered via
+ISS UI, but under extremely rare
+circumstances. Could possibly remove
+this entry from the table entirely as
+transmitters are extremely unlikely to
+ever see this code.
+
+Consumer is
+unreachable
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+47
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE2111
+
+Service
+Leg
+
+Response
+
+Reason
+
+Unable to parse
+Receipt ID from
+Receipt message
+using
+XPath
+
+TPE2112
+
+TPE2113
+
+TPE2114
+
+TPE2115
+
+Response
+
+Response
+
+Response
+
+Response
+
+Unable to parse
+timestamp from
+Receipt message
+using XPath
+
+Unable to parse
+UTID from Receipt
+message using
+XPath
+
+Unable to parse
+Error Code from
+Receipt message
+using XPath
+
+Unable to parse
+Error Message from
+Receipt message
+using XPath
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+Parse Receipt ID from Response
+message using XPath.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+A2A
+
+Parse Timestamp from Response
+Message using XPath.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+A2A
+
+Parse UTID from Response Message
+using XPath.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+A2A
+
+Parse Error Code from Response
+Message using XPath.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+A2A
+
+Parse Error Message from Response
+Message using XPath.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+48
+
+Transmitting Information Returns
+
+Fault
+Code
+
+TPE2201
+
+TPE2202
+
+Service
+Leg
+
+Response
+
+Response
+
+Reason
+
+There is an
+excess number of
+attachments in the
+response
+
+The attachment
+in the response
+exceeded maximum
+size limit
+
+Channel
+
+ISS Fault Message
+
+A2A
+
+We are experiencing a technical issue.
+Please try your request again later. We
+apologize for the inconvenience.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+A2A
+
+We are experiencing a technical issue.
+Please try your request again later. We
+apologize for the inconvenience.
+
+UI
+
+We are experiencing a technical issue
+with the receipt [Error Code 6064].
+Please try your request again later. We
+apologize for the inconvenience.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+49
+
+Transmitting Information Returns
+
+4.4.1 | Threat Mitigation through ISS-UI:
+If an error has occurred upon upload of the Manifest and Form Data File, the user will be returned to the
+upload page with an error marked in red. Examples of the upload page and upload error page are shown
+below in Figures 4-13.
+
+Figure 4-11: Example of UI Upload Page
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+50
+
+Transmitting Information Returns
+
+If an error has occurred upon submission status requests, the Transmission Status Details page will display an
+error table depicting the error codes and corresponding error details. An example of the transmission status
+page is shown below in Figure 4-12.
+
+Figure 4-12: UI Check Transmission Status Page Showing the Search Error
+4.4.2 | Threat Mitigation through ISS-A2A
+ISS-A2A will perform threat mitigation and initial validation on authorized connections. ISS-A2A will return
+a fault if a transmission contains a threat, if a transmission fails initial validation, or if a connection with the
+endpoint cannot be established and reject the transmission.
+Faults differ from errors – a fault is an issue during transmission, whereas an error is the result of business
+rules processing failure. The Fault Generation process is common to each of ISS-A2A process flows. Fault
+messages generated to ISS-A2A are always routed to the transmitter via a SOAP message.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+51
+
+Section
+5
+
+Validating the Transmission and Return Data
+
+Section 5 Validating the Transmission and
+Return Data
+This section explains how the AIR System will perform validations of the transmission and return data via
+Schema validations, Transmission Header and Manifest validations, and Business Rule checks.
+When AIR receives a transmission, the following tasks are executed in this order:
+1.
+
+The Receipt ID and Timestamp are generated
+
+2.
+
+Basic Manifest validations such as TCC validations are performed in synchronous session
+
+3.
+
+If any condition fails with the TCC or Software ID, AIR will stop processing
+
+4.
+
+The Receipt ID, Timestamp, and Unique Transmission ID (A2A only) are returned to the Transmitter
+
+5.
+
+The Form Data File attached to the transmission is read and written to persistent storage
+
+6.
+
+Verify “Attachment Byte Size Number” by calculation and comparison
+
+7.
+
+Verify that the UUID extracted from the ACA Business Correlation ID is unique for the Transmitter
+Control Code (TCC) extracted from the ACA Business Correlation ID
+
+8.
+
+Verify Transmission Type Code, Tax Year and Vendor Information
+
+9.
+
+Verify Checksum and duplicate file validation
+
+10. Schema Validation is executed in the Form Data File
+11. The Form Data File is queued for processing against the AIR Business Rules
+12. Errors identified during processing against the AIR Business Rules are written to the AIR database and
+inserted into an Error Data File that will be returned to the Transmitter in the Acknowledgement
+When errors are identified with the transmission or AIR cannot read or write the Form Data File to persistent
+storage, the transmission will be rejected, and the appropriate error code and description will be returned to
+the Transmitter in the SOAP Response message.
+If the Form Data File fails Schema validation, the transmission will be rejected. The appropriate error
+code and description relevant to Schema validation will be returned when the Transmitter retrieves the
+Acknowledgement for the respective transmission.
+When business rule errors are identified during processing of the Form Data File, AIR will record the error
+codes and descriptions and return those errors in the Error Data File attached to the Acknowledgement SOAP
+Response message as an MTOM encoded attachment.
+Note: When entering a foreign address, AIR will only accept certain foreign country codes which are
+aligned with the codes that the Modernized e-File (MeF) application accepts. The list of allowable
+foreign country codes that IRS accepts is found at the following link: Foreign Country Code Listing for
+Modernized e-File (MeF).
+
+5.1 | Transmission Validation
+This section describes the checks that are made on the transmission and the errors that will be returned to the
+Transmitter if the transmission is rejected before it can be saved for further processing.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+53
+
+Validating the Transmission and Return Data
+
+Table 5-1: AIR Error Categories
+Error Prefix
+
+AIRER (File Read
+Error)
+
+HEADER- XXX
+MANIFEST-XXX
+(TY2016+) AIRMF
+(TY2015) (Manifest
+Validation Error)
+AIRSH (XML
+Schema Validation
+Error)
+HEADER-XXX
+MANIFEST-XXX
+(TY2016+) AIRMF
+
+General Description
+Unable to process request
+– cannot read or persist
+XML File
+
+Severity
+
+Transmission
+Rejected
+
+Error occurred validating
+the transmission Manifest
+or Header
+
+Transmission
+Rejected
+
+Error occurred during
+XML Schema Validation –
+missing data elements or
+schema not well formed
+
+Transmission
+Rejected
+or Partially
+Accepted
+
+The XML File is a duplicate
+
+(TY2015) (Duplicate
+File)
+
+Transmission
+Rejected
+
+HEADER-XXX
+MANIFEST-XXX,
+1095B-XXX,
+1094C-XXX,
+1095C- XXX
+(TY2016+) AIREX,
+AIRMF (TY2015)
+
+Action
+Transmitter notified via SOAP
+Response to transmission message
+Transmitter resolves on read error,
+AIR resolves on write error
+Transmitter notified via the
+Acknowledgement
+Transmitter resolves
+
+Transmitter notified via the
+Acknowledgement
+Transmitter resolves
+Transmitter notified via the
+Acknowledgement
+Transmitter resolves
+
+Transmitter notified via the
+Acknowledgement
+
+Correction Information
+provided is invalid
+
+Transmission
+Rejected
+
+Transmitter resolves
+
+(Correction validation
+failure)
+SHARED-XXX
+1094B-XXX, 1095BXXX, 1094C-XXX,
+1095C-XXX
+(TY2016+) AIRTN
+(TY2015) (TIN
+
+Transmitter notified via the
+Acknowledgement
+TIN and Name do not
+match IRS records
+
+Transmission
+Accepted with
+Error
+
+Transmitter is expected to correct
+the data and send correction record
+to IRS
+
+Validation Error)
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+54
+
+Validating the Transmission and Return Data
+
+Error Prefix
+SHARED-XXX
+1094B-XXX, 1095BXXX, 1094C-XXX,
+1095C- XXX
+(TY2016+) AIRBR
+
+General Description
+
+Severity
+
+Action
+Transmitter notified via the
+Acknowledgement
+
+Error occurred while
+processing the record
+against the business rules
+
+Transmission
+Accepted with
+Error
+
+Transmitter is expected to correct
+the data and send correction record
+to IRS
+
+(TY2015) (Business
+Rule Validation Error)
+
+5.1.1 | Missing or Multiple Attachments
+Checks for missing or multiple attachments occur during the transmission synchronous process. AIR first
+validates that one and only one Form Data File is attached to the transmission. If there are no files attached,
+AIR will reject the transmission and return the appropriate error code and error description. If there is more
+than one XML Form Data File attached to the transmission, AIR will reject the transmission and return the
+appropriate error code and error description.
+5.1.2 | Error Reading or Persisting the Form Data File
+Errors reading or persisting the Form Data File occurs during the transmission synchronous process.
+AIR extracts the Form Data File from the MTOM encoded attachment, reads the file and stores the file to
+persistent storage. If AIR cannot read, or persist the Form Data File, AIR will reject the transmission and return
+an error code with a prefix AIRER.
+5.1.3 | Manifest Verification Failure
+Manifest verification checks occur after receipt processing (reading and persisting the XML Form Data File).
+AIR will perform the following checks against the data included in the Manifest and return any errors found
+when the Transmitter retrieves the Acknowledgement for the transmission:
+■ Verify that the Test File Indicator is set to ‘P’ (PROD)
+■ Verify that the Transmitter Control Code (TCC – included in the ACA Business Correlation ID) is valid, in
+
+the “Active” status, and authorized to transmit the Information Returns included in the transmission
+Note: If the transmission is rejected with Header-005 or Header-006 (SysError 1 or 2) wait 48 hours, then
+retransmit.
+■ Verify that the TCC is authorized (Roles - Issuer or Transmitter) to transmit the forms in the transmission
+
+and that the forms are in Production "P" status
+■ Verify TCC is active and permitted to submit specific form
+■ Verify that the Software ID is authorized for PROD and in the “P” status
+■ Verify Software ID is active for specified payment year on the manifest
+■ If any conditions fail in TCC or Software ID, AIR will stop processing
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+55
+
+Validating the Transmission and Return Data
+
+■ Verify “Attachment Byte Size Number” by calculation and comparison
+■ Verify that the UUID extracted from the ACA Business Correlation ID is unique for the Transmitter Control
+
+Code (TCC) extracted from the ACA Business Correlation ID
+■ Verify Transmission Type Code, Tax Year and Vendor Information
+■ Verify the checksum in the manifest against the computed SHA-256 Checksum on the Form Data Files
+
+submitted by transmitter
+■ Verify duplicate file validation based on checksum number and status of the transmission
+
+Note: If an error occurs during TCC authorizations, processing stops at that point for security reasons and
+the remainder of the Manifest is not validated.
+If the above verifications fail, AIR will reject the transmission and return a Business Rule error with a prefix
+MANIFEST or HEADER for TY2016 forms & beyond or an Error code prefixed with AIRMF for TY2015 forms
+with the following two exceptions, where these Business Rules are returned rather than an Error Code:
+MANIFEST-001: If Manifest 'PriorYearDataInd' has a choice of "Yes" indicated, then 'PaymentYr' must be
+equal to the Processing Year minus two or more years
+MANIFEST-002: If Manifest 'PriorYearDataInd' has a choice of "No" indicated, then 'PaymentYr' must not be
+equal to the Processing Year minus two or more
+5.1.4 | Duplicate XML File Detected
+Duplicate file checks occur after the Transmitter has successfully submitted the transmission to IRS. AIR
+checks the computed SHA-256 Checksum and the size of the Form Data File against previously processed
+Form Data Files submitted by the respective TCC. If the checksum that AIR identified from the Form Data
+File on persistent storage match a Form Data File previously transmitted by that TCC, the file will be rejected
+as duplicate and return a corresponding duplicate error code with prefix MANIFEST for TY2016 forms and
+beyond.
+■ The Form Data file will not be identified as duplicate if the previously submitted file status is “REJECTED”
+
+5.1.5 | Manifest and XML File Schema Validation Failure
+Manifest schema validation occurs before the Transmitter has successfully submitted the transmission to
+IRS. Forms 1094/1095-B and 1094/1095-C Manifest schema and XML file Schema Validation occurs after the
+Transmitter has successfully submitted the transmission to IRS. IRS recommends each return be run against
+a validating parser prior to being submitted to IRS. This pre-validation is intended to identify the majority of
+potential error conditions and minimize the chance of receiving errors. A validating parser compares the XML
+document to the defined elements and attributes of the schemas to ensure a well-formed document that
+adheres to the XML Schema is transmitted to IRS. Schemas provide the basic definition for elements (i.e.,
+field length, data type, prescribed patterns, enumerations, etc.). Data integrity depends on each data
+element complying with the data format specifications. If the ACA Information Return preparation software
+uses IRS-defined XML schemas to create the XML information return, there should be no data format errors in
+the return. The AIR System verifies this by validating each return in the transmission file against the schemas.
+The information return documents must conform to the version of the XML schema they specify. AIR conducts
+XML schema validation on the Form Data File before processing. Any schema validation failures are reported
+back to the originating entity. If the XML does not conform to the XML Schema (missing required elements or
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+56
+
+Validating the Transmission and Return Data
+
+XML not well formed), AIR will reject or partially accept the transmission and return an error code with a
+prefix AIRSH.
+The Error Data File contains the error codes, the error descriptions, and the XPath reference to the element
+found to be in error.
+Effective January 2017, the AIR schemas don't allow empty or null values within schema tags. All data
+elements present by virtue of an opening and a closing tag must contain a value. Empty or null tags (even for
+optional data elements) will result in a transmission rejection. Do not include tags for optional data elements
+that are empty.
+Note: When an error is found during schema validation, processing stops when schema validation
+completes. No Business rules will be applied to the submission, and if the error is found in the Manifest,
+the submission (XML archive) will not be schema validated either.
+Table 5-2 below includes notional samples of schema validation business rules.
+Table 5-2: Schema Validation Business Rules
+Error Code
+
+Error Description Text
+
+AIRSH100
+
+XML Schema Validation Failed - not well formed
+or missing required elements.
+
+Error Category
+
+XML Error
+
+Action
+Transmission
+rejected
+or partially
+accepted
+
+AIRSH100/AIRSH200 occurs when element schema definition does not follow the pattern. (For example: type,
+length, spaces, missing a required element, or using both elements in a choice field, etc.)
+5.1.6 | Business Rule Errors
+Business rule checks occur after the Transmitter has successfully submitted the transmission to IRS.
+To the extent possible, the AIR business rules have been standardized across all information returns currently
+available in AIR. As additional information returns migrate to the modernized architecture, the associated
+business rules for those returns will be rewritten to maintain the standardization across all form types.
+Beginning with Tax Year 2016 submissions, error files returned to Transmitters will show exactly which
+business rules were violated by the transmission rather than displaying which error codes were triggered.
+These rules will have a one-to-one relationship to the rules posted on the Affordable Care Act Information
+Returns (AIR) page. The change is designed to help Transmitters better understand the exact nature of the
+business rule violation.
+The following error information will be returned to the Transmitter when IRS identifies errors associated with a
+business rule for TY2016 and beyond forms:
+■ Header level: HEADER-XXX-XX
+■ Manifest level: MANIFEST-XXX-XX
+■ Form level: 1094B-XXX-XX, 1095B-XXX-XX, 1094C-XXX-XX, 1095C-XXX-XX, SHARED-XXX
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+57
+
+Validating the Transmission and Return Data
+
+Note: The first “XXX” is sequential numbering of Business Rule; second “XX” is version number of the
+Business Rule (as needed; left off for first version)
+Beginning with Tax Year 2017, Form level rules also include Shared rules for some of the Covered Individual
+Group on Forms 1095-B and 1095-C. The shared rules are displayed as Shared-XXX.
+Certain business rules (those with a severity of “Report Error and Reject if Over Threshold”) may cause a
+rejection of the entire submission, if violated in more instances than the threshold allows. If this happens, the
+Transmitter will receive an Error Data File containing all the rules that were violated plus a generic “Threshold”
+error for each threshold that was exceeded. It is the responsibility of the Transmitter to correct all business
+rule errors and retransmit. Business rules for the AIR forms are posted to Affordable Care Act Information
+Returns (AIR) page.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+58
+
+Section
+6
+
+Acknowledgement Files
+
+Section 6 Acknowledgement Files
+Once the transmission is received, the Form Data File is read and written to persistent storage, and checks
+are made on the Transmission Manifest Data, the Receipt ID, Timestamp, and Unique Transmission ID are
+returned to the Transmitter as part of the synchronous session. The AIR System responds with a receipt for
+the transmission or an error explaining what was wrong, if anything, with the transmission. The XML Form
+Data File is then queued for processing within AIR.
+When AIR receives a status request, an Acknowledgement file is generated indicating the status of the
+transmission (Processing, Partially Accepted, Accepted, Accepted with Errors, Rejected, and Not Found)
+and is available for the Transmitter to retrieve. Transmitters should wait at least 10 minutes after the “Receipt
+ID” is provided to request the Acknowledgement for a transmission. The Acknowledgement includes an
+uncompressed native XML Error Data File that contains errors found during validation. If there are no errors
+found during validation, the Error Data File is not included in the Acknowledgement and the transmission
+processing status will be "Accepted".
+The XML Error Data File attached to the Acknowledgement is constrained to 200 MB. If the number of
+validation errors identified result in the XML File exceeding the 200 MB constraint, the file will be truncated,
+and a message will be inserted at the end of the file indicating that the file was truncated.
+Note: During peak processing periods, the Acknowledgement may not be ready for several hours, and can
+take up to 7 days after the “Receipt ID” is provided.
+The Transmission Acknowledgement will include:
+■ Transmitter Control Code
+■ Unique Transmission ID
+■ Form Type Code
+■ Timestamp
+■ Submission Status Code: Accepted, Rejected, Processing, Partially Accepted, Accepted with Errors,
+
+Not Found
+■ Error Message Detail
+■ Error Message Code (Error Code or Business Rule number)
+■ Error Message Text (Error Code or Business Rule Description)
+■ XPathContent (link to schema error AIRSHXXX location within the transmitted Form Data File.)
+
+Note: The XPath identifies the specific data element and instance in an enumerated group, if applicable,
+causing the violation.
+■ Document System File Name
+■ Checksum Augmentation Number (SHA-256) – if a file is attached to the Acknowledgement
+■ Attachment Byte Size Number
+
+Refer to the items in the Acknowledgement Schema (in the IRS-Form1094-1095BCTransmitterRespMessage.
+xsd file), for all the items that can be included in the Acknowledgement.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+60
+
+Acknowledgement Files
+
+6.1 | Acknowledgement Schema
+AIR returns an Error Data File with the Acknowledgement when errors are found in the transmission. The same
+data file is shared by all ACA Information Returns (Forms 1094/1095-B and 1094/1095-C). The table below
+explains some of the elements in the Acknowledgement:
+Table 6-1: AIR Forms Acknowledgement Schema Elements
+Element Name
+
+Explanation
+
+UniqueTransmissionId
+
+The UTID AIR derived from the ACA Business Correlation ID (See Section
+3.2 of this document)
+
+TransmitterControlCd
+
+The Transmitter Control Code that submitted the transmission – must
+match the TCC provided in the Acknowledgement request
+A value computed by AIR TCC+2 character alphanumeric
+■ A value computed by AIR – TCC+00
+
+ShipmentRecordNum
+
+The two zeros appended to the TCC are static and constant in the
+ShipmentRecordNum for all transmissions processed through AIR
+The Receipt ID returned to the Transmitter when this transmission was
+submitted to IRS
+
+ReceiptId
+FormTypeCd
+
+The Form Type included in the transmission
+
+Timestamp
+
+A Timestamp when the Acknowledgement was provided to the
+Transmitter
+One of:
+■ Accepted
+■ Rejected
+
+SubmissionStatusCd
+
+■ Processing
+■ Accepted with Errors
+■ Partially Accepted
+■ Not Found
+
+ErrorMessageDetail
+
+A specific Business Rule number and description for TY2016 & later.
+AIRER & AIRSH for all tax years.
+
+DocumentSystemFileNm
+
+The name of the uncompressed native XML file in the MTOM encoded
+attachment – applies only when a file is attached
+
+CheckSumAugmentationNum
+
+The SHA-256Type checksum value computed against the uncompressed
+native XML file in the MTOM
+encoded
+
+AttachmentByteSizeNum
+
+The Byte size of the uncompressed native XML file in the MTOM encoded
+attachment – applies when a file is attached
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+61
+
+Acknowledgement Files
+
+6.2 | Retrieving Acknowledgements
+Transmitters must have an active IRS account and been approved to transmit ACA Information Returns.
+See Section 2 above for information about obtaining an account and applying for an ACA Information.
+Return TCC. The AIR System will allow the Transmitter to either transmit submissions to IRS and/or retrieve
+Acknowledgements for those transmissions from IRS. Retrieving Acknowledgements for status checksTransmitters must submit a request to retrieve the processing status and error detail of their transmission which is
+known as the Acknowledgement.
+When you retrieve Acknowledgements:
+■ Verify you’re in the correct environment: AATS or Production.
+■ Wait at least 10 minutes after the Receipt ID is provided to request the Acknowledgement for a
+
+transmission.
+For Acknowledgements via the UI channel:
+■ Check the environment you’re connecting to.
+■ Only check a Receipt ID starting “AATS109XXXXXXXXX” against the AATS application.
+■ Only check a Receipt ID starting “109XXXXXXX” against the AIR Production application.
+
+For Acknowledgements via the A2A channel:
+■ When retrieving acknowledgements use the correct endpoint.
+■ Only check a Receipt ID starting “AATS109XXXXXXXXX” against the AATS service endpoint.
+■ Only check a Receipt ID starting “109XXXXXXX” against the AIR Production service endpoint.
+
+The transmission and contains details such as any business rules validation errors, and TIN validation failures
+that were found when the XML transmission file (Form Data File) is processed. The status of the transmission
+includes one of the following:
+■ Accepted – (IRS has successfully processed and accepted the transmission: No XML Error Data File or
+
+MTOM encoded attachment is included)
+■ Rejected – (IRS rejected the transmission as it could not be processed successfully: An XML Error Data
+
+File or MTOM encoded attachment may or may not be included)
+■ Processing – (IRS has not completed processing the transmission: No XML Error Data File or
+
+MTOMencoded attachment is included)
+■ Partially Accepted – (IRS has successfully processed the transmission (accepted and rejected one or
+
+more submissions contained in the transmission): An XML Error Data file or MTOM encoded attachment
+may or may not be included)
+■ No fatal errors were identified while processing the transmission metadata
+■ At least one submission within the transmission was accepted (with or without errors)
+■ At least one submission within the transmission was rejected as unusable data
+■ Accepted with Errors – (IRS has successfully processed and accepted the transmission with some
+
+errors: An XML Error Data file or MTOM encoded attachment is included containing the details)
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+62
+
+Acknowledgement Files
+
+■ Not Found – (The Receipt ID or the UTID in the request was not found: No XML Error Data File or MTOM
+
+encoded attachment is included)
+The details of errors found when IRS processed the XML Form Data File are made available to the Transmitter
+via display on their web browser (UI channel) or are included in an XML Form Data File attached to the SOAP
+Response in an MTOM encoded attachment (A2A channel). If the error detail exceeds the 200 MB limit, the
+error reporting will be truncated and a message indicating that the error detail was truncated will be included
+in the file..
+6.2.1 | Error Data File
+The sample Error Data File provided in Figure 6-1 below is an example of what the transmitters will receive in
+the Acknowledgement File when there are errors found in the transmissions. Each field will specify detailed
+information of the submissions and its errors.
+In the example provided:
+Submission Status Cd specifies the status of one Form 1094 and its Forms 1095
+<SubmissionLevelStatusCd>Accepted with Errors </SubmissionLevelStatusCd>
+To understand all the errors regarding Form 1094, follow the TransmitterErrorDetailGrp which has
+<UniqueSubmissionId>1095C-15-00000004|1</UniqueSubmissionId> (ReceiptId | SubmissionId)
+To understand all the errors regarding Form 1095 for that Form 1094, follow the TransmitterErrorDetailGrp
+which has: <UniqueRecordId>1095C-15-00000004|1|1</UniqueRecordId> (ReceiptId | SubmissionId |
+RecordId )
+<UniqueSubmissionId>1095C-15-00000004|1</UniqueSubmissionId> (ReceiptId | SubmissionId)
+The TransmitterErrorDetailGrp, which is a repeating group, will be present if more than one error is present.
+The TransmitterErrorDetailGrp contains the ErrorMessageCd, the Error MessageText, and the XpathContent.
+The XPath identifies the specific data element and instance in an enumerated group, if applicable, causing the
+violation.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+63
+
+Acknowledgement Files
+
+Figure 6-1: Sample of an Error Data File
+■ The Error Data File will contain details regarding which business rules were violated.
+■ The Error Data File will also contain the XPath for each error. The XPath can be used to pinpoint the data
+
+element that caused the violation and will be helpful in resolving and correcting errors.
+■ When the same business rule is violated too many times, the entire submission will be rejected, and a
+
+generic threshold error will be returned in the Error Data File.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+64
+
+Acknowledgement Files
+
+Figure 6-2: Sample of an Error Data File with TIN Validation
+6.2.2 | Retrieving Acknowledgements via the UI Channel
+The Transmitter will log in to the appropriate UI Channel link (AATS or Production) available on the Affordable
+Care Act Information Returns (AIR) page on IRS.gov to submit a request to retrieve the processing
+status and error detail of their transmission, which is known as the Acknowledgement. To retrieve the
+Acknowledgement, the Transmitter must select the option to retrieve Acknowledgement and provide their
+Transmitter Control Code (TCC) and the Receipt ID or the UTID from the transmission for which they are
+requesting the processing status. Once the required information is interactively entered, the user submits the
+request.
+Note: When retrieving acknowledgements via the UI Channel, no XML files are required to be uploaded.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+65
+
+Acknowledgement Files
+
+IRS retrieves the transmission status and provides the capability to view the error detail, if processing errors
+were identified as part of the synchronous session. From the UI Channel, the Error Data File may also be
+downloaded by the Transmitter for detailed analysis of the corrections required.
+For details on how to construct and receive status and acknowledgements, see Publication 5258, AIR
+Submission Composition and Reference Guide, on the Affordable Care Act Information Returns (AIR)
+page.
+6.2.3 | Retrieving Acknowledgements via the A2A Channel
+The Transmitter will be required to include their digital certificate and a digitally signed hash of the message in
+the WS-Security Header of the SOAP Message and invoke the appropriate URL for the Web Service endpoint
+that exposes the IRS-ACAAckngService service within the ACAGetTransmitterBulkRequestStatus.wsdl.
+The Receipt ID or the UTID is required for a Transmitter to retrieve the Acknowledgement for the respective
+transmission.
+Required information pertaining to the Transmitter and the transmission are included as part of the SOAP
+message (in the SOAP Header) that is transmitted to IRS in a SOAP Request message.
+IRS validates the SOAP message and performs security scanning and XML Schema validation on the inbound
+request since this is for the acknowlegement). If threats are detected or XML Schema validation fails, IRS will
+reject the request and inform the Transmitter of the rejection. If no security threats are detected, IRS retrieves
+the acknowledgement including the status and the Error Data File (if processing errors were identified by IRS),
+and returns them in the SOAP Response message as part of the synchronous session. The Error Data File (if
+included) is an uncompressed native XML formatted file that will not exceed 200 MB attached to the message
+as an MTOM encoded attachment.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+66
+
+Section
+7
+
+Corrections and Replacements
+
+Section 7 Corrections and Replacements
+7.1 | Corrections Process
+Corrections can only be made to previous transmissions that have been “Accepted, Accepted with Errors
+or Partially Accepted”. Transmitters should file corrections with IRS as soon as possible and furnish a copy of
+the corrected return to the Recipient. Transmissions containing correction records must only contain corrections
+and should not include any “Original” records. Corrections may be filed for the following form types:
+■ Form 1095-B
+■ Form 1094-C, Authoritative Transmittals only
+■ Form 1095-C
+
+Note: Although both the Form 1094-B and Form 1094-C are transmittal forms, the Form 1094-B is
+purely a transmittal document and, therefore, does not require correction. The Form 1094-C Authoritative
+Transmittal contains additional information that may need to be corrected. The Form 1094-C must
+be submitted alone when a correction is required to the Form 1094-C, Authoritative Transmittal itself.
+Otherwise, the Form 1094-C must be submitted with one or more “corrected” Forms 1095-C.
+The correction process can be utilized when:
+■ IRS notifies the Transmitter or Issuer of one or more errors on the transmittal (Form 1094-C Authoritative
+
+Transmittal) or information returns (Forms 1095-B or Forms 1095-C) filed.
+■ The Transmitter or Issuer identifies one or more errors on the transmittal (Form 1094-C Authoritative
+
+Transmittal) or information returns (Forms 1095-B or Forms 1095-C) filed.
+■ The Employee or Covered Individual reports an error
+
+The unique identifiers assigned by AIR allow corrections to the specific record(s), both transmittal records
+(Forms 1094) and information return records (Forms 1095) defined above in Section 3.
+See the example and figure below illustrating multiple corrections to a single record.
+For example, the Form 1094 data located in submission 10 of a transmission would have a USID as follows:
+USID= 1094B-PY-00700283|10
+The Form 1095 data located in record 2 of submission 10 of a transmission would have a URID as follows:
+URID= 1094B-PY-00700283|10|2
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+68
+
+Corrections and Replacements
+
+Figure 7-1: Reference Records to be Corrected
+7.1.1 | Transmitting Corrections
+Guidelines for transmitting corrections:
+■ Do not submit original and corrected documents in the same file
+■ If the transmission is identified as containing corrections in the Manifest (TransmissionTypeCd is
+
+‘C’), then the “CorrectedInd” in the Form Data File has to be set to "1" and must include either the
+“CorrectedUniqueSubmissionId” (if the correction is for Form 1094-C) or the “CorrectedUniqueRecordId”
+(if the correction is for Form 1095) which references the record that is being corrected
+■ If a Correction is found to be in error and needs to be corrected, submit a Correction to the most recently
+
+accepted Correction –File only one Correction per Unique Submission ID when correcting a Form
+1094-C Authoritative Transmittal or Unique Record ID when correcting a Form 1095
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+69
+
+Corrections and Replacements
+
+■ Correction records will carry both a “Record ID” to uniquely identify the correcting record, as well as the
+
+Unique ID of the 1094-C or 1095 Record to be corrected
+■ For Form 1094-C use “SubmissionId” and “CorrectedUniqueSubmissionId”
+■ For Form 1095-B and C use “RecordId” and “CorrectedUniqueRecordId”
+■ Always include the complete record for the Correction; do not supply only the Corrected data elements
+
+within the correcting record
+■ When the transmission is Accepted with Errors and the only errors identified are Manifest errors with
+
+a severity of “Report Error”, these errors cannot be corrected, and the messages are for informational
+purposes only
+7.1.2 | Transmitting Form 1094-C Corrections (Authoritative Transmittals Only)
+The system can accept original transmissions for any tax year listed on irs.gov (2015, 2016, 2017, 2018, 2019,
+2020, 2021, 2022, 2023, 2024 and 2025, however, the system can only accept corrections for 6 tax years
+preceding the current year. For example, for the Filing year 2025, AIR system will accept corrections for 2019,
+2020, 2021, 2022, 2023, 2024, 2025 and not for 2015, 2016, 2017, or 2018. If an original transmission requires
+corrections to the Form 1094-C Authoritative Transmittal, include the following (see schema and business
+rules):
+■ Populate the Form 1094-C “CorrectedInd” with “1”
+■ A “UniqueTransmissionId” for the transmission
+■ A “TransmissionTypeCd” in the Manifest should be “C” for corrections
+■ A “SubmissionId” (SID) for the correction Transmittal record
+■ The “CorrectedUniqueSubmissionId” (CUSID) identifying the record that is being corrected
+■ A “CorrectedSubmissionPayerName” this is the Payer Business Name from the submission (1094-C)
+
+being corrected
+■ And “CorrectedSubmissionPayerTIN” this is Payer Taxpayer Identification Number (EIN) from the
+
+submission (1094-C) being corrected
+■ A Non-authoritative 1094-C cannot be corrected.
+
+Examples of key data fields from the original record to be corrected are the Name of ALE Member (Employer)
+and the Employer Identification Number (EIN). Note: These fields are necessary to allow IRS to associate
+the correction record to the original record even when the Unique ID’s don’t match. Do not attach any Forms
+1095-C.
+Note: Please remember to mark the Corrected Form 1094-C as an “Authoritative Transmittal” and to
+complete the entire record Parts I, II, III and if applicable Part IV (not just the Name and EIN).
+When correcting Form 1094-C Authoritative Transmittal entity data that also appears on associated Forms
+1095-C (Name and EIN), it is not necessary to submit changes to every associated Form 1095-C in order
+to correct that information on the Forms 1095-C. IRS internal systems will associate appropriate entity
+information to existing Form 1095-C records.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+70
+
+Corrections and Replacements
+
+7.1.3 | Transmitting Forms 1095-B or 1095-C Corrections
+If an original transmission requires corrections to the Forms 1095-B and 1095-C, include the following (see
+schema and business rules):
+■ Populate the Form 1095-B or 1095-C “CorrectedInd” with “1”. Note: The “CorrectedInd” in the Form
+
+1094-C should be “0”. The Form 1094-B is purely a transmittal document and, therefore, does not have
+a “CorrectedInd”.
+■ A “UniqueTransmissionId” for the transmission
+■ “TransmissionTypeCd” in the Manifest should be “C” for corrections
+■ A “SubmissionId” for the Transmittal (Form 1094) record
+■ A “RecordId” of the correction record
+■ The “CorrectedUniqueRecordId” (CURID) identifying the record that is being corrected
+■ Include the other required fields in the “CorrectedRecordRecipientGrp”
+
+Elements in the "CorrectedRecordRecipientGrp" include Recipient Name and TIN from the original record to
+be corrected.
+■ For a Form 1095-B provide the Business or Individual name and TIN,
+■ For a Form 1095-C provide the Employee name and TIN.
+■ Only complete the accompanying Form 1094-C through the element “AuthoritativeTransmittalInd”. Parts
+
+II, III and IV of the Form 1094-C, should not be completed when correcting the 1095-B or 1095-C.
+Note: “AuthoritativeTransmittalInd” is now required on “1094C”. When filing a form “1095C” correction, the
+“AuthoritativeTransmittalInd” should be marked “0”. These fields are necessary to allow IRS to associate
+the correction record to the original record even when the Unique IDs don’t match.
+7.1.4 | Transmitting Form 1094-C and Form 1095-C Corrections
+If an original transmission requires corrections to both the Forms 1094-C Authoritative Transmittal and
+1095-C, file two separate transmissions.
+■ The first transmission will be to correct the Form 1094-C Authoritative Transmittal only, by following the
+
+Form 1094-C Authoritative Transmittal Correction Process outlined above.
+■ The second transmission will be to correct the Form 1095-C by following the Form 1095-C Correction
+
+Process outlined above. Only complete the accompanying Form 1094-C through the element
+“AuthoritativeTransmittalInd”. Parts II, III and IV of the Form 1094-C, should not be completed. Please
+note: “AuthoritativeTransmittalInd” is now required. On a 1095-C Correction, it should be marked “0”.
+If, after submitting a correction, IRS identifies a subsequent error, or if the Transmitter identifies a subsequent
+error, you must utilize the Unique IDs associated with the correction. See Figure 7-1 above.
+Note: The original record may only be corrected once.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+71
+
+Corrections and Replacements
+
+7.2 | Rejected Transmissions
+Both the Portal and AIR can “Reject” transmissions. However, the replacement process only applies to
+Transmissions or Submissions rejected by AIR.
+7.2.1 | Transmissions Rejected by Portal
+When a transmission is rejected by IRS Portal, the Transmitter will receive a fault (error) code that is prefixed
+with ‘TPE’. The corresponding error description message will contain information about the errors that was
+detected.
+The table of fault codes produced by IRS Portal is included in Section 4.4 of this document.
+When a transmission is rejected by IRS Portal, the Transmitter must fix the problem that caused the rejection
+and resend the transmission. In the case where the message size is too large, the Transmitter must reduce the
+number of records in the Form Data File before resending the transmission.
+Note: Use the same “TransmissionTypeCd” that was used when the transmission was rejected by the
+Portal to resubmit the file.
+7.2.2 | Transmissions/Submissions Rejected by AIR
+When AIR rejects the transmission due to malformed schema, a missing required element or a pattern
+mismatch, the Error Code returned to the Transmitter will be prefixed with ‘AIRSH’. Business rule validation
+provides Submission level rejections, along with Transmission level rejections. None of the records included in
+a transmission/submission that are rejected are maintained in IRS data stores. Thus, when a transmission or
+submission is rejected by AIR, a replacement transmission or submission must be submitted.
+The following are reasons for a rejection at the Transmission level or Submission level (Forms 1094/1095-B
+and 1094/1095-C);
+A complete Transmission can be rejected due to:
+■ A fatal error identified while processing the transmission metadata
+■ Schema validation failed on the schema
+■ Business rule failures at the transmission level (ex: Manifest error, Incorrect Submission ID in Form Data
+
+File)
+■ All Submissions within the transmission are rejected
+
+Note: The above situation requires the Transmitters to replace the entire Transmission.
+A Transmission can be Partially Accepted when one or more submissions, but not all, are rejected.
+A Submission can be rejected due to:
+■ Schema validation failed on the Form Data XML File
+■ Business Rule Failures (ex: Form 1094 Incorrect or Missing Tax Year), which will lead to that Submission
+
+rejection (Form 1094 and its corresponding 1095 Forms).
+Note: The above situation requires the Transmitters to replace only the rejected Submission(s).
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+72
+
+Corrections and Replacements
+
+7.3 | Replacement Process - Transmitting Replacements
+A replacement transmission must contain all the records submitted to IRS for processing in the rejected
+Transmission or Submission that is being replaced. Transmitters should submit an acceptable replacement
+transmission no later than 60 days after the date the rejected status of the original transmission was
+available. The 60-day adjustment applies whether or not the original transmission was received before or
+after the ACA Information Returns due date. When an acceptable replacement transmission is received within
+60 days from the date the status was available, the file will be treated as filed on the original transmission
+received date. If an acceptable replacement transmission is received after the 60 days, the file will be treated
+as filed on the date the replacement transmission is received. In this way, any applicable late-filing penalty is
+calculated based on the date the transmission was received.
+Note: Transmitters should wait until a transmission is processed and the Acknowledgement File status
+is either 'Rejected' or 'Partially Accepted' by IRS before submitting a replacement transmission or
+submission.
+Transmitters can replace rejected Transmissions, as well as rejected Submissions. Replacements can only
+be transmitted for previously rejected Transmissions or Submissions. AIR requires replacements to use
+specific identifiers to reference the original rejected transmission/submission. When replacing a transmission,
+the Manifest XML Schema includes an element “OriginalReceiptId” which references the Receipt ID of the
+original transmission that is being replaced.
+When replacing a submission, the Form Data File element “OriginalUniqueSubmissionId” is used to reference
+the Submission ID of the original submission that is being replaced. When submissions are replaced, the
+Manifest data element “OriginalReceiptId” is not used.
+Only transmissions that contained original records (TransmissionTypeCd is ‘O’) that were rejected require a
+replacement transmission. When a transmission, containing original records, is rejected (TransmissionTypeCd
+is ‘O’), the Transmitter must fix the problem that caused the rejection and resend the transmission as a
+replacement (TransmissionTypeCd is ‘R’).
+However, if a transmission containing correction records is rejected (TransmissionTypeCd is ‘C’), the
+Transmitter must fix the problem that caused the rejection and resend the transmission (TransmissionTypeCd
+remains ‘C’). An individual original submission within a transmission can be rejected by IRS in a Partially
+Accepted transmission. The original submission should be fixed and retransmitted in a replacement
+transmission (TransmissionTypeCd is 'R').
+7.3.1 | Replacement Transmissions
+Replacement transmissions must include the following requirements (see schema and business rules for
+additional details):
+■ A “UniqueTransmissionId” for the replacement transmission
+■ “TransmissionTypeCd” in the Manifest should be “R” for replacement
+■ Include the “OriginalReceiptId” data element in the Manifest identifying the original transmission that is
+
+being replaced
+■ ACA Business Correlation ID ("UniqueTransmissionId") in the Manifest should be unique for each
+
+transmission (UUID which is part of UTID will be checked for uniqueness against that TCC).
+■ "DocumentSystemFileNm" in the Manifest should match the name of the Form Data File
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+73
+
+Corrections and Replacements
+
+■ "ChecksumAugmentationNum" in the Manifest should be unique for each transmission
+■ Replacement transmission should not include any additional replacing/new submissions
+
+Do not
+■ Include the “OriginalUniqueSubmissionId” in the Form Data File
+
+7.3.1.1 | Replacing an Original Transmission that Rejected
+If the original Transmission was “Rejected”, then replace the entire Transmission by using the Receipt ID
+from the Rejected Transmission to populate the Manifest Data element "OriginalReceiptId" of the Replacement
+Transmission.
+Replacement transmissions must include the following requirements (see schema and business rules for
+additional details):
+■ A “UniqueTransmissionId” for the replacement transmission (ACA Business Correlation ID
+
+(UniqueTransmissionId) in the Manifest should be unique for each transmission (UUID which is part of
+UTID will be checked for uniqueness against that TCC)
+■ “TransmissionTypeCd” in the Manifest should be “R” for replacements
+■ Include the “OriginalReceiptId” data element identifying the original transmission that is being replaced
+■ "DocumentSystemFileNm" in the Manifest should match the name of the Form Data File
+■ "ChecksumAugmentationNum" in the Manifest should be unique for each transmission
+
+Do not:
+■ Include any additional or new submissions
+■ Include the “OriginalUniqueSubmissionId” in the Form Data File
+■ Try to replace individual submissions within a rejected transmission
+■ Try to replace a transmission that was not rejected
+■ Try to replace a transmission that has been successfully replaced
+
+7.3.1.2 | Replacing a ‘Replacement’ Transmission that Rejected
+If an Original Transmission is rejected and the Replacement Transmission is also rejected, then replace the first
+(EARLIEST) rejected Transmission in the chain by populating the Manifest Data element ‘OriginalReceiptId’
+with the Receipt Id that references the EARLIEST rejected Transmission in the chain. Please see Figure 7-2 for
+an illustration of the earliest rejected Transmission in the chain.
+Replacement Transmissions must include the following requirements (see schema and business rules for
+additional details):
+■ A “UniqueTransmissionId” for the replacement transmission (ACA Business Correlation ID
+
+(UniqueTransmissionId) in the Manifest should be unique for each transmission (UUID which is part of
+UTID will be checked for uniqueness against that TCC)
+■ “TransmissionTypeCd” in the Manifest should be “R” for replacements
+■ Include the “OriginalReceiptId” data element identifying the Receipt Id that references the first rejected
+
+transmission, which contained a TransmissionTypeCd of "O", in the chain
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+74
+
+Corrections and Replacements
+
+■ "DocumentSystemFileNm" in the Manifest should match the name of the Form Data File
+■ "ChecksumAugmentationNum" in the Manifest should be unique for each transmission
+■ Replacement transmission should not include any additional or new submissions
+
+Do not:
+■ Include the “OriginalUniqueSubmissionId” in the Form Data File
+■ Try to replace a rejected replacement transmission
+■ Try to replace individual submissions within a rejected transmission
+■ Try to replace a transmission that was not rejected
+■ Try to replace a transmission that has been successfully replaced
+
+Figure 7-2 depicts the replacement process where both the initial transmission and the first replacement
+attempt were rejected by AIR.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+75
+
+Corrections and Replacements
+
+Figure 7-2: Replacing a Rejected Transmission
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+76
+
+Corrections and Replacements
+
+7.3.2 | Replacement Submissions
+Replacement submissions must include the following requirements (see schema and business rules for
+additional details):
+■ A “UniqueTransmissionId” for the replacement transmission
+■ “TransmissionTypeCd” in the Manifest should be “R” for replacement
+■ Include the “OriginalUniqueSubmissionId” in the Form Data File identifying the submission that is
+
+being replaced
+■ Duplicate replacement Submission (s) included within the same transmission will be rejected.
+■ Replacement transmission should not include any new submissions
+
+Do not
+■ Include the “OriginalReceiptId” data element in the Manifest
+
+7.3.2.1 | Replacing Submission Within a Partially Accepted Transmission
+If the Original Transmission was Partially-Accepted, then replace the individual Submission(s) that were
+rejected by populating the data element “OriginalUniqueSubmissionId” in each replacement Submission
+(Form 1094) with the “UniqueSubmissionId” from the Submission Header of the rejected Submission(s). When
+filing replacement Submission(s) for submissions that were rejected within a Partially Accepted Transmission,
+adhere to the following requirements (see schema and business rules for additional details):
+■ A “UniqueTransmissionId” for the replacement transmission
+■ “TransmissionTypeCd” in the Manifest should be “R” for replacement
+■ Include the “OriginalUniqueSubmissionId” in the Form Data File identifying the submission that is
+
+being replaced from the original Partially Accepted transmission
+■ Duplicate replacement Submission ID(s) included within the same transmission will be rejected.
+■ Replacement transmission should not include any new submissions
+
+Do not
+■ Include the “OriginalReceiptId” data element in the Manifest
+■ Submit a submission-level replacement for a transmission that was rejected
+
+7.3.2.2 | Replacing a Submission from a Partially Accepted Original Transmission when the Replacement
+Transmission or Submission was Rejected
+If the original Transmission is Partially Accepted, and the Transmission with the replacement submissions is
+Rejected or Partially Accepted, then transmit another replacement transmission using the Submission IDs
+from the original rejected submissions. In either case always replace the first rejected submission in the chain
+of rejected submissions when one or more replacements are rejected. Please refer to Figure 7-3 and 7-3A.
+Note: The first rejected Submission(s) in the chain of rejections does not relate to the order of submissions
+within an individual Transmission. Figure 7-3 depicts the Submission-Replacement process where a
+replacement Submission was rejected.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+77
+
+Corrections and Replacements
+
+Figure 7-3: Visual depicting the first-rejected submission in a chain of rejections that should be replaced
+Figure 7-3A: Visual showing the first-rejected submission should be replaced when the replacement
+transmission is rejected
+
+Figure 7-3A illustrates a similar situation when the entire replacement transmission was rejected
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+78
+
+Corrections and Replacements
+
+If filing a replacement Submission from a Partially Accepted Transmission where the replacement was
+rejected, adhere to the following requirements (see schema and business rules for additional details):
+■ A “UniqueTransmissionId” for the replacement transmission
+■ “TransmissionTypeCd” in the Manifest should be “R” for replacement
+■ Include the “OriginalUniqueSubmissionId” in each replacement submission Form data file with the
+
+Unique Submission ID from the header within the earliest rejected Submission in a sequence within a
+Partially Accepted Transmission that is being replaced (refer to Figures 7-3 and 7-3A)
+■ Duplicate replacement Submission ID(s) included within the same transmission will be rejected.
+■ Replacement transmission should not include any new submissions
+
+Do not
+■ Include the “OriginalReceiptId” data element in the Manifest
+■ Replace a submission within a Submission Replacement Transmission that was rejected
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+79
+
+Section
+8
+
+Extension of Time to File
+
+Section 8 Extension of Time to File
+To request an automatic 30-day extension of time to file AIR Forms 1095-B and 1094/1095-C, complete Form
+8809. The Form 8809, Application for Extension of Time to File Information Returns, cannot be filed through
+the AIR System. The 30-day extension request can be submitted by three different methods:
+■ A paper submission of Form 8809
+■ An Electronic File Transmission through the FIRE Production System (FIRE TCC needed)
+■ An online Fill-in Form 8809 may be completed via the FIRE Production System
+
+For more information on extensions for Information Returns see instructions for Form 8809, Publication 1220
+and IRIS Publications 5717 and 5718.
+
+8.1 | Request for an Additional Extension of Time to File
+Under certain hardship conditions you may apply for an additional 30-day extension if the initial extension
+of time to file is granted and the additional extension is filed before the expiration of the automatic 30-day
+extension. The additional 30-day extension request can only be submitted by filing a paper Form 8809.
+
+8.2 | Extension of Time to Provide the Recipient Copy
+The due date for furnishing the Form 1095-B and 1095-C to the Recipients (employee/or covered individual) is
+January 31st. The written request for an extension of time to provide the Recipient copy must be postmarked
+by the date on which the statements are due to the Recipients (January 31st). The letter must contain the
+following: Issuer, Name, TIN, Address, Type of Return, Reason for Delay, statement saying the request is for
+Recipient copies, and signature of the Issuer or Authorized Agent. The request should be mailed to:
+Internal Revenue Service
+Attn: Extension of Time Coordinator
+240 Murall Drive, Mail Stop 4360
+Kearneysville, WV 25430
+If the extension is granted, it will allow a maximum of 30 additional days to furnish copies to the Recipients.
+No additional extensions are allowed.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+81
+
+Section
+9
+
+Waiver from Filing Electronically
+
+Section 9 Waiver from Filing Electronically
+ACA Information Returns Forms 1094/1095-B and 1094/1095-C are covered under Internal Revenue Code
+(IRC) section 6011(e). IRC 6011(e) requires filers of 10 or more information returns to file electronically. The
+electronic filing requirement does not apply if you apply for and receive a hardship waiver. If the filer is required
+to submit information returns electronically and fails to do so, and there is not an approved waiver on record,
+the filer may be subject to a penalty for failure-to-file electronically.
+Proposed Treas. Reg. [REG-102951-16] reduces the threshold from 250 to 10 and requires corrected
+information returns to be filed in the same manner as original information returns.
+Note: All filers are encouraged to file the ACA Information Returns electronically even if they file less than
+10 information returns. Final regulations were issued February 21, 2023, by the Department of the Treasury
+and the Internal Revenue Service. These regulations reduce the 250-Return threshold to generally require
+electronic filing by filers of 10 or more returns in a calendar year beginning in Tax Year 2023, Processing
+Year 2024.
+Form 8508 – Request for Waiver from Filing Information Returns Electronically, is used to request a waiver
+from filing AIR Forms 1094/1095-B and 1094/1095-C for Tax Year 2025 and subsequent tax years. A separate
+Form 8508 must be submitted for each employer or insurance issuer/carrier. Form 8508 – should be submitted
+at least 45 days before the due date of the information return. The form cannot be filed electronically and must
+be submitted to the address shown in the instructions for Form 8508.
+Form 8508 – May be filed beginning in January 2026 and should be submitted at least 45 days before the due
+date of the information return. The form cannot be filed electronically and must be submitted to the address
+shown in the instructions for Form 8508.
+Refer to Form 8508 for detailed instructions on completing the form and Publication 1220 for more
+information.
+Additional Resources
+■ Standard Postal Service State Abbreviations and ZIP Codes
+■ Foreign Country Codes
+■ For details on Name Control for Businesses, see Section 3.11 in Publication 4163
+■ For details on Name Control for Individuals, see Exhibit 5 in Publication 4164
+■ For details on Social Security and Taxpayer Identification Numbers, see Exhibit 6 in Publication 4164
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+83
+
+Section
+Appendix A
+
+10
+
+Appendix A: AIR Transmission Checklist (A2A) for TY2025
+
+Section 10 Appendix A: AIR Transmission
+Checklist (A2A) for TY2025
+This checklist covers both AATS and Production Filing for Software Developers, Transmitters and Issuers
+1. Preparation (Including Registration and Application)
+■ Did your company’s Responsible Officials and Contacts create an e-Services Account?
+■ Did your company apply for and obtain a valid Transmitter Control Code (TCC)? Software ID(s)?
+■ Has a responsible official signed the application with the PIN created during e-Services account creation
+
+process and for any subsequent application modifications?
+■ Has your company followed the Automated Enrollment process?
+■ Have you reviewed the Publication 5308, Automated Enrollment for ACA Providers the External
+
+Guide? Have you uploaded and registered the certificate in Automated Enrollment for A2A?
+■ When registering the certificate, have you taken note of your A2A Client System ID (ASID) for future
+
+troubleshooting?
+■ Have you authorized the IRS-ACASubmitService?
+■ Have you authorized the IRS-ACAAckngService?
+■ Have you reviewed Publication 5258, 5165 and 5164? (These documents can be found on the AIR page
+
+under Resources)
+2. Pre-Filing—AATS and Production
+■ Have you downloaded the latest versions of Schema and Business Rules? (Schemas and Business
+
+Rules can be found Affordable Care Act Information Returns Schemas and Business Rules)
+■ Have you ensured that required Business Header data elements are present per the Schema?
+■ Have you ensured that required Manifest data elements are present per Schema?
+■ Transmitter should use Manifest schema from current tax year (TY2025) schema package to
+
+generate TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2021, TY2022, TY2023, TY2024,
+and TY2025 Manifest file
+Example: <PaymentYr>2015</PaymentYr> Manifest will be checked and validated against TY2025 schema
+and business rules
+3. Have you ensured that required 1094/1095 B/Cs Form data file elements are present
+per Schema?
+■ Transmitters should use latest TY2025 schema version to generate Forms 1094/1095-B or Forms
+
+1094/1095-C Form Data (payload) for TY2025 returns
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+85
+
+Appendix A: AIR Transmission Checklist (A2A) for TY2025
+
+For prior year returns TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2021, TY2022, TY2023 and
+TY2024 use the latest year schema for that tax year.
+Example: Transmitters should use latest TY2019 schema version to generate Forms 1094/1095-B or Forms
+1094/1095-C Form Data (payload) for TY2019 returns
+■ Transmitters should use TY2025 schema package and deploy at their end
+■ Transmitters should use TY2025 WSDL’s:
+■ Are your manifest and form data files well-formed extensible Markup Language (XML)?
+■ Is the composition of your XML file in line with Publication 5258?
+■ Is your Transmission Form data file uncompressed and sized under 100 MB?
+■ Do you have a certificate from an approved source? (See Publication 5258 Section 5.3.1.1)
+■ Have you ensured that namespaces have been defined and referenced correctly (See Publication 5258
+
+Section 5.3.1.4 for samples)?
+■ Have you ensured the test file indicator is correct (See Publication 5258 Section 3.4.1 Transmission XML
+
+Elements)?
+■ Have you ensured the UTID is set correctly per the schema and Publication 5258 Section 3.4.2?
+■ Checks to avoid Data Element-driven Portal (TPE) Errors
+■ Have you followed the special characters guidance in Publication 5165 that prohibits use of
+
+Hash (#) and Double- Dash (--) characters and specifies the use of HTML escape character
+equivalents,(e.g., “&amp;” for Ampersand)?
+■ Have you removed any commas or periods in the ‘BusinessNameLn1’ or ‘BusinessNameLn2’ or in
+
+‘AddressLine1’ or ‘AddressLine2’?
+■ Have you scanned your document for commented out element names, e.g.,
+
+<!--urn2:ACABusinessHeader-->? Note that any occurrence of double dash will trigger a potential
+threat error and rejection
+■ To avoid error “TPE1105 Message not formatted properly and/or cannot be interpreted,”
+■ Have you verified HTTP Post method is used when calling web service?
+■ Have you tested your sample SOAP message via a web service testing tool (e.g. SoapUI)? 2
+■ Have you verified you are using the most current tax year schema in your manifest file?
+■ To avoid “TPE1112 Request must be sent using HTTP compression
+■ Is your Transmission Hypertext Transfer Protocol (HTTP) compressed via gzip for A2A? (See
+
+Publication 5258, Section 5.1)
+2 IRS recommends that external users validate their XML files against the schemas provided by the IRS prior to submitting them
+to the IRS. Taking this step will help avoid discovering errors after the XML file is submitted. Performing this validation on the user
+end makes it easier and faster to identify and locate schema types of errors. Any tool which allows the external user to validate their
+XML files against the schemas, such as “Altova XML Spy” or “SoapUI” should be suitable.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+86
+
+Appendix A: AIR Transmission Checklist (A2A) for TY2025
+
+■ Is your file attachment SOAP Message Transmission Optimization Mechanism (MTOM) encoded?
+■ Have you downloaded the latest versions of Simple Object Access Protocol (SOAP)?
+■ To avoid “TPE1122 Invalid WS security header,” (See Publication 5258 section: 5.3.1.4 - SOAP Header
+
+Examples showing Security Header and related elements)
+■ Have you ensured your registered certificate is not expired?
+■ Have you ensured your registered certificate lists BOTH of the values “digital signature” and “key
+
+encipherment” as Key Usage attributes?
+■ Have you ensured your registered certificate DOES NOT list values other than “digital signature”
+
+and “key encipherment” as Key Usage attributes?
+■ Have you ensured all Security Header elements are present per Schema and CRG?
+■ Have you digitally signed your Transmission for all Message Types?
+● Timestamp
+● ACABusinessHeader
+
+■ Have you followed the format for timestamp? E.g., Added colons (:) to the time stamp and removed
+
+the milliseconds Ex: 2015-08-28T20:08:45Z
+■ Have you digitally signed the following Header elements for Message Type
+
+- ACAGetTransmitterBulkRequestService?
+● ACABusinessHeader
+● ACATransmitterManifestReqDtl
+● Timestamp
+
+■ Have you digitally signed the following Header elements for Message Type
+
+- ACAGetTransmitterBulkRequestStatus?
+● ACABusinessHeader
+● ACABulkRequestTransmitterStatusDetailRequest
+● Timestamp
+
+■ Have you set CanonicalizationMethod Algorithm to http://www.w3.org/TR/2002/
+
+REC-xml-exc-c14n-20020718/#WithComments?
+■ Have you set SignatureMethod Algorithm to http://www.w3.org/2001/04/
+
+xmldsig-more#rsa-sha256?
+■ Have you set each DigestMethod Algorithm to http://www.w3.org/2001/04/xmlenc#sha256?
+■ Have you set each Transform Algorithm http://www.w3.org/2001/10/xml-exc-c14n#?
+■ Have you included your Base64-encoded certificate in a KeyInfo element?
+■ Have you regenerated the Timestamp for every request to avoid expiration?
+■ To avoid “TPE 1106 Soap message does not conform to WSDL”
+■ Do you have the latest version of Web Services Definition Language (WSDL) files describing the
+
+web services? (Please contact AIR Help Desk - 1-866-937-4130. Include your ACA TCC and
+Company Name)
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+87
+
+Appendix A: AIR Transmission Checklist (A2A) for TY2025
+
+■ Do you have the ACAGetTransmitterBulkRequestService.wsdl to transmit TY2015, TY2016, TY2017,
+
+TY2018, TY2019, TY2020, TY2021, TY2022, TY2023, TY2024 and TY2025 transmissions?
+■ Do you have the ACAGetTransmitterBulkRequestStatus.wsdl to check the status of TY2015, TY2016,
+
+TY2017, TY2018, TY2019, TY2020, TY2021, TY2022, TY2023, TY2024 and TY2025 transmissions?
+● TY2025 WSDLs are capable of generating the SOAP envelope for TY2015, TY2016, TY2017,
+
+TY2018, TY2019, TY2020, TY2021, TY2022, TY2023, TY2024 and TY2025 transmissions
+● SOAP envelope generated by TY2025 WSDL’s contain: ACA Header, WS-Security, ACA Business
+
+header and Manifest information which are the same for TY2015, TY2016, TY2017, TY2018,
+TY2019, TY2020, TY2021, TY2022, TY2023, TY2024 and TY2025 transmissions (namespaces are
+different in payload)
+■ Have you verified that each value conforms to the appropriate schema version?
+■ If your Transmission has been rejected, have you updated your UTID? – Note that UTIDs are checked
+
+for uniqueness.
+■ Have you run your header and manifest and form data file through an XML Schema validator (e.g.
+
+SoapUI)? 3
+■ Do you have the AIR endpoints for Service and Status requests? Is your Transmission Form File encoded
+
+as UTF-8 without the Byte Order Mark (BOM)? (See Publication 5258 section 5.4.1 -Message Attachment
+File Format)
+■ Have you included your ASID in the UserId element within the ACASecurityHeader? (See Publication
+
+5258 section 5.3.1.4)
+4. Transmitting to IRS—AATS
+■ Did you use the correct TCC, Software Developer for AATS testing and Transmitter and/or Issuer for
+
+Communication Testing?
+■ Did you establish a connection with ISS-A2A?
+■ Have you saved the ‘ReceiptId’ along with your copy of the Transmission as sent?
+■ Have you obtained a status?
+■ If the status for all your required test submissions is “Accepted,” did you contact the help desk for confir-
+
+mation and update of the TCC and/or Form Status? (Telephone Number 1-866-937-4130, for domestic
+calls, or 470-769-5100 (not toll-free) for international calls.)
+■ If the status is “Accepted with Errors,” Have you checked against the test Scenarios and Publication
+
+5164 and resubmitted?
+■ If the status is “Rejected,” Have you checked against the test scenarios / Publication 5164 as well as
+
+guidance above and resubmitted?
+3 See previous footnote
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+88
+
+Appendix A: AIR Transmission Checklist (A2A) for TY2025
+
+5. Transmitting to IRS­—Production Environment
+■ Have you passed the AATS A2A Communications Test?
+■ Is the software you are using approved through the AATS testing process?
+■ Did you establish a connection with Information Submission Service (ISS)-A2A?
+■ Have you submitted all Transmissions?
+■ Do you have Forms 1094/1095-B and Forms 1094/1095-C in separate transmissions?
+■ Have you saved the ‘ReceiptId’ along with your copy of the Transmission as sent?
+■ Have you obtained a status?
+■ If the status is “Accepted,” No action required.
+■ If the status is “Accepted with Errors,” Have you reviewed the Error Data File to identify and correct
+
+errors?
+■ If the status is “Rejected,” Have you reviewed the Error Data File to identify and fix errors?
+● Did you resubmit the Transmission using the Replacement Process?
+● Have you provided the ‘OriginalReceiptId’ of the first-rejected Transmission?
+● Was your Replacement Accepted? – If not, have you fixed and resubmitted?
+
+■ If the status is “Partially Accepted,” have you reviewed the Error Data File to identify and fix errors?
+● Did you resubmit the Rejected Submission(s) using the Replacement Process?
+● Have you provided the ‘OriginalUniqueSubmissionId’ of the first-rejected Submission?
+● Was your Replacement Accepted? – If not, have you fixed and resubmitted?
+
+All external partner communication will need to support encryption using TLS 1.2 or 1.3 Federal Information
+Processing Standards (FIPS) Publication 140-2. Compliant cryptography will be used for strong and secure
+communication between Transmitters and IRS.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+89
+
+Section
+Appendix B
+
+11
+
+Appendix B: AIR Transmission Checklist (UI) for TY2025
+
+Section 11 Appendix B: AIR Transmission
+Checklist (UI) for TY2025
+This checklist covers both AATS and Production Filing for Software Developers, Transmitters and Issuers
+1. Preparation (Including Registration and Application)
+■ Did your company’s Responsible Officials and Contacts create an e-Services?
+■ Did your company apply for and receive a valid Transmitter Control Code (TCC)? Software ID(s)?
+■ Has a responsible official signed the application with the PIN created during the e-Services account
+
+creation process, and for any subsequent application modifications?
+■ Have you reviewed Publications 5258, 5165 and 5164? (These documents can be found on the AIR
+
+page under Resources.
+2. Pre-Filing—AATS and Production
+■ Have you downloaded the latest versions of Schema and Business Rules? (Schemas and Business
+
+Rules can be found at Affordable Care Act Information Returns Schemas and Business Rules)
+■ Have you ensured that required Manifest data elements are present per Schema?
+● Transmitters should use Manifest schema from current tax year (TY2025) schema package to
+
+generate TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2021, TY2022 TY2023, TY2024
+and TY2025 Manifest file
+Example: <PaymentYr>2015</PaymentYr> Manifest will be checked and validated against TY2025 schema
+and business rules
+■ Have you ensured that required Business Header data elements are present per the Schema?
+
+3. Transmitters sending returns through UI Channel (AATS and Production)
+■ AIR will accept Tax Years 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 and 2025 for
+
+Processing Year 2026
+■ Transmitters should use latest TY2025 schema version to generate Forms 1094/1095-B or Forms
+
+1094/1095-C Form Data (payload) for TY2025 returns
+For prior year returns TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2022, TY2023 and TY2024 use
+the latest year schema for that tax year.
+Example: Transmitters should use latest TY2019 schema version to generate Forms 1094/1095-B or Forms
+1094/1095-C Form Data (payload) for TY2019 return
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+91
+
+Appendix B: AIR Transmission Checklist (UI) for TY2025
+
+4. Calculate AttachmentByteSizeNum for TY2015, TY2016, TY2017, TY2018, TY2019, TY2020, TY2021,
+TY2022, TY2023, TY2024 and TY2025.
+■ Have you followed the following steps?
+■ Right click on Form data file,
+■ Click on “Properties”
+■ Copy the size in bytes (not “Size of disk”) and
+■ Paste on Manifest element - <AttachmentByteSizeNum>000</AttachmentByteSizeNum>
+■ Have you ensured that required 1094/1095 B/Cs Form file data elements are present per Schema?
+■ Are your manifest and data files well-formed extensible Markup Language (XML)?
+■ Is the composition of your XML file in line with Publication 5258?
+■ Have you run your manifest and form data files through an XML Schema validator? 4
+■ Is your Transmission Form Data File uncompressed and sized under 100 MB?
+■ Have you ensured that namespaces have been defined and referenced correctly (See Publication 5258)
+
+Section 4.2.1 sample)?
+■ Have you ensured the test file indicator is correct (See Publication 5258 3.4.1)?
+■ Have you ensured the UTID is set correctly per the schema and Publication 5258 specification (See
+
+Publication 5258 Section 3.4.2)?
+■ Checks to avoid Data Element-driven Portal (TPE) Errors
+■ Have you followed the special characters guidance in Publication 5165 that prohibits use of Hash (#) and
+
+Double-Dash (--) characters and specifies the use of HTML escape character equivalents, (e.g., “&amp;”
+for Ampersand)?
+■ Are there commas or periods in the ‘BusinessNameLn1’ or ‘BusinessNameLn2’ or in ‘AddressLine1’ or
+
+‘AddressLine2’? If so, have you removed them?
+■ Have you scanned your document for commented out element names,
+
+e.g., <!-- urn2:ACABusinessHeader-->? Note that any occurrence of double dash will trigger a potential
+threat error and rejection
+■ If your Transmission has been rejected, have you updated your UTID? – Note that UTIDs are checked for
+
+uniqueness.
+■ Are your Transmission form data file and Manifest file encoded as UTF-8 without the Byte Order Mark
+
+(BOM)?
+4 IRS recommends that external users validate their XML files against the schemas provided by the IRS prior to submitting them
+to the IRS. Taking this step will help avoid discovering errors after the XML file is submitted. Performing this validation on the user
+end makes it easier and faster to identify and locate schema types of errors. Any tool which allows the external user to validate their
+XML files against the schemas, such as “Altova XML Spy” or “SoapUI” should be suitable.
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+92
+
+Appendix B: AIR Transmission Checklist (UI) for TY2025
+
+5. Transmitting to IRS—AATS
+■ Did you use the correct TCC, Software Developer, for AATS testing and Transmitter and/or Issuer for
+
+Communication Testing?
+■ Can you clearly link the manifest of each Transmission to the form data file? – for example, each
+
+Transmission could be placed in a directory?
+■ Are you in the upload screen of AATS?
+■ Have you named the form data file per Publication 5258 section 3.3 guidance?
+■ Have you saved the ‘ReceiptId’ along with your copy of the Transmission as sent?
+■ Have you obtained a status?
+■ If the status for all your required test submissions is “Accepted,” did you contact the help desk for confir-
+
+mation and update of the TCC and/or Form Status? (Telephone Number 1-866-937-4130, for domestic
+calls, or 470-769-5100 (not toll-free) for international calls.)
+■ If the status is “Accepted with Errors,” Have you checked against the test Scenarios and Publication
+
+5164 and resubmitted?
+■ If the status is “Rejected,” Have you checked against the test scenarios and Publication 5164 as well as
+
+guidance above and resubmitted?
+6. Transmitting to IRS—Production Environment
+■ Have you passed the AATS UI Communications Test?
+■ Is the software you are using approved through the AATS testing process?
+■ Can you clearly link the manifest of each Transmission to the form data file? – For example, each
+
+Transmission could be placed in a directory.
+■ Are you in the upload screen of Production—UI?
+■ Have you named the form data file per Publication 5258 section 3.3 guidance?
+■ Have you saved the ‘ReceiptId’ along with your copy of the Transmission as sent?
+■ Have you obtained a status?
+■ If the status is “Accepted,” No action required.
+■ If the status is “Accepted with Errors,” Have you reviewed the Error Data File to identify and correct
+
+errors?
+■ If the status is “Rejected,” Have you reviewed the Error Data File to identify and fix errors?
+■ Did you resubmit the Transmission using the Replacement Process?
+■ Have you provided the ‘OriginalReceiptId’ of the first-rejected Transmission?
+■ Was your Replacement Accepted? – If not, have you fixed and resubmitted?
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+93
+
+Appendix B: AIR Transmission Checklist (UI) for TY2025
+
+■ If the status is “Partially Accepted,” have you reviewed the Error Data File to identify and fix errors?
+■ Did you resubmit the Rejected Submission(s) using the Replacement Process?
+■ Have you provided the ‘OriginalUniqueSubmissionId’ of the first-rejected Submission?
+■ Was your Replacement Accepted? – If not, have you fixed and resubmitted?
+
+Guide for Electronically Filing ACA Information Returns for Software Developers and Transmitters
+
+94
+
+
