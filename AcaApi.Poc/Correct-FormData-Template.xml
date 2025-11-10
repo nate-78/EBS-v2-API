@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:Form109495CTransmittalUpstream xmlns:p="urn:us:gov:treasury:irs:msg:form1094-1095Ctransmitterupstreammessage" xmlns:p1="urn:us:gov:treasury:irs:ext:aca:air:ty25" xmlns:p2="urn:us:gov:treasury:irs:common" xmlns:p3="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:us:gov:treasury:irs:msg:form1094-1095Ctransmitterupstreammessage IRS-Form1094-1095CTransmitterUpstreamMessage.xsd ">
   <p1:Form1094CUpstreamDetail lineNum="0" recordType="">
-<p1:TaxYr>2025</p1:TaxYr>
+    <p1:SubmissionId>1</p1:SubmissionId>
+    <p1:TaxYr>2025</p1:TaxYr>
     <p1:CorrectedInd>0</p1:CorrectedInd>
     <p1:EmployerInformationGrp>
       <p1:BusinessName>
@@ -18,6 +19,11 @@
           <p2:USZIPCd>%%ZIP%%</p2:USZIPCd>
         </p1:USAddressGrp>
       </p1:MailingAddressGrp>
+      <p1:ContactNameGrp>
+        <p1:PersonFirstNm>John</p1:PersonFirstNm>
+        <p1:PersonLastNm>Doe</p1:PersonLastNm>
+      </p1:ContactNameGrp>
+      <p1:ContactPhoneNum>5551234567</p1:ContactPhoneNum>
     </p1:EmployerInformationGrp>
     <p1:Form1095CAttachedCnt>1</p1:Form1095CAttachedCnt>
     <p1:AuthoritativeTransmittalInd>1</p1:AuthoritativeTransmittalInd>
@@ -30,7 +36,16 @@
           <p1:PersonFirstNm>%%EMPLOYEE_FIRST_NAME%%</p1:PersonFirstNm>
           <p1:PersonLastNm>%%EMPLOYEE_LAST_NAME%%</p1:PersonLastNm>
         </p1:OtherCompletePersonName>
+        <p2:TINRequestTypeCd>INDIVIDUAL_TIN</p2:TINRequestTypeCd>
         <p2:SSN>%%EMPLOYEE_SSN%%</p2:SSN>
+        <p1:MailingAddressGrp>
+          <p1:USAddressGrp>
+            <p1:AddressLine1Txt>%%ADDRESS%%</p1:AddressLine1Txt>
+            <p2:CityNm>%%CITY%%</p2:CityNm>
+            <p1:USStateCd>%%STATE%%</p1:USStateCd>
+            <p2:USZIPCd>%%ZIP%%</p2:USZIPCd>
+          </p1:USAddressGrp>
+        </p1:MailingAddressGrp>
       </p1:EmployeeInfoGrp>
       <p1:EmployeeOfferAndCoverageGrp>
         <p1:AnnualOfferOfCoverageCd>1A</p1:AnnualOfferOfCoverageCd>

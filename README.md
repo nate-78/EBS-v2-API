@@ -2,6 +2,10 @@
 
 This project is a proof-of-concept demonstrating how to successfully communicate with the IRS Affordable Care Act (ACA) Application-to-Application (A2A) web service.
 
+## Project Scope: 1094-C / 1095-C Forms Only
+
+While the official IRS A2A documentation and schemas cover a variety of ACA form types (including the 1094-B and 1095-B series), this proof-of-concept is **exclusively focused on the submission of 1094-C and 1095-C forms**. The code, XML templates, and testing have been specifically tailored for this single use case.
+
 ## The Challenge: GZIP, MTOM, and WS-Security
 
 The primary technical challenge in communicating with the IRS A2A service is its unique combination of security and encoding requirements, which are not easily met by standard .NET libraries like WCF (Windows Communication Foundation).
@@ -37,31 +41,14 @@ Care should be taken when modifying these files, as they are critical to the suc
 
 ---
 
-## Current Status: TPE1105 Error Investigation (As of 2025-11-08)
+## Current Status: TPE1101 Error Investigation (As of 2025-11-09)
 
-Despite successfully resolving the initial transport-level errors, the project is currently blocked by a persistent `TPE1105` error from the IRS A2A test service. The error message is generic: "The message was not formatted properly and/or cannot be interpreted."
+After a lengthy investigation, all transport-level errors have been successfully resolved. The application now correctly constructs and transmits a SOAP request that is compliant with the IRS's complex GZIP, MTOM, and WS-Security requirements.
 
-### Investigation Summary
+This was achieved by manually constructing the entire multipart/related HTTP message as a compressed byte stream, giving us precise control over all headers and MIME parts. This process resolved a series of errors, including the initial `TPE1105` (schema validation), `TPE1112` (GZIP compression), and several `soapenv:Server` faults related to incorrect multipart `Content-Type` header formatting.
 
-An exhaustive, step-by-step investigation was conducted to align every aspect of the generated SOAP request with the official examples in the IRS Publication 5258 (`p5258.txt`).
+With the transport issues solved, the server is now successfully parsing our request and has begun validating the SOAP message content itself. We are now receiving a new, more specific error:
 
-The key areas of investigation and the changes implemented in the code include:
-1.  **SOAP Header Order**: The order of the main header elements (`<wsse:Security>`, `<ACATransmitterManifestReqDtl>`, etc.) was corrected to match the documentation.
-2.  **`wsa:Action` Header**: This header was removed as it is not present in the documentation's submission examples.
-3.  **`wsse:Security` Structure**: This was the most complex area. The code was significantly refactored to ensure the generated `<Signature>` block precisely matches the IRS example. This involved:
-    *   **Correcting the `KeyInfo` structure**: Changed from directly embedding the certificate (`KeyInfoX509Data`) to using a `<SecurityTokenReference>` that points to a `<BinarySecurityToken>` containing the certificate data.
-    *   **Correcting the `<Transforms>`**: Removed an extra `XmlDsigExcC14NTransform` that was being added to the signature's `<Reference>`. The documentation only specifies the `enveloped-signature` transform.
-    *   **Correcting Element Order**: Ensured the `<Signature>` and `<BinarySecurityToken>` elements appear before the `<Timestamp>` within the `<Security>` header.
-4.  **Unused Namespaces**: The unused `xmlns:wsa` declaration was removed from the root `<Envelope>` element.
-5.  **Canonicalization Algorithm**: As a final test, the canonicalization method was switched from the modern default (`xml-exc-c14n#`) to an older, non-exclusive version (`xml-c14n#`). This required registering the legacy algorithm at runtime but still resulted in a `TPE1105` error. The code has been reverted to use the modern `xml-exc-c14n#` algorithm.
+**`TPE1101: Our system detected invalid or outdated XML namespaces in your message.`**
 
-### Conclusion and Next Steps
-
-The code in its current state generates a SOAP request that, based on visual inspection and analysis, is a perfect match for the structure specified in the `p5258.txt` documentation. We have exhausted all reasonable technical avenues for debugging the request structure on our end.
-
-The persistent `TPE1105` error is therefore believed to be caused by an external factor, such as:
--   An issue with the IRS's A2A test server environment.
--   A discrepancy between the published `p5258.txt` documentation and the actual server-side validation logic.
--   Another undocumented requirement that is not discoverable through the provided materials.
-
-**Recommended Next Step:** Contact the IRS help desk for support. Provide them with the last successfully generated SOAP request XML (available in the console output when running the `AcaApi.Poc` project) and the `TPE1105` error code.
+This error indicates that we have made significant progress. The current focus is to identify which XML namespace or structure in our SOAP envelope is considered invalid by the AATS testing server for a Tax Year 2025 submission.

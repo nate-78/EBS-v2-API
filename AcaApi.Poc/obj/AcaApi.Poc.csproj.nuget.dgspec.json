@@ -64,19 +64,19 @@
             },
             "System.Security.Cryptography.Xml": {
               "target": "Package",
-              "version": "[9.0.8, )"
+              "version": "[8.0.0, )"
+            },
+            "System.ServiceModel.Duplex": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "System.ServiceModel.Http": {
               "target": "Package",
-              "version": "[8.*, )"
-            },
-            "System.ServiceModel.NetTcp": {
-              "target": "Package",
-              "version": "[8.*, )"
+              "version": "[8.0.0, )"
             },
             "System.ServiceModel.Primitives": {
               "target": "Package",
-              "version": "[8.*, )"
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

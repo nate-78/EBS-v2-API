@@ -19,13 +19,22 @@ namespace AcaApi.Poc
                 return element;
             }
 
-            // If the standard method doesn't work, try to find an element with a wsu:Id attribute.
+            // If the standard method doesn't work, try a more specific query for the known elements that use wsu:Id.
             var namespaceManager = new XmlNamespaceManager(document.NameTable);
             namespaceManager.AddNamespace("wsu", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
-            namespaceManager.AddNamespace("wsse", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd");
-            element = document.SelectSingleNode($"//wsse:Security/wsu:Timestamp[@wsu:Id='{idValue}']", namespaceManager) as XmlElement;
+            namespaceManager.AddNamespace("urn", "urn:us:gov:treasury:irs:ext:aca:air:ty25"); // Assuming ty25, adjust if needed
+            namespaceManager.AddNamespace("acaBusHeader", "urn:us:gov:treasury:irs:msg:acabusinessheader");
 
-            return element;
+            string query = $"//*[@wsu:Id='{idValue}']";
+            element = document.SelectSingleNode(query, namespaceManager) as XmlElement;
+
+            // Ensure the found element is one of the types we expect to sign
+            if (element != null && (element.LocalName == "Timestamp" || element.LocalName == "ACATransmitterManifestReqDtl" || element.LocalName == "ACABusinessHeader"))
+            {
+                return element;
+            }
+
+            return null;
         }
     }
 }

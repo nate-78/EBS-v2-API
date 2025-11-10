@@ -19,7 +19,7 @@ namespace AcaApi.Poc
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 
-                var config = configuration.GetSection("AcaApiConfig").Get<AppConfig>();
+                var config = configuration.Get<AppConfig>();
 
                 if (config == null)
                 {

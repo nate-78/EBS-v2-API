@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\owensdev-git\\EBS-v2-API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|c:\\owensdev-git\\ebs-v2-api\\acaapi.poc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|solutionrelative:acaapi.poc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|c:\\owensdev-git\\ebs-v2-api\\acaapi.poc\\acatransmitterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|solutionrelative:acaapi.poc\\acatransmitterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,10 +31,6 @@
       "RelativeMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|solutionrelative:acaapi.poc\\soap_unsigned.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|c:\\owensdev-git\\ebs-v2-api\\acaapi.poc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|solutionrelative:acaapi.poc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|c:\\owensdev-git\\ebs-v2-api\\acaapi.poc\\appconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD8C7710-D3A4-478D-9A72-704A1D0C1300}|AcaApi.Poc\\AcaApi.Poc.csproj|solutionrelative:acaapi.poc\\appconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -42,24 +42,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AcaTransmitterService.cs",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\AcaTransmitterService.cs",
               "RelativeDocumentMoniker": "AcaApi.Poc\\AcaTransmitterService.cs",
-              "ToolTip": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\AcaTransmitterService.cs*",
-              "RelativeToolTip": "AcaApi.Poc\\AcaTransmitterService.cs*",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAowIgAAAAOAAAAAAAAAA==",
+              "ToolTip": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\AcaTransmitterService.cs",
+              "RelativeToolTip": "AcaApi.Poc\\AcaTransmitterService.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAjwJgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-08T19:32:49.052Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "scenario2-manifest.xml",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\scenario2-manifest.xml",
               "RelativeDocumentMoniker": "AcaApi.Poc\\scenario2-manifest.xml",
@@ -72,7 +72,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "scenario2-form-data.xml",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\scenario2-form-data.xml",
               "RelativeDocumentMoniker": "AcaApi.Poc\\scenario2-form-data.xml",
@@ -89,7 +89,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "soap_unsigned.xml",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\soap_unsigned.xml",
               "RelativeDocumentMoniker": "AcaApi.Poc\\soap_unsigned.xml",
@@ -102,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "soap_signed.xml",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\soap_signed.xml",
               "RelativeDocumentMoniker": "AcaApi.Poc\\soap_signed.xml",
@@ -115,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\Program.cs",
               "RelativeDocumentMoniker": "AcaApi.Poc\\Program.cs",
@@ -128,13 +128,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\appsettings.json",
               "RelativeDocumentMoniker": "AcaApi.Poc\\appsettings.json",
               "ToolTip": "C:\\owensdev-git\\EBS-v2-API\\AcaApi.Poc\\appsettings.json",
               "RelativeToolTip": "AcaApi.Poc\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-11-08T15:44:21.197Z",
               "EditorCaption": ""

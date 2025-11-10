@@ -46,6 +46,4 @@ The immediate next step is to execute Phase 0.
     *   **Business Rules:** `EBS-Legacy\_documents\irs-aca-business-rules`
     *   **IRS Pub 5165:** Primary guide for A2A communication.
 
-## 5. Pending Action Items
 
-*   **Blocker:** Awaiting official TY2025 WSDL files from the IRS. The provided TY2024 files are sufficient for the POC.
