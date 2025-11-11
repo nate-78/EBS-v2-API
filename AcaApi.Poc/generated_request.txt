@@ -1,0 +1,68 @@
+﻿------=_Part_fa184e5f-701a-422e-aab3-90e2f43dd172
+Content-Type: application/xop+xml; charset=UTF-8; type="text/xml"
+Content-Transfer-Encoding: 8bit
+Content-ID: <soapui-body-content@soapui.org>
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:air="urn:us:gov:treasury:irs:ext:aca:air:ty25" xmlns:irs="urn:us:gov:treasury:irs:common" xmlns:acaBusHeader="urn:us:gov:treasury:irs:msg:acabusinessheader" xmlns:acaBodyReq="urn:us:gov:treasury:irs:msg:irsacabulkrequesttransmitter" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">BulkRequestTransmitter</Action><To xmlns="http://www.w3.org/2005/08/addressing">https://la.www4.irs.gov/airp/aca/a2a/1095BC_Transmission_AATS</To><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsu:Timestamp wsu:Id="_1"><wsu:Created>2025-11-11T16:56:57.2640891Z</wsu:Created><wsu:Expires>2025-11-11T17:01:57.2640938Z</wsu:Expires></wsu:Timestamp><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><DigestValue>Jr628TLAmCMUz17UChQPboug1yp6axLFMj9wjgnHbf4=</DigestValue></Reference></SignedInfo><SignatureValue>glilZVd+kTp8fL7Vo/1rIUIXaSan0OK4mvGVD2plcUEmjUtmIZaYygutsFk2RoBuImzJSI3Oi5W9PqLAlvJ8o0mKS5Ir08cPRXQBfSbMSjkpfwdZ9cX4E925Un7VjEEGS2IloZwTkm8jUZlEJWvyY+uDUECINemHGLeXkOcj8Z8UzofPQJfJryhJTzmNlQ9MpBhwYrpvNnN3ueLriDEEgx+blcDfZaG4pLl4HbSEYwZqkYf4fEVQFfUpKX32Yb4vnQIi2KpLCd7apAY4G378vuJV51nkaix9dUNqMkHjhM+2LNwnxhglyfwObLzcm/Hjx24pZDOe7an+SSCNwe43ig==</SignatureValue><KeyInfo><X509Data><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></wsse:Security><acaSecHdr:ACASecurityHeader xmlns:acaSecHdr="urn:us:gov:treasury:irs:msg:acasecurityheader"><irs:UserId>1BB05S01</irs:UserId></acaSecHdr:ACASecurityHeader><acaBusHeader:ACABusinessHeader wsu:Id="ACABusinessHeader"><air:UniqueTransmissionId>c244ac55-3238-44b5-aa8b-fa562b2073a2:SYS12:BB05S::T</air:UniqueTransmissionId><irs:Timestamp>2025-11-11T16:56:57.2641127Z</irs:Timestamp></acaBusHeader:ACABusinessHeader><air:ACATransmitterManifestReqDtl wsu:Id="ACATransmitterManifest"><air:PaymentYr>2025</air:PaymentYr><air:PriorYearDataInd>0</air:PriorYearDataInd><irs:EIN>000000301</irs:EIN><air:TransmissionTypeCd>O</air:TransmissionTypeCd><air:TestFileCd>T</air:TestFileCd><air:TransmitterNameGrp><air:BusinessNameLine1Txt>SeliTestCorp</air:BusinessNameLine1Txt></air:TransmitterNameGrp><air:CompanyInformationGrp><air:CompanyNm>SeliTestCorp</air:CompanyNm><air:MailingAddressGrp><air:USAddressGrp><air:AddressLine1Txt>123 Main St</air:AddressLine1Txt><irs:CityNm>Anytown</irs:CityNm><air:USStateCd>TX</air:USStateCd><irs:USZIPCd>75000</irs:USZIPCd></air:USAddressGrp></air:MailingAddressGrp><air:ContactPhoneNum>555-555-1212</air:ContactPhoneNum></air:CompanyInformationGrp><air:VendorInformationGrp><air:VendorCd>I</air:VendorCd><air:VendorNm>EBS Internal Development</air:VendorNm><air:ContactNameGrp><irs:PersonFirstNm>Jane</irs:PersonFirstNm><irs:PersonLastNm>Smith</irs:PersonLastNm></air:ContactNameGrp><air:ContactPhoneNum>800-555-1212</air:ContactPhoneNum></air:VendorInformationGrp><air:TotalPayeeRecordCnt>1</air:TotalPayeeRecordCnt><air:TotalPayerRecordCnt>1</air:TotalPayerRecordCnt><air:SoftwareId>25A0023165</air:SoftwareId><air:FormTypeCd>1094C</air:FormTypeCd><irs:BinaryFormatCd>application/xml</irs:BinaryFormatCd><irs:ChecksumAugmentationNum>6889EC1E66654311B3A0FB80484BDA59508F1BAB972A7C552C9B31630C8E2FF7</irs:ChecksumAugmentationNum><air:AttachmentByteSizeNum>2766</air:AttachmentByteSizeNum><air:DocumentSystemFileNm>Correct-FormData-Template.xml</air:DocumentSystemFileNm></air:ACATransmitterManifestReqDtl></soap:Header><soap:Body><acaBodyReq:ACABulkRequestTransmitter><irs:BulkExchangeFile><xop:Include xmlns:xop="http://www.w3.org/2004/08/xop/include" href="cid:a9e8d4b3-bb09-4906-9a7e-35f8ca5f9ea9" /></irs:BulkExchangeFile></acaBodyReq:ACABulkRequestTransmitter></soap:Body></soap:Envelope>
+------=_Part_fa184e5f-701a-422e-aab3-90e2f43dd172
+Content-Type: application/xml
+Content-Transfer-Encoding: binary
+Content-ID: <a9e8d4b3-bb09-4906-9a7e-35f8ca5f9ea9>
+Content-Disposition: attachment; name="Correct-FormData-Template.xml"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<p:Form109495CTransmittalUpstream xmlns:p="urn:us:gov:treasury:irs:msg:form1094-1095Ctransmitterupstreammessage" xmlns:p1="urn:us:gov:treasury:irs:ext:aca:air:ty25" xmlns:p2="urn:us:gov:treasury:irs:common" xmlns:p3="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:us:gov:treasury:irs:msg:form1094-1095Ctransmitterupstreammessage IRS-Form1094-1095CTransmitterUpstreamMessage.xsd ">
+  <p1:Form1094CUpstreamDetail lineNum="0" recordType="">
+    <p1:SubmissionId>1</p1:SubmissionId>
+    <p1:TaxYr>2025</p1:TaxYr>
+    <p1:CorrectedInd>0</p1:CorrectedInd>
+    <p1:EmployerInformationGrp>
+      <p1:BusinessName>
+        <p1:BusinessNameLine1Txt>SeliTestCorp</p1:BusinessNameLine1Txt>
+      </p1:BusinessName>
+      <p1:BusinessNameControlTxt>SELI</p1:BusinessNameControlTxt>
+      <p2:TINRequestTypeCd>BUSINESS_TIN</p2:TINRequestTypeCd>
+      <p2:EmployerEIN>000000301</p2:EmployerEIN>
+      <p1:MailingAddressGrp>
+        <p1:USAddressGrp>
+          <p1:AddressLine1Txt>123 Main St</p1:AddressLine1Txt>
+          <p2:CityNm>Anytown</p2:CityNm>
+          <p1:USStateCd>TX</p1:USStateCd>
+          <p2:USZIPCd>75000</p2:USZIPCd>
+        </p1:USAddressGrp>
+      </p1:MailingAddressGrp>
+      <p1:ContactNameGrp>
+        <p1:PersonFirstNm>John</p1:PersonFirstNm>
+        <p1:PersonLastNm>Doe</p1:PersonLastNm>
+      </p1:ContactNameGrp>
+      <p1:ContactPhoneNum>5551234567</p1:ContactPhoneNum>
+    </p1:EmployerInformationGrp>
+    <p1:Form1095CAttachedCnt>1</p1:Form1095CAttachedCnt>
+    <p1:AuthoritativeTransmittalInd>1</p1:AuthoritativeTransmittalInd>
+    <p1:Form1095CUpstreamDetail recordType="" lineNum="0">
+      <p1:RecordId>1</p1:RecordId>
+      <p1:CorrectedInd>0</p1:CorrectedInd>
+      <p1:TaxYr>2025</p1:TaxYr>
+      <p1:EmployeeInfoGrp>
+        <p1:OtherCompletePersonName>
+          <p1:PersonFirstNm>John</p1:PersonFirstNm>
+          <p1:PersonLastNm>Doe</p1:PersonLastNm>
+        </p1:OtherCompletePersonName>
+        <p2:TINRequestTypeCd>INDIVIDUAL_TIN</p2:TINRequestTypeCd>
+        <p2:SSN>000000001</p2:SSN>
+        <p1:MailingAddressGrp>
+          <p1:USAddressGrp>
+            <p1:AddressLine1Txt>123 Main St</p1:AddressLine1Txt>
+            <p2:CityNm>Anytown</p2:CityNm>
+            <p1:USStateCd>TX</p1:USStateCd>
+            <p2:USZIPCd>75000</p2:USZIPCd>
+          </p1:USAddressGrp>
+        </p1:MailingAddressGrp>
+      </p1:EmployeeInfoGrp>
+      <p1:EmployeeOfferAndCoverageGrp>
+        <p1:AnnualOfferOfCoverageCd>1A</p1:AnnualOfferOfCoverageCd>
+      </p1:EmployeeOfferAndCoverageGrp>
+    </p1:Form1095CUpstreamDetail>
+  </p1:Form1094CUpstreamDetail>
+</p:Form109495CTransmittalUpstream>
+------=_Part_fa184e5f-701a-422e-aab3-90e2f43dd172--

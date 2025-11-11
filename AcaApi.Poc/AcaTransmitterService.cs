@@ -47,11 +47,12 @@ namespace AcaApi.Poc
             var checksumHex = BitConverter.ToString(checksum).Replace("-", "");
 
                         // Step 3: Define namespaces to exactly match IRS examples
-            XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
+            XNamespace soap = "http://schemas.xmlsoap.org/soap/envelope/";
             XNamespace wsse = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
             XNamespace wsu = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
             XNamespace xop = "http://www.w3.org/2004/08/xop/include";
-            
+            XNamespace wsa = "http://www.w3.org/2005/08/addressing";
+
             var paymentYr = "2025"; // Per user instruction, hardcode for AATS
             var taxYearShort = paymentYr.Substring(2);
 
@@ -69,20 +70,32 @@ namespace AcaApi.Poc
 
             // Step 4: Construct SOAP Envelope with correct checksum
             var soapEnvelope = new XDocument(
-                new XElement(soapenv + "Envelope",
-                    new XAttribute(XNamespace.Xmlns + "soapenv", soapenv),
+                new XElement(soap + "Envelope",
+                    new XAttribute(XNamespace.Xmlns + "soap", soap),
                     new XAttribute(XNamespace.Xmlns + "air", air),
                     new XAttribute(XNamespace.Xmlns + "irs", irs),
                     new XAttribute(XNamespace.Xmlns + "acaBusHeader", acaBusHeader),
                     new XAttribute(XNamespace.Xmlns + "acaBodyReq", acaBodyReq),
-                    new XElement(soapenv + "Header",
+                    new XAttribute(XNamespace.Xmlns + "wsu", wsu),
+                    new XElement(soap + "Header",
+                        new XElement(wsa + "Action",
+                            new XAttribute("xmlns", wsa.NamespaceName),
+                            "BulkRequestTransmitter"),
+                        new XElement(wsa + "To",
+                            new XAttribute("xmlns", wsa.NamespaceName),
+                            _config.SubmissionEndpoint),
                         new XElement(wsse + "Security",
                             new XAttribute(XNamespace.Xmlns + "wsse", wsse),
                             new XAttribute(XNamespace.Xmlns + "wsu", wsu),
                             new XElement(wsu + "Timestamp",
+                                new XAttribute(wsu + "Id", "_1"),
                                 new XElement(wsu + "Created", DateTime.UtcNow.ToString("o")),
                                 new XElement(wsu + "Expires", DateTime.UtcNow.AddMinutes(5).ToString("o"))
                             )
+                        ),
+                        new XElement(acaSecHdr + "ACASecurityHeader",
+                             new XAttribute(XNamespace.Xmlns + "acaSecHdr", acaSecHdr),
+                             new XElement(irs + "UserId", _config.Asid)
                         ),
                         new XElement(acaBusHeader + "ACABusinessHeader",
                             new XAttribute(wsu + "Id", "ACABusinessHeader"),
@@ -109,40 +122,33 @@ namespace AcaApi.Poc
                                         new XElement(irs + "USZIPCd", manifest.Root.Element("CompanyInformation").Element("MailingAddress").Element("Zip").Value)
                                     )
                                 ),
-                                new XElement(air + "ContactNameGrp",
-                                    new XElement(air + "PersonFirstNm", "John"),
-                                    new XElement(air + "PersonLastNm", "Doe")
-                                ),
                                 new XElement(air + "ContactPhoneNum", manifest.Root.Element("CompanyInformation").Element("ContactPhone").Value)
                             ),
                             new XElement(air + "VendorInformationGrp",
                                 new XElement(air + "VendorCd", "I"),
+                                new XElement(air + "VendorNm", "EBS Internal Development"),
                                 new XElement(air + "ContactNameGrp",
-                                    new XElement(air + "PersonFirstNm", "Jane"),
-                                    new XElement(air + "PersonLastNm", "Smith")
+                                    new XElement(irs + "PersonFirstNm", "Jane"),
+                                    new XElement(irs + "PersonLastNm", "Smith")
                                 ),
                                 new XElement(air + "ContactPhoneNum", "800-555-1212")
                             ),
                             new XElement(air + "TotalPayeeRecordCnt", manifest.Root.Element("TotalPayeeRecordCnt").Value),
                             new XElement(air + "TotalPayerRecordCnt", "1"),
                             new XElement(air + "SoftwareId", manifest.Root.Element("SoftwareId").Value),
-                            new XElement(air + "FormTypeCd", "1094/1095C"),
+                            new XElement(air + "FormTypeCd", "1094C"),
                             new XElement(irs + "BinaryFormatCd", "application/xml"),
                             new XElement(irs + "ChecksumAugmentationNum", checksumHex),
-                            new XElement(irs + "AttachmentByteSizeNum", populatedFormDataBytes.Length.ToString()),
+                            new XElement(air + "AttachmentByteSizeNum", populatedFormDataBytes.Length.ToString()),
                             new XElement(air + "DocumentSystemFileNm", Path.GetFileName(formDataFilePath))
-                        ),
-                        new XElement(acaSecHdr + "ACASecurityHeader",
-                             new XAttribute(XNamespace.Xmlns + "acaSecHdr", acaSecHdr)
-                        ),
-                        new XElement(soapenv + "Body",
-                            new XElement(acaBodyReq + "ACABulkRequestTransmitter",
-                                new XAttribute("version", "1.0"),
-                                new XElement(irs + "BulkExchangeFile",
-                                    new XElement(xop + "Include",
-                                        new XAttribute(XNamespace.Xmlns + "xop", xop),
-                                        new XAttribute("href", $"cid:{cid}")
-                                    )
+                        )
+                    ),
+                    new XElement(soap + "Body",
+                        new XElement(acaBodyReq + "ACABulkRequestTransmitter",
+                            new XElement(irs + "BulkExchangeFile",
+                                new XElement(xop + "Include",
+                                    new XAttribute(XNamespace.Xmlns + "xop", xop),
+                                    new XAttribute("href", $"cid:{cid}")
                                 )
                             )
                         )
@@ -179,6 +185,7 @@ namespace AcaApi.Poc
 
         private XDocument SignSoapEnvelope(XDocument soapEnvelope, X509Certificate2 certificate)
         {
+            XNamespace soap = "http://schemas.xmlsoap.org/soap/envelope/";
             XNamespace wsse = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
             XNamespace wsu = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
 
@@ -196,58 +203,34 @@ namespace AcaApi.Poc
             var securityElement = xmlDoc.SelectSingleNode("//wsse:Security", namespaceManager) as XmlElement;
             if (securityElement == null) throw new Exception("Security element not found.");
 
-            var timestampElement = securityElement.SelectSingleNode("wsu:Timestamp", namespaceManager) as XmlElement;
-            if (timestampElement == null) throw new Exception("Timestamp element not found for signing.");
-
-            string timestampId = "TS-" + Guid.NewGuid().ToString("D");
-            timestampElement.SetAttribute("Id", wsu.NamespaceName, timestampId);
-
-            // 1. Create BinarySecurityToken
-            string certId = "X509-" + Guid.NewGuid().ToString("D");
-            var binarySecurityToken = xmlDoc.CreateElement("wsse", "BinarySecurityToken", wsse.NamespaceName);
-            binarySecurityToken.SetAttribute("Id", wsu.NamespaceName, certId);
-            binarySecurityToken.SetAttribute("ValueType", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3");
-            binarySecurityToken.SetAttribute("EncodingType", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary");
-            binarySecurityToken.InnerText = Convert.ToBase64String(certificate.RawData);
-
-            // 2. Set up the SignedXml object
+            // Set up the SignedXml object
             SignedXml signedXml = new SignedXmlWithId(xmlDoc);
             signedXml.SigningKey = certificate.GetRSAPrivateKey();
             signedXml.SignedInfo.CanonicalizationMethod = "http://www.w3.org/2001/10/xml-exc-c14n#";
             signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
 
-            // 3. Create References to sign
-            Reference referenceTimestamp = new Reference($"#{timestampId}");
-            referenceTimestamp.AddTransform(new System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform());
-            referenceTimestamp.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
-            signedXml.AddReference(referenceTimestamp);
+            // Create single Reference with URI="" to sign entire envelope
+            Reference envelopeReference = new Reference("");
+            envelopeReference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
+            envelopeReference.AddTransform(new XmlDsigExcC14NTransform());
+            envelopeReference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
+            signedXml.AddReference(envelopeReference);
 
-            Reference referenceManifest = new Reference("#ACATransmitterManifest");
-            referenceManifest.AddTransform(new XmlDsigExcC14NTransform());
-            referenceManifest.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
-            signedXml.AddReference(referenceManifest);
-
-            Reference referenceBusinessHeader = new Reference("#ACABusinessHeader");
-            referenceBusinessHeader.AddTransform(new XmlDsigExcC14NTransform());
-            referenceBusinessHeader.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
-            signedXml.AddReference(referenceBusinessHeader);
-
-            // 4. Create KeyInfo pointing to BinarySecurityToken
+            // Create KeyInfo with X509Data/X509Certificate
             KeyInfo keyInfo = new KeyInfo();
-            var securityTokenReference = xmlDoc.CreateElement("wsse", "SecurityTokenReference", wsse.NamespaceName);
-            var referenceElement = xmlDoc.CreateElement("wsse", "Reference", wsse.NamespaceName);
-            referenceElement.SetAttribute("URI", $"#{certId}");
-            referenceElement.SetAttribute("ValueType", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3");
-            securityTokenReference.AppendChild(referenceElement);
-            keyInfo.AddClause(new KeyInfoNode(securityTokenReference));
+            var x509Data = xmlDoc.CreateElement("X509Data", "http://www.w3.org/2000/09/xmldsig#");
+            var x509Certificate = xmlDoc.CreateElement("X509Certificate", "http://www.w3.org/2000/09/xmldsig#");
+            x509Certificate.InnerText = Convert.ToBase64String(certificate.RawData);
+            x509Data.AppendChild(x509Certificate);
+            keyInfo.AddClause(new KeyInfoNode(x509Data));
             signedXml.KeyInfo = keyInfo;
 
-            // 5. Compute signature and assemble the security header
+            // Compute signature
             signedXml.ComputeSignature();
             XmlElement signatureElement = signedXml.GetXml();
 
-            securityElement.PrependChild(signatureElement);
-            securityElement.PrependChild(binarySecurityToken);
+            // Append Signature AFTER Timestamp (Timestamp is already in Security element)
+            securityElement.AppendChild(signatureElement);
 
             using (var nodeReader = new System.Xml.XmlNodeReader(xmlDoc))
             {
@@ -310,9 +293,9 @@ namespace AcaApi.Poc
             request.Headers.Add("SOAPAction", "BulkRequestTransmitter");
 
             Console.WriteLine("Sending SOAP request:\n" + Encoding.UTF8.GetString(requestBytes));
-            
-            // File.WriteAllBytes("generated_request.txt", requestBytes);
-            // Console.WriteLine("\n****** REQUEST SAVED TO generated_request.txt FOR REVIEW ******\n");
+
+            File.WriteAllBytes("generated_request.txt", requestBytes);
+            Console.WriteLine("\n****** REQUEST SAVED TO generated_request.txt FOR REVIEW ******\n");
 
             var response = await _httpClient.SendAsync(request);
 
